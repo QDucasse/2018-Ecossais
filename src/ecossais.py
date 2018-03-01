@@ -10,6 +10,8 @@ from random import shuffle
 
 
 class Joueur(list):
+    
+    
     def __init__(self,taille,no,plat,partie):
         ''' 
         Crée un joueur à travers une main de taille donnée et un numéro caractéristique.
@@ -25,6 +27,7 @@ class Joueur(list):
         self.taille=taille
         self.numero=no
     
+    
     def __str__(self):
         ''' 
         Affiche la main du joueur en question
@@ -34,8 +37,7 @@ class Joueur(list):
         Aucun
         '''
         for carte in self:
-            if type(carte)==Carte:
-                print(carte.__str__()) 
+            print(carte.__str__()) 
         
         
     def jouer(self,carte,position):
@@ -48,20 +50,21 @@ class Joueur(list):
         Carte choisie
         Position visée
         '''
-        self.placer(self,carte,position)
-        self.piocher(self)
-        carte.position=position
+        self.placer(carte,position)
+        self.piocher()
+        carte.position=str(position)
+    
     
     def placer(self,carte,position):
         '''
-        Place la carte sélectionner à l'emplacement donné
+        Place la carte sélectionnée à l'emplacement donné
         
         Paramètres
         ----------
         Carte choisie
         Position visée sous la forme d'un tuple
         '''
-        self.plateau[position[0]][position[1]]=print(carte.__str__)
+        self.plateau.tapis[position[0]][position[1]]=print(carte)
         
     
     def piocher(self):
@@ -76,6 +79,8 @@ class Joueur(list):
 
     
 class Carte():
+    
+    
     def __init__(self,valeur,couleur,position):
         ''' 
         Crée une carte donnée.
@@ -112,9 +117,11 @@ class Carte():
     
 class Plateau(np.ndarray):
     
+    
     def __new__(cls,nb_bornes):
         plateau = super(Plateau, cls).__new__(cls, (9, nb_bornes))
         return plateau
+    
     
     def __init__(self, nb_bornes):
         ''' 
@@ -159,6 +166,8 @@ class Plateau(np.ndarray):
         
     
 class Borne():
+    
+    
     def __init__(self,g1,g2,pos):
         ''' 
         Crée une borne séparant les groupes de cartes g1 et g2.
@@ -169,11 +178,12 @@ class Borne():
         Groupe de cartes 2: g2
 
         '''
-        self.g1=g1 # le groupe de cartes du côté du joueur 1
-        self.g2=g2 # le groupe de cartes du côté du joueur 2
-        self.position=pos # la position de la borne sur le plateau
-        self.premierComplete=0 # conserve  1 ou 2 correspondant au côté du joueur ayant fini en premier
+        self.g1=g1              # le groupe de cartes du côté du joueur 1
+        self.g2=g2              # le groupe de cartes du côté du joueur 2
+        self.position=pos       # la position de la borne sur le plateau
+        self.premierComplete=0  # conserve  1 ou 2 correspondant au côté du joueur ayant fini en premier
         self.gagnant= ' '
+     
         
     def comparer(self): 
         '''
@@ -204,6 +214,8 @@ class Borne():
           
             
 class GroupeCartes():
+    
+    
     def __init__(self,C1=Carte(0,'X','Vide'),C2=Carte(0,'X','Vide'),C3=Carte(0,'X','Vide')):
         # On définit Carte(0,'X','Vide) comme un emplacement vide
         ''' 
@@ -214,11 +226,12 @@ class GroupeCartes():
         Les 3 cartes qui composent le groupe
 
         '''
-        self.C1=C1
-        self.C2=C2
-        self.C3=C3
-        self.totalPoints=C1.valeur + C2.valeur + C3.valeur
-        self.force=0
+        self.C1 = C1
+        self.C2 = C2
+        self.C3 = C3
+        self.totalPoints = C1.valeur + C2.valeur + C3.valeur
+        self.force = 0
+    
     
     def calculForce(self): 
         ''' 
@@ -258,6 +271,8 @@ class GroupeCartes():
     
     
 class Jeu():
+    
+    
     def __init__(self,plateau=Plateau(9)):
         ''' 
         Crée une partie.
@@ -279,6 +294,7 @@ class Jeu():
             for couleur in ['A','B','C','D','E','F']:
                 self.pioche.append('%c%i'%(couleur,i+1))
         shuffle(self.pioche)
+     
         
     def __str__(self):
         '''
@@ -290,7 +306,8 @@ class Jeu():
 
         '''
         
-        print(('{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche'+'\n'+self.plateau.__str__).format(self.nbTours,self.joueurCourant,len(self.pioche)))
+        print('{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche'.format(self.nbTours,self.joueurCourant,len(self.pioche)))
+        print(self.plateau)
         
         
     def unTour(self):
@@ -344,18 +361,18 @@ class Jeu():
         
         
         
-#        
-#if __name__=='__main__':
-#    j=Jeu()
-#    for i in range(j.J1.taille):
-#        j.J1.piocher()
-#        j.J2.piocher()
-#    for i in range(55):
-#        j.unTour()
-# 
-#       
-#        
-#        
+        
+if __name__=='__main__':
+    j=Jeu()
+    for i in range(j.J1.taille):
+        j.J1.piocher()
+        j.J2.piocher()
+    for i in range(55):
+        j.unTour()
+ 
+       
+        
+        
         
         
         

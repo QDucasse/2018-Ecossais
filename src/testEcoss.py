@@ -14,17 +14,17 @@ class TestJoueur(unittest.TestCase):
     def testPlacer:
     def testPiocher:
         
-class TestCarte(unittest.TestCase):
-    def testInitialisation
-    
-class TestPlateau(unittest.TestCase):
-    def testInitialisation
-    
-class TestBorne(unittest.TestCase):
-    
-class TestGroupeCartes(unittest.TestCase):
-    
-class TestJeu(unittest.TestCase):
+#class TestCarte(unittest.TestCase):
+#    def testInitialisation
+#    
+#class TestPlateau(unittest.TestCase):
+#    def testInitialisation
+#    
+#class TestBorne(unittest.TestCase):
+#    
+#class TestGroupeCartes(unittest.TestCase):
+#    
+#class TestJeu(unittest.TestCase):
     
 
 
