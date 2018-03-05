@@ -8,11 +8,13 @@ Created on Mon Mar  5 18:26:48 2018
 
 from carte import Carte
 
+
+
 class GroupeCartes():
     
     
-    def __init__(self,C1=Carte(0,'  ','Vide'),C2=Carte(0,'  ','Vide'),C3=Carte(0,'  ','Vide')):
-        # On définit Carte(0,'X','Vide) comme un emplacement vide
+    def __init__(self,C1=Carte(0,' ','Vide'),C2=Carte(0,'  ','Vide'),C3=Carte(0,'  ','Vide')):
+        # On définit Carte(0,' ','Vide) comme un emplacement vide
         ''' 
         Crée un groupe de 3 cartes, la carte vide étant Carte(0,'X','Vide') .
         
