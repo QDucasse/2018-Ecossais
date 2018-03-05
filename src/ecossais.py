@@ -5,7 +5,6 @@ Created on Mon Feb 12 15:46:45 2018
 
 @author: ducassqu
 """
-import numpy as np
 from random import shuffle
 
 
@@ -20,6 +19,8 @@ class Joueur(list):
         ----------
         Taille de la main du joueur
         Numéro du joueur
+        Plateau en cours
+        Partie en cours
 
         '''
         self.jeu=partie
@@ -36,11 +37,14 @@ class Joueur(list):
         ----------
         Aucun
         '''
+        res=[]
         for carte in self:
-            print(carte.__str__()) 
+            res.append(str(carte))
+        return str(res)
+            
         
         
-    def jouer(self,carte,position):
+    def jouer(self,no_carte,position):
         '''
         Joue une carte de la main d'un joueur dans la position donnée
         Correspond aux actions successives de placer et piocher pour compléter la main
@@ -50,12 +54,12 @@ class Joueur(list):
         Carte choisie
         Position visée
         '''
-        self.placer(carte,position)
+        self.placer(no_carte,position)
         self.piocher()
-        carte.position=str(position)
+        
     
     
-    def placer(self,carte,position):
+    def placer(self,no_carte,position):
         '''
         Place la carte sélectionnée à l'emplacement donné
         
@@ -64,8 +68,9 @@ class Joueur(list):
         Carte choisie
         Position visée sous la forme d'un tuple
         '''
-        self.plateau.tapis[position[0]][position[1]]=print(carte)
-        
+        self.plateau.tapis[position[0]][position[1]]=str(self[no_carte])
+        self[no_carte].position=str(position)
+        del(self[no_carte])
     
     def piocher(self):
         '''
@@ -77,7 +82,8 @@ class Joueur(list):
         '''
         self.append(Carte(self.jeu.pioche.pop()[1],self.jeu.pioche.pop()[0],'MainJoueur{0}'.format(self.numero)))
 
-    
+
+
 class Carte():
     
     
@@ -115,28 +121,44 @@ class Carte():
         return '{0}{1}'.format(self.couleur,self.valeur)
 
     
-class Plateau(np.ndarray):
+class Plateau():
     
-    
-    def __new__(cls,nb_bornes):
-        plateau = super(Plateau, cls).__new__(cls, (9, nb_bornes))
-        return plateau
-    
-    
-    def __init__(self, nb_bornes):
-        ''' 
-        Crée un plateau de taille donnée.
-        
-        Paramètres
-        ----------
-        Nombre de bornes
+#    
+#    def __new__(cls,nb_bornes):
+#        plateau = super(Plateau, cls).__new__(cls, (9, nb_bornes))
+#        return plateau
+#    
+#    
+#    def __init__(self, nb_bornes):
+#        ''' 
+#        Crée un plateau de taille donnée.
+#        
+#        Paramètres
+#        ----------
+#        Nombre de bornes
+#
+#        '''
+#        self.nb_bornes = nb_bornes
+#        self.tapis = np.array([['CC']*nb_bornes]*7, dtype=str)
+#        self.tapis[3] = ['B ']*nb_bornes 
 
-        '''
-        self.nb_bornes = nb_bornes
-        self.tapis = np.array([['CC']*nb_bornes]*7, dtype=str)
-        self.tapis[3] = ['B ']*nb_bornes 
-        
-    
+      
+    def __init__(self,nb_bornes):
+         ''' 
+         Crée un plateau de taille donnée.
+         
+         Paramètres
+         ----------
+         Nombre de bornes
+
+         '''
+         self.taille=nb_bornes
+         self.tapis=[]
+         for i in range(7):
+             self.tapis.append(['  ']*nb_bornes)
+         self.tapis[3]=['XX','XX','XX','XX','XX','XX','XX','XX','XX']
+         
+         
     def __str__(self):
         ''' 
         Affiche le plateau de jeu.
@@ -146,20 +168,12 @@ class Plateau(np.ndarray):
         Self
 
         '''
-        return str(self.tapis)
+        s=''
+        for ligne in self.tapis:
+            s=s+str(ligne)+'\n'
+        return s
        
-#    def __init__(self,nb_bornes):
-#         ''' 
-#         Crée un plateau de taille donnée.
-#         
-#         Paramètres
-#         ----------
-#         Nombre de bornes
-#
-#         '''
-#         self.taille=nb_bornes
-#         self.tapis=[['  ']*9]*9
-#         self.tapis[4]=['XX','XX','XX','XX','XX','XX','XX','XX','XX']
+
 
 #    def testVictoire(self):
         
@@ -216,7 +230,7 @@ class Borne():
 class GroupeCartes():
     
     
-    def __init__(self,C1=Carte(0,'X','Vide'),C2=Carte(0,'X','Vide'),C3=Carte(0,'X','Vide')):
+    def __init__(self,C1=Carte(0,'  ','Vide'),C2=Carte(0,'  ','Vide'),C3=Carte(0,'  ','Vide')):
         # On définit Carte(0,'X','Vide) comme un emplacement vide
         ''' 
         Crée un groupe de 3 cartes, la carte vide étant Carte(0,'X','Vide') .
@@ -306,8 +320,9 @@ class Jeu():
 
         '''
         
-        print('{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche'.format(self.nbTours,self.joueurCourant,len(self.pioche)))
-        print(self.plateau)
+        s='{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
+        s=s+str(self.plateau)
+        return s
         
         
     def unTour(self):
@@ -323,24 +338,24 @@ class Jeu():
         '''
         ######### Affichage du jeu au moment de jouer ########################################
         
-        print(self.__str__())
+        print(self)
         if self.joueurCourant==1:
-            print(self.J1.__str__())
+            print(self.J1)
         else:
-            print(self.J2.__str__())
+            print(self.J2)
         
         ######### On demande au joueur de sélectionner sa carte et la position visée #########
         
-        carte=input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))
-        position=input('Sélectionnez la position que vous souhaitez sous la forme (x,y) \n')
+        no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) 
+        position= eval(input('Sélectionnez la position visée sous la forme (x,y) \n'))
         if self.joueurCourant==1:
-            self.J1.jouer(carte,position)
+            self.J1.jouer(no_carte,position)
         else:
-            self.J2.jouer(carte,position)
+            self.J2.jouer(no_carte,position)
         
         ######### Affichage des résultats des actions ########################################
         
-        print(self.plateau)
+        #print(self.plateau)
         
         
         ######### Vérification de la victoire d'un des joueurs !! ############################
