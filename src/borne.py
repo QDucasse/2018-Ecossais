@@ -8,9 +8,8 @@ Created on Mon Mar  5 18:25:17 2018
 
 from joueur import Joueur
 from carte import Carte
-from plateau import Plateau
 from groupeCartes import GroupeCartes
-from ecossais import Jeu
+
 
 class Borne():
     

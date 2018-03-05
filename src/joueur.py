@@ -5,11 +5,9 @@ Created on Mon Mar  5 18:25:13 2018
 
 @author: quentin
 """
-from borne import Borne
+
 from carte import Carte
 from plateau import Plateau
-from groupeCartes import GroupeCartes
-from ecossais import Jeu
 
 class Joueur(list):
     

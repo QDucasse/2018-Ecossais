@@ -6,11 +6,7 @@ Created on Mon Mar  5 18:26:48 2018
 @author: quentin
 """
 
-from joueur import Joueur
 from carte import Carte
-from plateau import Plateau
-from borne import Borne
-from ecossais import Jeu
 
 class GroupeCartes():
     
