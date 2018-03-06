@@ -71,6 +71,7 @@ class Joueur(list):
         '''
         self.plateau.tapis[position[0]][position[1]]=str(self[no_carte])
         self[no_carte].position=str(position)
+        self.jeu.rafraichissementIntegral
         del(self[no_carte])
     
     def piocher(self):

@@ -30,6 +30,15 @@ class Jeu():
         self.J2=Joueur(6,2,self.plateau,self)
         self.nbTours=0
         self.joueurCourant=1
+        self.borne1=Borne(0,self.plateau)        
+        self.borne2=Borne(1,self.plateau) 
+        self.borne3=Borne(2,self.plateau) 
+        self.borne4=Borne(3,self.plateau) 
+        self.borne5=Borne(4,self.plateau) 
+        self.borne6=Borne(5,self.plateau) 
+        self.borne7=Borne(6,self.plateau) 
+        self.borne8=Borne(7,self.plateau) 
+        self.borne9=Borne(8,self.plateau) 
         
         #Initialisation et mise en place de la pioche
         self.pioche=[] 
@@ -53,7 +62,17 @@ class Jeu():
         s=s+str(self.plateau)
         return s
         
-        
+    def rafraichissementIntegral(self):
+        self.borne1.rafraichir        
+        self.borne2.rafraichir    
+        self.borne3.rafraichir    
+        self.borne4.rafraichir    
+        self.borne5.rafraichir    
+        self.borne6.rafraichir    
+        self.borne7.rafraichir    
+        self.borne8.rafraichir    
+        self.borne9.rafraichir    
+    
     def unTour(self):
         '''
         Fait progresser chacune des actions d'une case et donne la main à un des joueurs :
@@ -75,7 +94,7 @@ class Jeu():
         
         ######### On demande au joueur de sélectionner sa carte et la position visée #########
         
-        no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) 
+        no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6 \n'.format(self.joueurCourant))) -1
         position= eval(input('Sélectionnez la position visée sous la forme (x,y) \n'))
         if self.joueurCourant==1:
             self.J1.jouer(no_carte,position)
@@ -108,8 +127,8 @@ if __name__=='__main__':
     for i in range(j.J1.taille):
         j.J1.piocher()
         j.J2.piocher()
-    for i in range(55):
-        j.unTour()
+#    for i in range(55):
+#        j.unTour()
  
        
         

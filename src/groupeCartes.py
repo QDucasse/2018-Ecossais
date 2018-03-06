@@ -29,7 +29,21 @@ class GroupeCartes():
         self.totalPoints = C1.valeur + C2.valeur + C3.valeur
         self.force = 0
     
-    
+    def __str__(self):
+        '''
+        Affiche 'Contenu du groupe 1 - No de borne - Contenu du groupe 2'.
+        
+        Paramètres
+        ----------
+        Aucun
+        
+        Renvoie
+        -------
+        s: str
+            La chaîne de caractères qui sera affichée via ''print''
+        '''
+        return str(self.C1)+'/'+str(self.C2)+'/'+str(self.C3)
+        
     def calculForce(self): 
         ''' 
         Calcule la force d'un groupe de cartes comme suit :

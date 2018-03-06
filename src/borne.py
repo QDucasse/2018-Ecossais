@@ -25,19 +25,35 @@ class Borne():
         Groupe de cartes 2: g2
 
         '''
-        self.g1=GroupeCartes(Carte(self.plateau.tapis[0][pos][1],self.plateau.tapis[0][pos][0],' '),
-                             Carte(self.plateau.tapis[1][pos][1],self.plateau.tapis[1][pos][0],' '),
-                             Carte(self.plateau.tapis[2][pos][1],self.plateau.tapis[2][pos][0],' '))
-                             # le groupe de cartes du côté du joueur 1
-        self.g2=GroupeCartes(Carte(self.plateau.tapis[4][pos][1],self.plateau.tapis[4][pos][0],' '),
-                             Carte(self.plateau.tapis[5][pos][1],self.plateau.tapis[5][pos][0],' '),
-                             Carte(self.plateau.tapis[6][pos][1],self.plateau.tapis[6][pos][0],' ')) 
-                             # le groupe de cartes du côté du joueur 2
         self.position=pos       # la position de la borne sur le plateau
         self.premierComplete=0  # conserve  1 ou 2 correspondant au côté du joueur ayant fini en premier
         self.gagnant= ' '
         self.plateau=plateau
+        self.g1=GroupeCartes(Carte(self.plateau.tapis[0][pos][1],self.plateau.tapis[0][pos][0],' '),
+                             Carte(self.plateau.tapis[1][pos][1],self.plateau.tapis[1][pos][0],' '),
+                             Carte(self.plateau.tapis[2][pos][1],self.plateau.tapis[2][pos][0],' '))
+                                # le groupe de cartes du côté du joueur 1
+        self.g2=GroupeCartes(Carte(self.plateau.tapis[4][pos][1],self.plateau.tapis[4][pos][0],' '),
+                             Carte(self.plateau.tapis[5][pos][1],self.plateau.tapis[5][pos][0],' '),
+                             Carte(self.plateau.tapis[6][pos][1],self.plateau.tapis[6][pos][0],' ')) 
+                                # le groupe de cartes du côté du joueur 2
         
+    def __str__(self):
+        '''
+        Affiche 'Contenu du groupe 1 - No de borne - Contenu du groupe 2'.
+        
+        Paramètres
+        ----------
+        Aucun
+        
+        Renvoie
+        -------
+        s: str
+            La chaîne de caractères qui sera affichée via ''print''
+        '''
+        return str(self.g1)+'-'+str(self.position)+'-'+str(self.g2)
+    
+    
     def comparer(self): 
         '''
         Compare les 2 groupes de cartes de chacun des côtés de la borne
@@ -64,4 +80,18 @@ class Borne():
                 # Enfin, en cas d'égalité à nouveau, le premier à avoir complété don côté gagne
                 self.gagnant= 'J{0}'.format(self.premierComplete)
                 
-          
+    def rafraichir(self):
+        '''
+        Rafraîchit le contenu de la borne à l'aide des éléments du tableau
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
+        self.g1=GroupeCartes(Carte(self.plateau.tapis[0][self.position][1],self.plateau.tapis[0][self.position][0],' '),
+                             Carte(self.plateau.tapis[1][self.position][1],self.plateau.tapis[1][self.position][0],' '),
+                             Carte(self.plateau.tapis[2][self.position][1],self.plateau.tapis[2][self.position][0],' '))
+        self.g2=GroupeCartes(Carte(self.plateau.tapis[4][self.position][1],self.plateau.tapis[4][self.position][0],' '),
+                             Carte(self.plateau.tapis[5][self.position][1],self.plateau.tapis[5][self.position][0],' '),
+                             Carte(self.plateau.tapis[6][self.position][1],self.plateau.tapis[6][self.position][0],' ')) 
+    
