@@ -30,6 +30,8 @@ class Jeu():
         self.J2=Joueur(6,2,self.plateau,self)
         self.nbTours=0
         self.joueurCourant=1
+        
+        #Initialisation des bornes
         self.borne1=Borne(0,self.plateau)        
         self.borne2=Borne(1,self.plateau) 
         self.borne3=Borne(2,self.plateau) 
@@ -39,6 +41,7 @@ class Jeu():
         self.borne7=Borne(6,self.plateau) 
         self.borne8=Borne(7,self.plateau) 
         self.borne9=Borne(8,self.plateau) 
+        self.ensembleBorne=[self.borne1,self.borne2,self.borne3,self.borne4,self.borne5,self.borne6,self.borne7,self.borne8,self.borne9]
         
         #Initialisation et mise en place de la pioche
         self.pioche=[] 
@@ -63,6 +66,15 @@ class Jeu():
         return s
         
     def rafraichissementIntegral(self):
+        '''
+        Rafraîchissement de l'intégralité des bornes.
+        A utiliser après une action.  
+        !!!Peut être amélioré si on choisit de rafraîchir seulement 
+        !!!la borne qui a changé
+        
+        Paramètres
+        ---------- 
+        '''
         self.borne1.rafraichir        
         self.borne2.rafraichir    
         self.borne3.rafraichir    
@@ -72,6 +84,8 @@ class Jeu():
         self.borne7.rafraichir    
         self.borne8.rafraichir    
         self.borne9.rafraichir    
+    
+
     
     def unTour(self):
         '''
