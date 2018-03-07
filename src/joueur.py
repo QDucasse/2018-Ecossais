@@ -69,11 +69,34 @@ class Joueur(list):
         Carte choisie
         Position visée sous la forme d'un tuple
         '''
-        self.plateau.tapis[position[0]][position[1]]=str(self[no_carte])
-        self[no_carte].position=str(position)
+        #if case vide
+        self.plateau.tapis[position[0]][position[1]]=str(self[no_carte]) 
+        #Placement de la carte sur le tapis
+        
+        self[no_carte].position=str(position)                           
+        #Rafraîchissement de la position de la carte en elle-même
+        
         self.jeu.rafraichissementIntegral
+        #Rafraîchissement des bornes pour y faire apparaître la carte
+        
         del(self[no_carte])
-    
+        #Suppression de la carte de la main du joueur
+        
+        borneEnCours=self.jeu.ensembleBorne[position[1]]
+        #On mémorise la borne sur laquelle la carte a été placée
+        if self.jeu.joueurCourant==1:
+            if borneEnCours.g1.force!=0 and borneEnCours.premierComplete==0:
+                borneEnCours.premierComplete=1
+                borneEnCours.comparer()
+        #On vérifie que le groupe de carte du côté du joueur venant de jouer est incomplet et s'il vient
+        #d'être complété, on change la valeur de PremierComplété
+        else:
+            if borneEnCours.g1.force==0 and borneEnCours.premierComplete==0:
+                borneEnCours.premierComplete=2
+                borneEnCours.comparer()
+        
+            
+        
     def piocher(self):
         '''
         Pioche la première carte de la pioche et l'ajoute à la main du joueur
