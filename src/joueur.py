@@ -57,7 +57,6 @@ class Joueur(list):
         '''
         self.placer(no_carte,position)
         self.piocher()
-        
     
     
     def placer(self,no_carte,position):
@@ -95,7 +94,29 @@ class Joueur(list):
                 borneEnCours.premierComplete=2
                 borneEnCours.comparer()
         
-            
+   
+    def peutJouer(self,position):
+        '''
+        Vérifie que le joueur courant peut bien placer sa carte à l'endroit choisi
+        
+        Paramètres
+        ----------
+        Position visée
+        
+        Renvoie
+        -------
+        True ou False
+        ''' 
+        #Vérification côté du plateau et emplacement différent d'une borne
+        if self.jeu.joueurCourant==1:
+            cd1= (position[0]<3) and (position[0]>=0)
+        else:
+            cd1= (position[0]>3) and (position[0]<=6)
+        
+        #Vérification emplacement vide
+        cd2=self.plateau.tapis[position[0]][position[1]]=='  '
+        
+        return (cd1) and (cd2)
         
     def piocher(self):
         '''
@@ -105,5 +126,6 @@ class Joueur(list):
         ----------
         Aucun
         '''
-        self.append(Carte(self.jeu.pioche.pop()[1],self.jeu.pioche.pop()[0],'MainJoueur{0}'.format(self.numero)))
+        if self.jeu.pioche!=[]:
+            self.append(Carte(self.jeu.pioche.pop()[1],self.jeu.pioche.pop()[0],'MainJoueur{0}'.format(self.numero)))
 

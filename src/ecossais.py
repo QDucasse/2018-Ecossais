@@ -6,6 +6,7 @@ Created on Mon Feb 12 15:46:45 2018
 @author: ducassqu
 """
 from random import shuffle
+
 from joueur import Joueur
 from carte import Carte
 from plateau import Plateau
@@ -85,7 +86,49 @@ class Jeu():
         self.borne8.rafraichir    
         self.borne9.rafraichir    
     
-
+    def testVictoire(self):
+        '''
+        Vérification de la victoire d'un des joueurs suivant les deux conditions suivantes:
+            Un joueur possède trois bornes consécutives
+            Un joueur possède cinq bornes en tout
+        
+        Paramètres
+        ----------
+        Aucun
+        
+        Renvoie
+        -------
+        True ou False
+        '''
+        etatBornes=self.plateau.tapis[3][:]
+        
+        #Condition 1
+        if etatBornes.count('J1')==5:
+            return (True,'VJ1')
+        elif etatBornes.count('J2')==5:
+            return (True,'VJ2')
+        
+        #Condition 2
+        #On sauvegarde dans un dictionnaire le maximum d'occurences successives de 'J1' ou 'J2'
+        res = {}
+        curseur = etatBornes[0]
+        compt = 0
+        for val in etatBornes:
+            if val == curseur:
+                compt += 1
+            else:
+                res[curseur]=compt
+                curseur = val
+                compt = 1
+        res[curseur]=compt
+        
+        #Puis vérification condition 2
+        if res['J1']>=3:
+            return (True,'VJ1')
+        elif res['J2']>=3:
+            return (True,'VJ2')
+        
+        
     
     def unTour(self):
         '''
@@ -111,13 +154,23 @@ class Jeu():
         no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6 \n'.format(self.joueurCourant))) -1
         position= eval(input('Sélectionnez la position visée sous la forme (x,y) \n'))
         if self.joueurCourant==1:
-            self.J1.jouer(no_carte,position)
+            while not self.J1.peutJouer(position):
+                #On vérifie que le joueur peut bien jouer à l'endroit sélectionné 
+                #et dans le cas contraire, on lui redemande une position
+                position= eval(input('Sélectionnez une position valable \n'))    
+            else:
+                self.J1.jouer(no_carte,position)
+       
         else:
-            self.J2.jouer(no_carte,position)
+            while not self.J1.peutJouer():
+                position= eval(input('Sélectionnez une position valable \n'))    
+            else:
+                self.J2.jouer(no_carte,position)
         
         
         
         ######### Vérification de la victoire d'un des joueurs !! ############################
+        
         
         
         ######### Changement de joueur et incrémentation du tour #############################
@@ -141,8 +194,11 @@ if __name__=='__main__':
     for i in range(j.J1.taille):
         j.J1.piocher()
         j.J2.piocher()
-#    for i in range(55):
-#        j.unTour()
+    while not j.testVictoire()[0]:
+        j.unTour()
+    else:
+        print(j.testVictoire()[1])
+        
  
        
         
