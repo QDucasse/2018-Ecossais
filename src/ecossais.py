@@ -110,23 +110,23 @@ class Jeu():
         
         #Condition 2
         #On sauvegarde dans un dictionnaire le maximum d'occurences successives de 'J1' ou 'J2'
-        res = {}
-        curseur = etatBornes[0]
-        compt = 0
-        for val in etatBornes:
-            if val == curseur:
-                compt += 1
-            else:
-                res[curseur]=compt
-                curseur = val
-                compt = 1
-        res[curseur]=compt
+#        res = {}
+#        curseur = etatBornes[0]
+#        compt = 0
+#        for val in etatBornes:
+#            if val == curseur:
+#                compt += 1
+#            else:
+#                res[curseur]=compt
+#                curseur = val
+#                compt = 1
+#        res[curseur]=compt
         
         #Puis vérification condition 2
-        if res['J1']>=3:
-            return (True,'VJ1')
-        elif res['J2']>=3:
-            return (True,'VJ2')
+#        if res['J1']>=3:
+#            return (True,'VJ1')
+#        elif res['J2']>=3:
+#            return (True,'VJ2')
         
         
     
