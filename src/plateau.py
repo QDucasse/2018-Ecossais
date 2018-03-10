@@ -58,8 +58,3 @@ class Plateau():
         for ligne in self.tapis:
             s=s+str(ligne)+'\n'
         return s
-       
-
-
-#    def testVictoire(self):
-        
