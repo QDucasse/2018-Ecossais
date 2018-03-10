@@ -42,3 +42,5 @@ class Carte():
         
         return '{0}{1}'.format(self.couleur,self.valeur)
 
+    # !!! IL FAUT FAIRE UN ACCESSEUR POUR VALEUR POUR POUVOIR DIRE QUE '  ' A UNE VALEUR DE 0
+    # ON POURRA ALORS CALCULER LA FORCE D'UN GROUPE. OUPS CAPS LOCK
