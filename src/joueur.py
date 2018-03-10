@@ -68,7 +68,7 @@ class Joueur(list):
         Carte choisie
         Position visée sous la forme d'un tuple
         '''
-        #if case vide
+
         self.plateau.tapis[position[0]][position[1]]=str(self[no_carte]) 
         #Placement de la carte sur le tapis
         
@@ -77,9 +77,6 @@ class Joueur(list):
         
         self.jeu.rafraichissementIntegral
         #Rafraîchissement des bornes pour y faire apparaître la carte
-        
-        del(self[no_carte])
-        #Suppression de la carte de la main du joueur
         
         borneEnCours=self.jeu.ensembleBorne[position[1]]
         #On mémorise la borne sur laquelle la carte a été placée
@@ -94,6 +91,8 @@ class Joueur(list):
                 borneEnCours.premierComplete=2
                 borneEnCours.comparer()
         
+        del(self[no_carte])
+        #Suppression de la carte de la main du joueur
    
     def peutJouer(self,position):
         '''
@@ -108,7 +107,7 @@ class Joueur(list):
         True ou False
         ''' 
         #Vérification du type des données insérées
-        if (type(position)=='tuple'):
+        if (type(position)==tuple):
             #Vérification côté du plateau et emplacement différent d'une borne
             if self.jeu.joueurCourant==1:
                 cd1= (position[0]<3) and (position[0]>=0)
