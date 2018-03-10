@@ -50,7 +50,8 @@ class Jeu():
             for couleur in ['A','B','C','D','E','F']:
                 self.pioche.append('%c%i'%(couleur,i+1))
         shuffle(self.pioche)
-     
+        self.pioche=list(set(self.pioche))
+        
         
     def __str__(self):
         '''
@@ -76,15 +77,15 @@ class Jeu():
         Paramètres
         ---------- 
         '''
-        self.borne1.rafraichir        
-        self.borne2.rafraichir    
-        self.borne3.rafraichir    
-        self.borne4.rafraichir    
-        self.borne5.rafraichir    
-        self.borne6.rafraichir    
-        self.borne7.rafraichir    
-        self.borne8.rafraichir    
-        self.borne9.rafraichir    
+        self.borne1.rafraichir()        
+        self.borne2.rafraichir()    
+        self.borne3.rafraichir()    
+        self.borne4.rafraichir()    
+        self.borne5.rafraichir()    
+        self.borne6.rafraichir()    
+        self.borne7.rafraichir()    
+        self.borne8.rafraichir()    
+        self.borne9.rafraichir()    
     
     def testVictoire(self):
         '''
@@ -176,11 +177,12 @@ class Jeu():
                 self.J1.jouer(no_carte,position)
        
         else:
-            while not self.J1.peutJouer():
+            while not self.J2.peutJouer(position):
                 position= eval(input('Sélectionnez une position valable \n'))    
             else:
                 self.J2.jouer(no_carte,position)
         
+        self.rafraichissementIntegral()
         
         ######### Changement de joueur et incrémentation du tour #############################
         
