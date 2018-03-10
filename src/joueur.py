@@ -107,16 +107,21 @@ class Joueur(list):
         -------
         True ou False
         ''' 
-        #Vérification côté du plateau et emplacement différent d'une borne
-        if self.jeu.joueurCourant==1:
-            cd1= (position[0]<3) and (position[0]>=0)
+        #Vérification du type des données insérées
+        if (type(position)=='tuple'):
+            #Vérification côté du plateau et emplacement différent d'une borne
+            if self.jeu.joueurCourant==1:
+                cd1= (position[0]<3) and (position[0]>=0)
+            else:
+                cd1= (position[0]>3) and (position[0]<=6)
+            
+            #Vérification emplacement vide
+            cd2=self.plateau.tapis[position[0]][position[1]]=='  '
+            
+            return cd1 and cd2
+        
         else:
-            cd1= (position[0]>3) and (position[0]<=6)
-        
-        #Vérification emplacement vide
-        cd2=self.plateau.tapis[position[0]][position[1]]=='  '
-        
-        return (cd1) and (cd2)
+            return False
         
     def piocher(self):
         '''
