@@ -100,7 +100,7 @@ class Jeu():
         -------
         True ou False
         '''
-        etatBornes=self.plateau.tapis[3][:]
+        etatBornes=self.plateau.tapis[3][:] #La liste des bornes du plateau
         
         #Condition 1
         if etatBornes.count('J1')==5:
@@ -109,28 +109,42 @@ class Jeu():
             return (True,'VJ2')
         
         #Condition 2
-        #On sauvegarde dans un dictionnaire le maximum d'occurences successives de 'J1' ou 'J2'
-#        res = {}
-#        curseur = etatBornes[0]
-#        compt = 0
-#        for val in etatBornes:
-#            if val == curseur:
-#                compt += 1
-#            else:
-#                res[curseur]=compt
-#                curseur = val
-#                compt = 1
-#        res[curseur]=compt
+        #On sauvegarde dans un dictionnaire le nombre maximum d'occurences successives de 'J1' ou 'J2'
+        res = {}
+        curseur = etatBornes[0]
+        compt = 0
+        for val in etatBornes:
+            if val == curseur:
+                compt += 1
+            else:
+                res[curseur]=compt
+                curseur = val
+                compt = 1
+        res[curseur]=compt
         
-        #Puis vérification condition 2
-#        if res['J1']>=3:
-#            return (True,'VJ1')
-#        elif res['J2']>=3:
-#            return (True,'VJ2')
-        
+        # Puis vérification condition 2
+        if res['J1']>=3:
+            return (True,'VJ1')
+        elif res['J2']>=3:
+            return (True,'VJ2')
         
     
-    def unTour(self):
+    def tourSuivant(self):
+        '''
+        Change le compteur de tour et le joueur courant
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
+        if self.joueurCourant==1:
+            self.joueurCourant=2
+        else:
+            self.joueurCourant=1
+        self.nbTours=self.nbTours+1
+        
+        
+    def unTourPvP(self):
         '''
         Fait progresser chacune des actions d'une case et donne la main à un des joueurs :
             Le joueur en question joue une carte (place + pioche)
@@ -141,7 +155,7 @@ class Jeu():
         ----------
         Aucun
         '''
-        ######### Affichage du jeu au moment de jouer ########################################
+        ######### Affichage du jeu et du la main du joueur ####################################
         
         print(self)
         if self.joueurCourant==1:
@@ -151,7 +165,7 @@ class Jeu():
         
         ######### On demande au joueur de sélectionner sa carte et la position visée #########
         
-        no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6 \n'.format(self.joueurCourant))) -1
+        no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) -1
         position= eval(input('Sélectionnez la position visée sous la forme (x,y) \n'))
         if self.joueurCourant==1:
             while not self.J1.peutJouer(position):
@@ -168,38 +182,35 @@ class Jeu():
                 self.J2.jouer(no_carte,position)
         
         
-        
-        ######### Vérification de la victoire d'un des joueurs !! ############################
-        
-        
-        
         ######### Changement de joueur et incrémentation du tour #############################
         
-        if self.joueurCourant==1:
-            self.joueurCourant=2
-        else:
-            self.joueurCourant=1
-        
-        self.nbTours=self.nbTours+1
+        self.tourSuivant()
         
         
         
+    def start(self):
+        '''
+        Lance une partie entre différents joueurs
         
-        
-        
+        Paramètres
+        ----------
+        Aucun
+        '''
+        print('Écossais Bagarreurs ! \n')
+        mode=input('Sélectionnez votre mode de jeu: \nH pour Humain contre Humain ou I contre une IA \n')
+        if mode=='H':
+            for i in range(self.J1.taille):
+                self.J1.piocher()
+                self.J2.piocher()
+            while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
+                 self.unTourPvP()
+#        elif mode=='I':
+#            self.J2=IA(niwuen)
         
         
 if __name__=='__main__':
     j=Jeu()
-    for i in range(j.J1.taille):
-        j.J1.piocher()
-        j.J2.piocher()
-    while not j.testVictoire()[0]:
-        j.unTour()
-    else:
-        print(j.testVictoire()[1])
-        
- 
+    j.start()
        
         
         
