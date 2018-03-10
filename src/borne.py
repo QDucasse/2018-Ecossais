@@ -21,8 +21,8 @@ class Borne():
         
         Paramètres
         ----------
-        Groupe de cartes 1: g1
-        Groupe de cartes 2: g2
+        Position sur le plateau
+        Plateau
 
         '''
         self.position=pos       # la position de la borne sur le plateau
@@ -53,6 +53,20 @@ class Borne():
         '''
         return str(self.g1)+'-'+str(self.position)+'-'+str(self.g2)
     
+    def peutComparer(self):
+        '''
+        Vérifie que chacun des groupes de cartes de part et d'autre de la borne est bien complet
+        
+        Paramètres
+        ----------
+        Aucun
+        
+        Renvoie
+        -------
+        True ou False
+        '''
+        return (self.g1.force!=0) and (self.g2.force!=0)
+    
     
     def comparer(self): 
         '''
@@ -66,18 +80,19 @@ class Borne():
         Aucun
         '''
         # Première condition de victoire via la force
+        
         if self.g1.force>self.g2.force:
-            self.plateau[3][self.pos]='J1'
+            self.plateau.tapis[3][self.position]='J1'
         elif self.g2.force>self.g1.force:
-            self.plateau[3][self.pos]='J2'
+            self.plateau.tapis[3][self.position]='J2'
         else:
             # En cas d'égalité, on compare le total de points 
             if self.g1.totalPoints>self.g2.totalPoints:
-                self.plateau[3][self.pos]='J1'
+                self.plateau.tapis[3][self.position]='J1'
             elif self.g2.totalPoints>self.g1.totalPoints:
-                self.plateau[3][self.pos]='J2'
+                self.plateau.tapis[3][self.position]='J2'
             else:
-                # Enfin, en cas d'égalité à nouveau, le premier à avoir complété don côté gagne
+                # Enfin, en cas d'égalité à nouveau, le premier à avoir complété son côté gagne
                 self.gagnant= 'J{0}'.format(self.premierComplete)
                 
     def rafraichir(self):
