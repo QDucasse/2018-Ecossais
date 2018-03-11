@@ -9,6 +9,8 @@ Created on Mon Mar  5 18:25:15 2018
 class Carte():
     
     
+    
+    
     def __init__(self,valeur,couleur,position):
         ''' 
         Crée une carte donnée.
@@ -39,8 +41,11 @@ class Carte():
             La chaîne de caractères qui sera affichée via ''print''
             
         '''
-        
-        return '{0}{1}'.format(self.couleur,self.valeur)
+        if self.valeur==0 and self.couleur=='X':
+            return '  '
+        else:
+            return '{0}{1}'.format(self.couleur,self.valeur)
+
 
     # !!! IL FAUT FAIRE UN ACCESSEUR POUR VALEUR POUR POUVOIR DIRE QUE '  ' A UNE VALEUR DE 0
     # ON POURRA ALORS CALCULER LA FORCE D'UN GROUPE. OUPS CAPS LOCK

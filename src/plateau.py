@@ -6,6 +6,7 @@ Created on Mon Mar  5 18:25:16 2018
 @author: quentin
 """
 
+from carte import Carte
 
 class Plateau():
     
@@ -41,7 +42,7 @@ class Plateau():
          self.taille=nb_bornes
          self.tapis=[]
          for i in range(7):
-             self.tapis.append(['  ']*nb_bornes)
+             self.tapis.append([str(Carte(0,'X',' '))]*nb_bornes)
          self.tapis[3]=['XX','XX','XX','XX','XX','XX','XX','XX','XX']
          
          
