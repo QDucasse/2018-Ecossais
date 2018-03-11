@@ -9,9 +9,9 @@ Created on Mon Mar  5 18:26:48 2018
 from carte import Carte
 
 
-
 class GroupeCartes():
     
+    carteVide=Carte(0,'X',' ')
     
     def __init__(self,C1,C2,C3):
         # On définit Carte(0,' ','Vide) comme un emplacement vide
@@ -43,7 +43,23 @@ class GroupeCartes():
             La chaîne de caractères qui sera affichée via ''print''
         '''
         return str(self.C1)+'/'+str(self.C2)+'/'+str(self.C3)
+    
+    def estComplet(self):
+        '''
+        Vérifie si le groupe est complet, cad contient 3 cartes
         
+        Paramètres
+        ----------
+        Aucun
+        
+        Renvoie
+        -------
+        True ou False
+        '''
+    
+        return (self.C1!=Carte(0,'X',' ')) and (self.C2!=Carte(0,'X',' ')) and (self.C3!=Carte(0,'X',' '))
+    
+    
     def calculForce(self): 
         ''' 
         Calcule la force d'un groupe de cartes comme suit :
