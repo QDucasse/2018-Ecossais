@@ -25,6 +25,7 @@ class IA_0(Joueur):
         '''
         
         position=(rnd.randint(4,7),rnd.randint(0,9))
+        
         while not self.peutJouer(position):
              position=(rnd.randint(4,7),rnd.randint(0,9))
         

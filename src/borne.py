@@ -29,14 +29,16 @@ class Borne():
         self.premierComplete=0  # conserve  1 ou 2 correspondant au côté du joueur ayant fini en premier
         self.gagnant= ' '
         self.plateau=plateau
-        self.g1=GroupeCartes(Carte(self.plateau.tapis[0][pos][1],self.plateau.tapis[0][pos][0],' '),
-                             Carte(self.plateau.tapis[1][pos][1],self.plateau.tapis[1][pos][0],' '),
-                             Carte(self.plateau.tapis[2][pos][1],self.plateau.tapis[2][pos][0],' '))
+        
+        self.g1=GroupeCartes(Carte(self.plateau.tapis[0][self.position].valeur,self.plateau.tapis[0][self.position].couleur),
+                             Carte(self.plateau.tapis[1][self.position].valeur,self.plateau.tapis[1][self.position].couleur),
+                             Carte(self.plateau.tapis[2][self.position].valeur,self.plateau.tapis[2][self.position].couleur))
                                 # le groupe de cartes du côté du joueur 1
-        self.g2=GroupeCartes(Carte(self.plateau.tapis[4][pos][1],self.plateau.tapis[4][pos][0],' '),
-                             Carte(self.plateau.tapis[5][pos][1],self.plateau.tapis[5][pos][0],' '),
-                             Carte(self.plateau.tapis[6][pos][1],self.plateau.tapis[6][pos][0],' ')) 
+        self.g2=GroupeCartes(Carte(self.plateau.tapis[4][self.position].valeur,self.plateau.tapis[4][self.position].couleur),
+                             Carte(self.plateau.tapis[5][self.position].valeur,self.plateau.tapis[5][self.position].couleur),
+                             Carte(self.plateau.tapis[6][self.position].valeur,self.plateau.tapis[6][self.position].couleur)) 
                                 # le groupe de cartes du côté du joueur 2
+                                
         
     def __str__(self):
         '''
@@ -51,7 +53,8 @@ class Borne():
         s: str
             La chaîne de caractères qui sera affichée via ''print''
         '''
-        return str(self.g1)+'-'+str(self.position)+'-'+str(self.g2)
+        return str(self.g1)+' - '+str(self.position)+' - '+str(self.g2)
+    
     
     def peutComparer(self):
         '''
@@ -81,19 +84,19 @@ class Borne():
         '''
         # Première condition de victoire via la force
         
-        if self.g1.force>self.g2.force:
+        if (self.g1.force>self.g2.force):
             self.plateau.tapis[3][self.position]='J1'
-        elif self.g2.force>self.g1.force:
+        elif (self.g2.force>self.g1.force):
             self.plateau.tapis[3][self.position]='J2'
         else:
             # En cas d'égalité, on compare le total de points 
-            if self.g1.totalPoints>self.g2.totalPoints:
+            if (self.g1.totalPoints>self.g2.totalPoints):
                 self.plateau.tapis[3][self.position]='J1'
-            elif self.g2.totalPoints>self.g1.totalPoints:
+            elif (self.g2.totalPoints>self.g1.totalPoints):
                 self.plateau.tapis[3][self.position]='J2'
             else:
                 # Enfin, en cas d'égalité à nouveau, le premier à avoir complété son côté gagne
-                self.gagnant= 'J{0}'.format(self.premierComplete)
+                self.plateau.tapis[3][self.position]='J{0}'.format(self.premierComplete)
                 
     def rafraichir(self):
         '''
@@ -103,10 +106,10 @@ class Borne():
         ----------
         Aucun
         '''
-        self.g1=GroupeCartes(Carte(self.plateau.tapis[0][self.position][1],self.plateau.tapis[0][self.position][0],' '),
-                             Carte(self.plateau.tapis[1][self.position][1],self.plateau.tapis[1][self.position][0],' '),
-                             Carte(self.plateau.tapis[2][self.position][1],self.plateau.tapis[2][self.position][0],' '))
-        self.g2=GroupeCartes(Carte(self.plateau.tapis[4][self.position][1],self.plateau.tapis[4][self.position][0],' '),
-                             Carte(self.plateau.tapis[5][self.position][1],self.plateau.tapis[5][self.position][0],' '),
-                             Carte(self.plateau.tapis[6][self.position][1],self.plateau.tapis[6][self.position][0],' ')) 
-    
+        self.g1=GroupeCartes(Carte(self.plateau.tapis[0][self.position].valeur,self.plateau.tapis[0][self.position].couleur),
+                             Carte(self.plateau.tapis[1][self.position].valeur,self.plateau.tapis[1][self.position].couleur),
+                             Carte(self.plateau.tapis[2][self.position].valeur,self.plateau.tapis[2][self.position].couleur))
+        self.g2=GroupeCartes(Carte(self.plateau.tapis[4][self.position].valeur,self.plateau.tapis[4][self.position].couleur),
+                             Carte(self.plateau.tapis[5][self.position].valeur,self.plateau.tapis[5][self.position].couleur),
+                             Carte(self.plateau.tapis[6][self.position].valeur,self.plateau.tapis[6][self.position].couleur))
+       

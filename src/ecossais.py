@@ -207,38 +207,9 @@ class Jeu():
             while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
                  self.unTourPvP()
 #        elif mode=='I':
-#            self.J2=IA(niwuen)
+#            self.J2=IA(blablabla)
         
         
 if __name__=='__main__':
     j=Jeu()
     j.start()
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
