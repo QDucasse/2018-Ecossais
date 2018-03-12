@@ -4,9 +4,7 @@
 Created on Mon Feb 26 19:56:49 2018
 @author: quentin
 """
-import os
-from os import chdir
-chdir('D:/Users/Matthieu/Documents/Devoirs Matthieu/ENSTA BZH/Projet 2.1 Ecossais Bagarreurs/GitHub')
+
 
 from ecossais import Jeu
 from borne import Borne
@@ -22,33 +20,36 @@ from numpy.random import randint
 
 
 class TestJoueur(unittest.TestCase):
-    
-    # plateau = []
-    # for i in range(7):
-    #     plateau.append(['  ']*9)
-    # # plateau[3]=['XX','XX','XX','XX','XX','XX','XX','XX','XX']
-    
-    plateau = Plateau(9)
-    
-    partie = Jeu(plateau)
-    
-    Toto = Joueur(6, randint(1,3), plateau, partie)
-    
-    
-    # def testInstance:    inutile, aucun échec possible
-    #     Toto = Joueur(5, 1, plateau, partie)
+
     
     def testJouer(self):
-        no = randint(1,6)
-        abs = randint(7)
-        ord = randint(7)
         
-        Toto.jouer(no, (abs, ord))
-        if len(self.pioche)!=0:
+        plateau = Plateau(9)
+        partie = Jeu(plateau)
+        Toto = Joueur(6, randint(1,3), plateau, partie)
+        
+        for i in range(Toto.taille):
+            Toto.piocher()        
+            
+        no = randint(1,7)
+        abs = randint(8)
+        ord = randint(6)
+        position = (abs, ord)
+        
+        Toto.jouer(no, position)
+        if len(partie.pioche)!=0:
             self.assertEqual(6, len(Toto))
-         
+
         
     def testPlacer(self):
+        
+        plateau = Plateau(9)
+        partie = Jeu(plateau)
+        Toto = Joueur(6, randint(1,3), plateau, partie)
+        
+        for i in range(Toto.taille):
+            Toto.piocher()
+        
         no = randint(1,6)
         abs = randint(7)
         ord = randint(7)
@@ -56,26 +57,40 @@ class TestJoueur(unittest.TestCase):
         carte = Toto[no]   
         
         
-        self.assertEqual(Toto.plateau[ord][abs], '{0}{1}'.format(carte.couleur, carte.valeur))
+        self.assertEqual(Toto.plateau.tapis[ord][abs], '{0}{1}'.format(carte.couleur, carte.valeur))
         
         
     
     def testPeutJouer(self):
-        test1 = {1:(0,0) ,1:(1,8) ,1:(2,8) ,1:(2,5) ,1:(0,8) ,2:(8,8) ,2:(7,0) ,2:(6,0) ,2:(8,0) ,2:(6,8)}
-        test2 = {2:(0,0) ,2:(1,8) ,2:(2,8) ,2:(2,5) ,2:(0,8) ,1:(8,8) ,1:(7,0) ,1:(6,0) ,1:(8,0) ,1:(6,8), 2:(3,0), 2:(3,8), 1:(3,0), 1:(3,8), 2:(9,3), 2:(4,9), 1:(2,9), 1:(-1,3), 1:(0,1), 1:(2,3), 2:(7,1), 2:(6,3)}
         
         plateau = Plateau(9)
+        
+        testJ11 = [(0,0) ,(1,8) ,(2,8) ,(2,5) ,(0,8)]
+        testJ21 = [(6,8) ,(5,0) ,(6,0) ,(4,8) ,(4,0)]
+        testJ12 = [(6,8), (5,0), (6,0), (4,8), (4,0), (0,1), (2,3), (2,9), (-1,3), (0,1), (2,3)]
+        testJ22 = [(0,0), (1,8), (2,8), (2,5), (0,8), (3,0), (3,8), (9,3), (4,9), (6,1), (4,3)]
+        
         plateau.tapis[0][1] = 'A6'
         plateau.tapis[2][3] = 'A6'
-        plateau.tapis[7][1] = 'A6'
-        plateau.tapis[6][3] = 'A6'
+        plateau.tapis[6][1] = 'A6'
+        plateau.tapis[4][3] = 'A6'
+        
+        J1 = Joueur(6, 1, plateau, Jeu(plateau))
+        J2 = Joueur(6, 2, plateau, Jeu(plateau))
         
         
-        for Jt,pos in self.test1.items():
-            self.assertEqual(Joueur(5, Jt, plateau, Jeu(plateau)).peutJouer(pos), True)
+        for pos in testJ11:
+            self.assertEqual(J1.peutJouer(pos), True)
             
-        for Jt,pos in self.test2.items():
-            self.assertEqual(Joueur(5, Jt, plateau, Jeu(plateau)).peutJouer(pos), False)
+        for pos in testJ21:
+            self.assertEqual(J2.peutJouer((4,4)), True)
+            
+        for pos in testJ12:
+            self.assertEqual(J1.peutJouer(pos), False)
+            
+        for pos in testJ22:
+            self.assertEqual(J2.peutJouer(pos), False)
+            
         
          
 #     def testPiocher(self):
@@ -104,6 +119,6 @@ class TestJoueur(unittest.TestCase):
 #     def testUnTour(self):
 
 
-# if  __name__  == "__main__":
-#     unittest.main() 
+if  __name__  == "__main__":
+    unittest.main() 
 
