@@ -107,8 +107,12 @@ class Joueur(list):
         True ou False
         ''' 
         #Vérification du type des données insérées
+<<<<<<< HEAD
         
         if (type(position)==tuple):
+=======
+        if (type(position)==tuple) and position[0] in range(7) and position[1] in range(self.plateau.taille):
+>>>>>>> 803b99f812f9a4d39d60c3e433e7fa455851c46c
             #Vérification côté du plateau et emplacement différent d'une borne
             if self.jeu.joueurCourant==1:
                 cd1= (position[0]<3) and (position[0]>=0)
