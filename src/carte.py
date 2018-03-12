@@ -11,7 +11,7 @@ class Carte():
     
     
     
-    def __init__(self,valeur,couleur,position):
+    def __init__(self,valeur,couleur):
         ''' 
         Crée une carte donnée.
         
@@ -24,7 +24,7 @@ class Carte():
         '''
         self.valeur=valeur
         self.couleur=couleur
-        self.position=position
+        
     
     
     def __str__(self):
@@ -46,6 +46,9 @@ class Carte():
         else:
             return '{0}{1}'.format(self.couleur,self.valeur)
 
+    
+    
 
+    #Carte(0,'X') est une carte vide
     # !!! IL FAUT FAIRE UN ACCESSEUR POUR VALEUR POUR POUVOIR DIRE QUE '  ' A UNE VALEUR DE 0
     # ON POURRA ALORS CALCULER LA FORCE D'UN GROUPE. OUPS CAPS LOCK

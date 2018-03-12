@@ -70,10 +70,7 @@ class Joueur(list):
         '''
         
         #Placement de la carte sur le tapis
-        self.plateau.tapis[position[0]][position[1]]=str(self[no_carte]) 
-        
-        #Rafraîchissement de la position de la carte en elle-même
-        self[no_carte].position=str(position)                           
+        self.plateau.tapis[position[0]][position[1]]=self[no_carte] 
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
         self.jeu.rafraichissementIntegral
@@ -83,14 +80,14 @@ class Joueur(list):
         
         #Si jamais un des groupes est complété, on change la valeur de premierComplete !
         if self.jeu.joueurCourant==1:
-            if borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet():
-                self.jeu.borneEnCours.premierComplete=1        
-        else:
-            if borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet():
+            if (borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet()):
                 self.jeu.borneEnCours.premierComplete=1
+        else:
+            if (borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet()):
+                self.jeu.borneEnCours.premierComplete=2
         
         #Comparaison si jamais les deux groupes sont complets
-        if borneEnCours.g1.estComplet() and borneEnCours.g2.estComplet():
+        if (borneEnCours.g1.estComplet() and borneEnCours.g2.estComplet()):
             borneEnCours.comparer()
         
         #Suppression de la carte de la main du joueur
@@ -110,6 +107,7 @@ class Joueur(list):
         True ou False
         ''' 
         #Vérification du type des données insérées
+        
         if (type(position)==tuple):
             #Vérification côté du plateau et emplacement différent d'une borne
             if self.jeu.joueurCourant==1:
@@ -118,12 +116,15 @@ class Joueur(list):
                 cd1= (position[0]>3) and (position[0]<=6)
             
             #Vérification emplacement vide
-            cd2=self.plateau.tapis[position[0]][position[1]]=='  '
-            
+            cd2=str(self.plateau.tapis[position[0]][position[1]])=='  '
+    
             return cd1 and cd2
         
         else:
             return False
+        
+      
+        
         
     def piocher(self):
         '''
@@ -134,5 +135,5 @@ class Joueur(list):
         Aucun
         '''
         if self.jeu.pioche!=[]:
-            self.append(Carte(self.jeu.pioche.pop()[1],self.jeu.pioche.pop()[0],'MainJoueur{0}'.format(self.numero)))
+            self.append(Carte(self.jeu.pioche.pop()[1],self.jeu.pioche.pop()[0]))
 

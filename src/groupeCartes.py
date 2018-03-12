@@ -11,12 +11,10 @@ from carte import Carte
 
 class GroupeCartes():
     
-    carteVide=Carte(0,'X',' ')
-    
-    def __init__(self,C1,C2,C3):
-        # On définit Carte(0,' ','Vide) comme un emplacement vide
+    def __init__(self,C1=Carte(0,'X'),C2=Carte(0,'X'),C3=Carte(0,'X')):
+        # On définit Carte(0,'X') comme un emplacement vide
         ''' 
-        Crée un groupe de 3 cartes, la carte vide étant Carte(0,'X','Vide') .
+        Crée un groupe avec les cartes C1 C2 et C3
         
         Paramètres
         ----------
@@ -26,7 +24,7 @@ class GroupeCartes():
         self.C1 = C1
         self.C2 = C2
         self.C3 = C3
-        self.totalPoints = C1.valeur + C2.valeur + C3.valeur
+        self.totalPoints = C1.valeur+C2.valeur+C3.valeur
         self.force = 0
     
     def __str__(self):
@@ -44,6 +42,7 @@ class GroupeCartes():
         '''
         return str(self.C1)+'/'+str(self.C2)+'/'+str(self.C3)
     
+    
     def estComplet(self):
         '''
         Vérifie si le groupe est complet, cad contient 3 cartes
@@ -57,8 +56,8 @@ class GroupeCartes():
         True ou False
         '''
     
-        return (self.C1!=Carte(0,'X',' ')) and (self.C2!=Carte(0,'X',' ')) and (self.C3!=Carte(0,'X',' '))
-    
+        return (self.C1!=Carte(0,'X')) and (self.C2!=Carte(0,'X')) and (self.C3!=Carte(0,'X'))
+        #On nomme Carte(0,'X') un espace vide
     
     def calculForce(self): 
         ''' 
@@ -80,18 +79,18 @@ class GroupeCartes():
         
         else:
              l=[self.C1.valeur,self.C2.valeur,self.C3.valeur]
-             if ((self.C1.couleur==self.C2.couleur) and (self.C2.couleur==self.C3.couleur)) and (min(l)==max(l)-2):
+             #On vérifie que les cartes sont de la même couleur et forment une suite
+             if (((self.C1.couleur==self.C2.couleur) and (self.C2.couleur==self.C3.couleur)) and (min(l)==(max(l)-2))):
                  self.force=5
-                 #On vérifie que les cartes sont de la même couleur et forment une suite
+             #On vérifie que les cartes sont de la même valeur 
              elif (self.C1.valeur==self.C2.valeur) and (self.C2.valeur==self.C3.valeur):   
                  self.force=4
-                 #On vérifie que les cartes sont de la même valeur 
+             #On vérifie que les cartes sont de la même couleur     
              elif (self.C1.couleur==self.C2.couleur) and (self.C2.couleur==self.C3.couleur):
                  self.force=3
-                 #On vérifie que les cartes sont de la même couleur 
-             elif (min(l)==max(l)-2) and (l.count(min(l))==1) and (l.count(max(l))==1):
-                 self.force=2
-                 #On vérifie que les cartes forment une suite
+             #On vérifie que les cartes forment une suite  
+             elif ((min(l)==(max(l)-2)) and (l.count(min(l))==1) and (l.count(max(l))==1)):
+                 self.force=2   
              else:
                  self.force=1
                  
