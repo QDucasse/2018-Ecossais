@@ -81,14 +81,15 @@ class Joueur(list):
         #Si jamais un des groupes est complété, on change la valeur de premierComplete !
         if self.jeu.joueurCourant==1:
             if (borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet()):
-                self.jeu.borneEnCours.premierComplete=1
+                borneEnCours.premierComplete=1
         else:
             if (borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet()):
-                self.jeu.borneEnCours.premierComplete=2
+                borneEnCours.premierComplete=2
         
         #Comparaison si jamais les deux groupes sont complets
         if (borneEnCours.g1.estComplet() and borneEnCours.g2.estComplet()):
-            borneEnCours.comparer()
+            if borneEnCours.peutComparer():
+                borneEnCours.comparer()
         
         #Suppression de la carte de la main du joueur
         del(self[no_carte])
@@ -136,5 +137,5 @@ class Joueur(list):
         Aucun
         '''
         if self.jeu.pioche!=[]:
-            self.append(Carte(self.jeu.pioche.pop()[1],self.jeu.pioche.pop()[0]))
+            self.append(Carte(int(self.jeu.pioche.pop()[1]),self.jeu.pioche.pop()[0]))
 
