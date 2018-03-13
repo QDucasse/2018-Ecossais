@@ -24,7 +24,7 @@ class GroupeCartes():
         self.C1 = C1
         self.C2 = C2
         self.C3 = C3
-        self.totalPoints = C1.valeur+C2.valeur+C3.valeur
+        self.totalPoints = C1.valeur + C2.valeur + C3.valeur
         self.force = 0
     
     def __str__(self):
@@ -56,7 +56,7 @@ class GroupeCartes():
         True ou False
         '''
     
-        return (self.C1!=Carte(0,'X')) and (self.C2!=Carte(0,'X')) and (self.C3!=Carte(0,'X'))
+        return (str(self.C1)!='  ') and (str(self.C2)!='  ') and (str(self.C3)!='  ')
         #On nomme Carte(0,'X') un espace vide
     
     def calculForce(self): 
@@ -93,4 +93,3 @@ class GroupeCartes():
                  self.force=2   
              else:
                  self.force=1
-                 
