@@ -12,7 +12,7 @@ from plateau import Plateau
 class Joueur(list):
     
     
-    def __init__(self,taille,no,plat,partie):
+    def __init__(self,taille,no,partie):
         ''' 
         Crée un joueur à travers une main de taille donnée et un numéro caractéristique.
         
@@ -25,7 +25,7 @@ class Joueur(list):
 
         '''
         self.jeu=partie
-        self.plateau=plat
+        self.plateau=partie.plateau
         self.taille=taille
         self.numero=no
     
@@ -107,12 +107,9 @@ class Joueur(list):
         True ou False
         ''' 
         #Vérification du type des données insérées
-<<<<<<< HEAD
-        
+
+
         if (type(position)==tuple):
-=======
-        if (type(position)==tuple) and position[0] in range(7) and position[1] in range(self.plateau.taille):
->>>>>>> 803b99f812f9a4d39d60c3e433e7fa455851c46c
             #Vérification côté du plateau et emplacement différent d'une borne
             if self.jeu.joueurCourant==1:
                 cd1= (position[0]<3) and (position[0]>=0)

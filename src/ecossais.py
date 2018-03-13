@@ -27,8 +27,8 @@ class Jeu():
 
         '''
         self.plateau=plateau
-        self.J1=Joueur(6,1,self.plateau,self)
-        self.J2=Joueur(6,2,self.plateau,self)
+        self.J1=Joueur(6,1,self)
+        self.J2=Joueur(6,2,self)
         self.nbTours=0
         self.joueurCourant=1
         
