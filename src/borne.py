@@ -27,7 +27,6 @@ class Borne():
         '''
         self.position=pos       # la position de la borne sur le plateau
         self.premierComplete=0  # conserve  1 ou 2 correspondant au côté du joueur ayant fini en premier
-        self.gagnant= ' '
         self.plateau=plateau
         
         self.g1=GroupeCartes(Carte(self.plateau.tapis[0][self.position].valeur,self.plateau.tapis[0][self.position].couleur),
