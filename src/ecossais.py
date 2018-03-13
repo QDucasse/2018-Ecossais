@@ -148,8 +148,8 @@ class Jeu():
     def unTourPvP(self):
         '''
         Fait progresser chacune des actions d'une case et donne la main à un des joueurs :
+            L'état du jeu s'affiche
             Le joueur en question joue une carte (place + pioche)
-            Le résultat de ses actions s'affiche
             Le nombre de tours s'incrémente
         
         Paramètres
