@@ -27,7 +27,7 @@ class TestJoueur(unittest.TestCase):
         Toto = Joueur(6, randint(1,3), j)
         for i in range(Toto.taille):
             Toto.piocher()          
-        no = randint(1,7)
+        no = randint(0,6)
         abs = randint(8)
         ord = randint(6)
         position = (abs, ord)
@@ -78,7 +78,7 @@ class TestJoueur(unittest.TestCase):
             self.assertEqual(J1.peutJouer(pos), True)
             
         for pos in testJ21:
-            self.assertEqual(J2.peutJouer((4,4)), True)
+            self.assertEqual(J2.peutJouer((4,4)),True)
             
         for pos in testJ12:
             self.assertEqual(J1.peutJouer(pos), False)
