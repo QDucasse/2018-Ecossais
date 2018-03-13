@@ -23,29 +23,24 @@ class TestJoueur(unittest.TestCase):
 
     
     def testJouer(self):
-        
-        plateau = Plateau(9)
-        partie = Jeu(plateau)
-        Toto = Joueur(6, randint(1,3), plateau, partie)
-        
+        j=Jeu()
+        Toto = Joueur(6, randint(1,3), j)
         for i in range(Toto.taille):
-            Toto.piocher()        
-            
+            Toto.piocher()          
         no = randint(1,7)
         abs = randint(8)
         ord = randint(6)
         position = (abs, ord)
         
-        Toto.jouer(no, position)
-        if len(partie.pioche)!=0:
-            self.assertEqual(6, len(Toto))
-
+        Toto.jouer(no,position)
+        if len(j.pioche)!=0:
+            self.assertEqual(6,len(Toto))
+        
         
     def testPlacer(self):
         
-        plateau = Plateau(9)
-        partie = Jeu(plateau)
-        Toto = Joueur(6, randint(1,3), plateau, partie)
+        j=Jeu()
+        Toto = Joueur(6, randint(1,3), j)
         
         for i in range(Toto.taille):
             Toto.piocher()
@@ -56,14 +51,14 @@ class TestJoueur(unittest.TestCase):
         
         carte = Toto[no]   
         
-        
-        self.assertEqual(Toto.plateau.tapis[ord][abs], '{0}{1}'.format(carte.couleur, carte.valeur))
+        self.assertEqual(Toto.plateau.tapis[ord][abs], carte)
         
         
     
     def testPeutJouer(self):
         
-        plateau = Plateau(9)
+        j=Jeu()
+        plateau = j.plateau
         
         testJ11 = [(0,0) ,(1,8) ,(2,8) ,(2,5) ,(0,8)]
         testJ21 = [(6,8) ,(5,0) ,(6,0) ,(4,8) ,(4,0)]
@@ -75,8 +70,8 @@ class TestJoueur(unittest.TestCase):
         plateau.tapis[6][1] = 'A6'
         plateau.tapis[4][3] = 'A6'
         
-        J1 = Joueur(6, 1, plateau, Jeu(plateau))
-        J2 = Joueur(6, 2, plateau, Jeu(plateau))
+        J1 = Joueur(6, 1, j)
+        J2 = Joueur(6, 2, j)
         
         
         for pos in testJ11:
