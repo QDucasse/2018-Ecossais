@@ -67,6 +67,8 @@ class Borne():
         -------
         True ou False
         '''
+        self.g1.calculForce()
+        self.g2.calculForce()
         return (self.g1.force!=0) and (self.g2.force!=0)
     
     
@@ -111,4 +113,3 @@ class Borne():
         self.g2=GroupeCartes(Carte(self.plateau.tapis[4][self.position].valeur,self.plateau.tapis[4][self.position].couleur),
                              Carte(self.plateau.tapis[5][self.position].valeur,self.plateau.tapis[5][self.position].couleur),
                              Carte(self.plateau.tapis[6][self.position].valeur,self.plateau.tapis[6][self.position].couleur))
-       
