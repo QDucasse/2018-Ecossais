@@ -73,23 +73,16 @@ class Joueur(list):
         self.plateau.tapis[position[0]][position[1]]=self[no_carte] 
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
-        self.jeu.rafraichissementIntegral
+        self.jeu.rafraichissementIntegral()
        
         #On mémorise la borne sur laquelle la carte a été placée
         borneEnCours=self.jeu.ensembleBorne[position[1]]
         
         #Si jamais un des groupes est complété, on change la valeur de premierComplete !
-        if self.jeu.joueurCourant==1:
-            if (borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet()):
-                borneEnCours.premierComplete=1
-        else:
-            if (borneEnCours.g1.estComplet() and not borneEnCours.g2.estComplet()):
-                borneEnCours.premierComplete=2
+        borneEnCours.verifPremierComplete(self.jeu)
         
         #Comparaison si jamais les deux groupes sont complets
-        if (borneEnCours.g1.estComplet() and borneEnCours.g2.estComplet()):
-            if borneEnCours.peutComparer():
-                borneEnCours.comparer()
+        borneEnCours.comparer()
         
         #Suppression de la carte de la main du joueur
         del(self[no_carte])
