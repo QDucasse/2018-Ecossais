@@ -26,14 +26,14 @@ class TestGroupeCartes(unittest.TestCase):
         c2=Carte(0,'X')
         c3=Carte(0,'X')
         g=GroupeCartes(c1,c2,c3)
-        self.assertEquals(g.totalPoints,0)
+        self.assertEqual(g.totalPoints,0)
     
     def testInit(self):
         c1=Carte(1,'A')
         c2=Carte(2,'B')
         c3=Carte(3,'C')
         g=GroupeCartes(c1,c2,c3)
-        self.assertEquals(g.totalPoints,6)
+        self.assertEqual(g.totalPoints,6)
         
         
     def testEstCompletFaux(self):
@@ -41,14 +41,14 @@ class TestGroupeCartes(unittest.TestCase):
         c2=Carte(0,'X')
         c3=Carte(0,'X')
         g=GroupeCartes(c1,c2,c3)
-        self.assertEquals(g.estComplet(),False)
+        self.assertEqual(g.estComplet(),False)
         
     def testEstCompletVrai(self):
         c1=Carte(1,'A')
         c2=Carte(2,'B')
         c3=Carte(3,'C')
         g=GroupeCartes(c1,c2,c3)
-        self.assertEquals(g.estComplet(),True)
+        self.assertEqual(g.estComplet(),True)
         
     def testCalculForce5(self):
         c1=Carte(1,'A')
@@ -56,7 +56,7 @@ class TestGroupeCartes(unittest.TestCase):
         c3=Carte(3,'A')
         g=GroupeCartes(c1,c2,c3)
         g.calculForce()
-        self.assertEquals(g.force,5)
+        self.assertEqual(g.force,5)
         
     def testCalculForce4(self):
         c1=Carte(1,'A')
@@ -64,7 +64,7 @@ class TestGroupeCartes(unittest.TestCase):
         c3=Carte(1,'C')
         g=GroupeCartes(c1,c2,c3)
         g.calculForce()
-        self.assertEquals(g.force,4)
+        self.assertEqual(g.force,4)
 
     def testCalculForce3(self):
         c1=Carte(1,'A')
@@ -72,7 +72,7 @@ class TestGroupeCartes(unittest.TestCase):
         c3=Carte(7,'A')
         g=GroupeCartes(c1,c2,c3)
         g.calculForce()
-        self.assertEquals(g.force,3)
+        self.assertEqual(g.force,3)
         
     def testCalculForce2(self):
         c1=Carte(1,'A')
@@ -80,7 +80,7 @@ class TestGroupeCartes(unittest.TestCase):
         c3=Carte(3,'C')
         g=GroupeCartes(c1,c2,c3)
         g.calculForce()
-        self.assertEquals(g.force,2)
+        self.assertEqual(g.force,2)
         
     def testCalculForce1(self):
         c1=Carte(1,'E')
@@ -88,7 +88,7 @@ class TestGroupeCartes(unittest.TestCase):
         c3=Carte(3,'C')
         g=GroupeCartes(c1,c2,c3)
         g.calculForce()
-        self.assertEquals(g.force,1)
+        self.assertEqual(g.force,1)
         
     def testCalculForce0(self):
         c1=Carte(0,'X')
@@ -96,7 +96,7 @@ class TestGroupeCartes(unittest.TestCase):
         c3=Carte(3,'C')
         g=GroupeCartes(c1,c2,c3)
         g.calculForce()
-        self.assertEquals(g.force,0)
+        self.assertEqual(g.force,0)
         
 if  __name__  == "__main__":
     unittest.main() 
