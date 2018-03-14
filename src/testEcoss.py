@@ -22,19 +22,19 @@ from numpy.random import randint
 class TestJoueur(unittest.TestCase):
 
     
-    def testJouer(self):
-        j=Jeu()
-        Toto = Joueur(6, randint(1,3), j)
-        for i in range(Toto.taille):
-            Toto.piocher()          
-        no = randint(0,6)
-        abs = randint(8)
-        ord = randint(6)
-        position = (abs, ord)
-        
-        Toto.jouer(no,position)
-        if len(j.pioche)!=0:
-            self.assertEqual(6,len(Toto))
+#    def testJouer(self):
+#        j=Jeu()
+#        Toto = Joueur(6, randint(1,3), j)
+#        for i in range(Toto.taille):
+#            Toto.piocher()          
+#        no = randint(0,6)
+#        abs = randint(8)
+#        ord = randint(6)
+#        position = (abs, ord)
+#        
+#        Toto.jouer(no,position)
+#        if len(j.pioche)!=0:
+#            self.assertEqual(6,len(Toto))
         
         
     def testPlacer(self):
