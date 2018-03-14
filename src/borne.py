@@ -69,7 +69,7 @@ class Borne():
         '''
         self.g1.calculForce()
         self.g2.calculForce()
-        return (self.g1.force!=0) and (self.g2.force!=0)
+        return (self.g1.estComplet() and self.g2.estComplet())
     
     
     def comparer(self): 
@@ -83,22 +83,42 @@ class Borne():
         ----------
         Aucun
         '''
-        # Première condition de victoire via la force
-        
-        if (self.g1.force>self.g2.force):
-            self.plateau.tapis[3][self.position]='J1'
-        elif (self.g2.force>self.g1.force):
-            self.plateau.tapis[3][self.position]='J2'
-        else:
-            # En cas d'égalité, on compare le total de points 
-            if (self.g1.totalPoints>self.g2.totalPoints):
+        #Verif de possibilité de comparaison
+        if self.peutComparer():
+            # Première condition de victoire via la force
+            if (self.g1.force>self.g2.force):
                 self.plateau.tapis[3][self.position]='J1'
-            elif (self.g2.totalPoints>self.g1.totalPoints):
+            elif (self.g2.force>self.g1.force):
                 self.plateau.tapis[3][self.position]='J2'
             else:
-                # Enfin, en cas d'égalité à nouveau, le premier à avoir complété son côté gagne
-                self.plateau.tapis[3][self.position]='J{0}'.format(self.premierComplete)
-                
+                # En cas d'égalité, on compare le total de points 
+                if (self.g1.totalPoints>self.g2.totalPoints):
+                    self.plateau.tapis[3][self.position]='J1'
+                elif (self.g2.totalPoints>self.g1.totalPoints):
+                    self.plateau.tapis[3][self.position]='J2'
+                else:
+                    # Enfin, en cas d'égalité à nouveau, le premier à avoir complété son côté gagne
+                    self.plateau.tapis[3][self.position]='J{0}'.format(self.premierComplete)
+           
+        
+    def verifPremierComplete(self,jeu):
+        '''
+        Accesseur de la variable d'instance premierComplete
+        
+        Parametres
+        ----------
+        Jeu la partie en cours
+        '''
+        if jeu.joueurCourant==1:
+            if (self.g1.estComplet() and not self.g2.estComplet()):
+                self.premierComplete=1
+        else:
+            if (self.g1.estComplet() and not self.g2.estComplet()):
+                self.premierComplete=2
+        
+        
+
+         
     def rafraichir(self):
         '''
         Rafraîchit le contenu de la borne à l'aide des éléments du tableau
