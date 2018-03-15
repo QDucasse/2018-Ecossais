@@ -19,7 +19,6 @@ class Carte():
         ----------
         Valeur de la carte
         Couleur de la carte
-        Position de la carte
 
         '''
         self.valeur=valeur

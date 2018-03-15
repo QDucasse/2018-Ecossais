@@ -107,7 +107,7 @@ class Borne():
         
         Parametres
         ----------
-        Jeu la partie en cours
+        Jeu, la partie en cours
         '''
         if jeu.joueurCourant==1:
             if (self.g1.estComplet() and not self.g2.estComplet()):

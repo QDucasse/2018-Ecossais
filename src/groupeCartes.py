@@ -79,7 +79,7 @@ class GroupeCartes():
         
         else:
              l=[self.C1.valeur,self.C2.valeur,self.C3.valeur]
-             #On vérifie que les cartes sont de la même couleur et forment une suite
+             #On vérif ie que les cartes sont de la même couleur et forment une suite
              if (((self.C1.couleur==self.C2.couleur) and (self.C2.couleur==self.C3.couleur)) and (min(l)==(max(l)-2))):
                  self.force=5
              #On vérifie que les cartes sont de la même valeur 

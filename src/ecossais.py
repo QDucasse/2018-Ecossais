@@ -17,7 +17,7 @@ from borne import Borne
 class Jeu():
     
     
-    def __init__(self,plateau=Plateau(9)):
+    def __init__(self):
         ''' 
         Crée une partie.
         
@@ -26,7 +26,7 @@ class Jeu():
         Aucun
 
         '''
-        self.plateau=plateau
+        self.plateau=Plateau(9)
         self.J1=Joueur(6,1,self)
         self.J2=Joueur(6,2,self)
         self.nbTours=0
@@ -60,7 +60,11 @@ class Jeu():
         Paramètres
         ----------
         Aucun
-
+        
+        Renvoie
+        -------
+        s: str
+            La chaîne de caractères qui sera affichée via ''print''
         '''
         
         s='{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
@@ -75,7 +79,8 @@ class Jeu():
         !!!la borne qui a changé
         
         Paramètres
-        ---------- 
+        ----------
+        Aucun
         '''
         self.borne1.rafraichir()        
         self.borne2.rafraichir()    
@@ -99,35 +104,23 @@ class Jeu():
         
         Renvoie
         -------
-        True ou False
+        True ou False ainsi que VJi avec i le numéro du joueur gagnant
         '''
         etatBornes=self.plateau.tapis[3][:] #La liste des bornes du plateau
         
-        #Condition 1
+        #Condition 1: 5 bornes en tout
         if etatBornes.count('J1')==5:
             return (True,'VJ1')
         elif etatBornes.count('J2')==5:
             return (True,'VJ2')
-        
-        #Condition 2
-        #On sauvegarde dans un dictionnaire le nombre maximum d'occurences successives de 'J1' ou 'J2'
-        res = {}
-        curseur = etatBornes[0]
-        compt = 0
-        for val in etatBornes:
-            if val == curseur:
-                compt += 1
-            else:
-                res[curseur]=compt
-                curseur = val
-                compt = 1
-        res[curseur]=compt
-        
-        # Puis vérification condition 2
-        if res['J1']>=3:
-            return (True,'VJ1')
-        elif res['J2']>=3:
-            return (True,'VJ2')
+        else:
+            for i in range(7):
+                #condition 2: 3 bornes successives
+                if etatBornes[i:i+3]==['J1','J1','J1']:
+                    return (True,'VJ1') 
+                elif etatBornes[i:i+3]==['J2','J2','J2']:
+                    return (True,'VJ2')
+      
         
     
     def tourSuivant(self):
@@ -198,7 +191,7 @@ class Jeu():
         ----------
         Aucun
         '''
-        print('Écossais Bagarreurs ! \n')
+        print('Écossais Bagarreurs ! \nLe jeu oppose deux joueurs avec les règles de base de Shotten Totten.\nLe côté du joueur 1 est en haut du plateau, celui du joueur 2 en bas')
         mode=input('Sélectionnez votre mode de jeu: \nH pour Humain contre Humain ou I contre une IA \n')
         if mode=='H':
             for i in range(self.J1.taille):

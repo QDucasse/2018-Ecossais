@@ -29,12 +29,11 @@ class Plateau():
          
     def __str__(self):
         ''' 
-        Affiche le plateau de jeu.
+        Affiche le plateau de jeu en passant par l'affichage de chacune des cartes.
         
         Paramètres
         ----------
-        Self
-
+        Aucun
         '''
         s='[ '
         for ligne in self.tapis:

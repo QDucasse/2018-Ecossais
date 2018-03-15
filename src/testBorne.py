@@ -36,7 +36,7 @@ class TestBorne(unittest.TestCase):
         self.assertEqual(str(b.g1),str(GroupeCartes(Carte(1,'A'),Carte(2,'B'),Carte(3,'C'))))
         self.assertEqual(str(b.g2),str(GroupeCartes(Carte(4,'D'),Carte(5,'E'),Carte(6,'F'))))
         
-    def testPeutComparer(self):
+    def testPeutComparerTrue(self):
         p=Plateau(9)
         p.tapis[0][0]=Carte(1,'A')
         p.tapis[1][0]=Carte(2,'B')
@@ -45,10 +45,19 @@ class TestBorne(unittest.TestCase):
         p.tapis[5][0]=Carte(5,'E')
         p.tapis[6][0]=Carte(6,'F')
         b=Borne(0,p)
-        
         #Vérification peutComparer dans un cas Vrai
         self.assertEqual(b.peutComparer(),True)
-        
+     
+    
+    def testPeutComparerFalse(self):
+        p=Plateau(9)
+        p.tapis[0][0]=Carte(0,'X')
+        p.tapis[1][0]=Carte(2,'B')
+        p.tapis[2][0]=Carte(3,'C')
+        p.tapis[4][0]=Carte(4,'D')
+        p.tapis[5][0]=Carte(5,'E')
+        p.tapis[6][0]=Carte(6,'F')
+        b=Borne(0,p)
         #Vérification peutComparer dans un cas Faux
         p.tapis[0][0]=Carte(0,'X')
         b=Borne(0,p)

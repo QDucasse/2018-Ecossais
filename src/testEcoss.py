@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Feb 26 19:56:49 2018
-@author: quentin
+@author: matthieu
 """
 
 
@@ -22,19 +22,19 @@ from numpy.random import randint
 class TestJoueur(unittest.TestCase):
 
     
-#    def testJouer(self):
-#        j=Jeu()
-#        Toto = Joueur(6, randint(1,3), j)
-#        for i in range(Toto.taille):
-#            Toto.piocher()          
-#        no = randint(0,6)
-#        abs = randint(8)
-#        ord = randint(6)
-#        position = (abs, ord)
-#        
-#        Toto.jouer(no,position)
-#        if len(j.pioche)!=0:
-#            self.assertEqual(6,len(Toto))
+    def testJouer(self):
+        j=Jeu()
+        Toto = Joueur(6, randint(1,3), j)
+        for i in range(Toto.taille):
+            Toto.piocher()          
+        no = randint(0,6)
+        abs = randint(8)
+        ord = randint(6)
+        position = (abs, ord)
+        
+        Toto.jouer(no,position)
+        if len(j.pioche)!=0:
+            self.assertEqual(6,len(Toto))
         
         
     def testPlacer(self):
@@ -51,7 +51,7 @@ class TestJoueur(unittest.TestCase):
         
         carte = Toto[no]   
         
-        self.assertEqual(Toto.plateau.tapis[ord][abs], carte)
+        self.assertEqual(str(Toto.plateau.tapis[ord][abs]), str(carte))
         
         
     
@@ -65,10 +65,10 @@ class TestJoueur(unittest.TestCase):
         testJ12 = [(6,8), (5,0), (6,0), (4,8), (4,0), (0,1), (2,3), (2,9), (-1,3), (0,1), (2,3)]
         testJ22 = [(0,0), (1,8), (2,8), (2,5), (0,8), (3,0), (3,8), (9,3), (4,9), (6,1), (4,3)]
         
-        plateau.tapis[0][1] = 'A6'
-        plateau.tapis[2][3] = 'A6'
-        plateau.tapis[6][1] = 'A6'
-        plateau.tapis[4][3] = 'A6'
+        plateau.tapis[0][1] = Carte(6,'A')
+        plateau.tapis[2][3] = Carte(6,'A')
+        plateau.tapis[6][1] = Carte(6,'A')
+        plateau.tapis[4][3] = Carte(6,'A')
         
         J1 = Joueur(6, 1, j)
         J2 = Joueur(6, 2, j)
