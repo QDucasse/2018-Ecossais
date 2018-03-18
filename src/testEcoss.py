@@ -38,53 +38,81 @@ class TestJoueur(unittest.TestCase):
         
         
     def testPlacer(self):
-        
         j=Jeu()
-        Toto = Joueur(6, randint(1,3), j)
-        
-        for i in range(Toto.taille):
-            Toto.piocher()
-        
-        no = randint(1,6)
-        abs = randint(7)
-        ord = randint(7)
-        
-        carte = Toto[no]   
-        
-        self.assertEqual(str(Toto.plateau.tapis[ord][abs]), str(carte))
-        
-        
+        joueur1 = Joueur(6,1,j)
+        joueur1.piocher()
+        strCarte=str(joueur1[0])
+        joueur1.placer(0,(0,0))
+        self.assertEqual(str(j.plateau.tapis[0][0]),strCarte)
     
-    def testPeutJouer(self):
-        
+
+         
+    def testPeutJouerPositionMauvaisType1(self):
+         j=Jeu()
+         j.joueurCourant=1
+         self.assertEqual(j.J1.peutJouer(4),False)
+         
+    def testPeutJouerPositionMauvaisType2(self):
+         j=Jeu()
+         j.joueurCourant=1
+         self.assertEqual(j.J1.peutJouer('a'),False)
+    
+    def testPeutJouerPositionMauvaisJoueur(self):
+         j=Jeu()
+         j.joueurCourant=1
+         self.assertEqual(j.J1.peutJouer((4,0)),False)
+         
+    def testPeutJouerPositionOccupee(self):
         j=Jeu()
+        j.joueurCourant=1
         plateau = j.plateau
+        plateau.tapis[0][0]=Carte(1,'A')
+        self.assertEqual(j.J1.peutJouer((0,0)),False)
         
-        testJ11 = [(0,0) ,(1,8) ,(2,8) ,(2,5) ,(0,8)]
-        testJ21 = [(6,8) ,(5,0) ,(6,0) ,(4,8) ,(4,0)]
-        testJ12 = [(6,8), (5,0), (6,0), (4,8), (4,0), (0,1), (2,3), (2,9), (-1,3), (0,1), (2,3)]
-        testJ22 = [(0,0), (1,8), (2,8), (2,5), (0,8), (3,0), (3,8), (9,3), (4,9), (6,1), (4,3)]
-        
-        plateau.tapis[0][1] = Carte(6,'A')
-        plateau.tapis[2][3] = Carte(6,'A')
-        plateau.tapis[6][1] = Carte(6,'A')
-        plateau.tapis[4][3] = Carte(6,'A')
-        
-        J1 = Joueur(6, 1, j)
-        J2 = Joueur(6, 2, j)
+         
+    def testPeutJouerPositionBorne(self):
+        j=Jeu()
+        j.joueurCourant=1
+        self.assertEqual(j.J1.peutJouer((3,0)),False)
+       
+    def testPeutJouerTrue(self):
+        j=Jeu()
+        j.joueurCourant=1
+        self.assertEqual(j.J1.peutJouer((0,0)),True)
         
         
-        for pos in testJ11:
-            self.assertEqual(J1.peutJouer(pos), True)
-            
-        for pos in testJ21:
-            self.assertEqual(J2.peutJouer((4,4)),True)
-            
-        for pos in testJ12:
-            self.assertEqual(J1.peutJouer(pos), False)
-            
-        for pos in testJ22:
-            self.assertEqual(J2.peutJouer(pos), False)
+#    def testPeutJouer(self):
+#        j=Jeu()
+#        plateau = j.plateau
+#        
+#        j=Jeu()
+#        plateau = j.plateau
+#        
+#        testJ11 = [(0,0) ,(1,8) ,(2,8) ,(2,5) ,(0,8)]
+#        testJ21 = [(6,8) ,(5,0) ,(6,0) ,(4,8) ,(4,0)]
+#        testJ12 = [(6,8), (5,0), (6,0), (4,8), (4,0), (0,1), (2,3), (2,9), (-1,3), (0,1), (2,3)]
+#        testJ22 = [(0,0), (1,8), (2,8), (2,5), (0,8), (3,0), (3,8), (9,3), (4,9), (6,1), (4,3)]
+#        
+#        plateau.tapis[0][1] = Carte(6,'A')
+#        plateau.tapis[2][3] = Carte(6,'A')
+#        plateau.tapis[6][1] = Carte(6,'A')
+#        plateau.tapis[4][3] = Carte(6,'A')
+#        
+#        J1 = Joueur(6, 1, j)
+#        J2 = Joueur(6, 2, j)
+#        
+#        
+#        for pos in testJ11:
+#            self.assertEqual(J1.peutJouer(pos), True)
+#            
+#        for pos in testJ21:
+#            self.assertEqual(J2.peutJouer((4,4)),True)
+#            
+#        for pos in testJ12:
+#            self.assertEqual(J1.peutJouer(pos), False)
+#            
+#        for pos in testJ22:
+#            self.assertEqual(J2.peutJouer(pos), False)
             
         
          
