@@ -21,6 +21,19 @@ from numpy.random import randint
 
 class TestJeu(unittest.TestCase):
 
+#    def testInit(self):
+#        #On teste la distribution lors de la mise en place du jeu
+#        
+#    def testVictoire(self):
+#        #On vérifie la victoire dans les cas False TrueJ1 TrueJ2
+#    
+#    def testUnTourPvP(self):
+#    
+#    def testUnTourPvIA(self):
+#    
+#    def testUnTourIAvIA(self):
+        
+    
     
    if  __name__  == "__main__":
     unittest.main() 

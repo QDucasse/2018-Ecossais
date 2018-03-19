@@ -6,13 +6,13 @@ Created on Mon Feb 12 15:46:45 2018
 @author: quentin
 """
 from random import shuffle
-
+from IA_0 import IA_0
 from joueur import Joueur
 from carte import Carte
 from plateau import Plateau
 from groupeCartes import GroupeCartes
 from borne import Borne
-    
+import numpy.random as rnd   
     
 class Jeu():
     
@@ -167,13 +167,13 @@ class Jeu():
         
         no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) -1
         while not self.bonNumeroCarte(no_carte):
-            no_carte= eval(input('Sélectionnez un numéro de carte valable \n'))
+            no_carte= eval(input('Sélectionnez un numéro de carte valable \n')) -1
         no_borne = eval(input('Sélectionnez la borne visée (par son numéro de 1 à 9) \n')) -1
         if self.joueurCourant==1:
             while not self.J1.peutJouer(no_borne):
                 #On vérifie que le joueur peut bien jouer à l'endroit sélectionné 
                 #et dans le cas contraire, on lui redemande une position
-                no_borne= eval(input('Sélectionnez une position valable \n'))    
+                no_borne= eval(input('Sélectionnez une position valable \n')) -1  
             else:
                 self.J1.jouer(no_carte,no_borne)
        
@@ -182,13 +182,59 @@ class Jeu():
                 no_borne= eval(input('Sélectionnez une position valable \n'))    
             else:
                 self.J2.jouer(no_carte,no_borne)
-        
+    
+    ###CETTE PARTIE PEUT ÊTRE EXTRAITE EN TANT QUE METHODE A PART
+    
         self.rafraichissementIntegral()
         
         ######### Changement de joueur et incrémentation du tour #############################
         
         self.tourSuivant()
         
+    def unTourPvIA(self):
+        '''
+        Fait progresser chacune des actions d'une case et donne la main à un des joueurs :
+            L'état du jeu s'affiche
+            Le joueur en question joue une carte (place + pioche)
+            Le nombre de tours s'incrémente
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
+        ######### Affichage du jeu et du la main du joueur ####################################
+        
+        print(self)
+        if self.joueurCourant==1:
+            print(self.J1)
+        
+        ######### On demande au joueur de sélectionner sa carte et la position visée #########
+        if self.joueurCourant==1:
+            no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) -1
+            while not self.bonNumeroCarte(no_carte):
+                no_carte= eval(input('Sélectionnez un numéro de carte valable \n')) -1
+            no_borne = eval(input('Sélectionnez la borne visée (par son numéro de 1 à 9) \n')) -1
+            while not self.J1.peutJouer(no_borne):
+                #On vérifie que le joueur peut bien jouer à l'endroit sélectionné 
+                #et dans le cas contraire, on lui redemande une position
+                no_borne= eval(input('Sélectionnez une position valable \n')) -1 
+            else:
+                self.J1.jouer(no_carte,no_borne)
+            
+        elif self.joueurCourant==2:
+            no_carte=rnd.randint(0,6)
+            while not self.bonNumeroCarte(no_carte):
+                no_carte=rnd.randint(0,6)
+            else:
+                self.J2.jouer(no_carte)
+            
+    ###CETTE PARTIE PEUT ÊTRE EXTRAITE EN TANT QUE METHODE A PART
+    
+        self.rafraichissementIntegral()
+        
+        ######### Changement de joueur et incrémentation du tour #############################
+        
+        self.nbTours=self.nbTours+1
         
         
     def start(self):
@@ -207,9 +253,14 @@ class Jeu():
                 self.J2.piocher()
             while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
                  self.unTourPvP()
-#        elif mode=='I':
-#            self.J2=IA(blablabla)
-        
+        ### PAREIL, IL FAUT FAIRE UNE FONCTION STARTPVP STARTPVIA ET STARTIAVIA
+        elif mode=='I':
+            self.J2=IA_0(6,2,self)
+            for i in range(self.J1.taille):
+                self.J1.piocher()
+                self.J2.piocher()
+            while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
+                 self.unTourPvIA()
         
 if __name__=='__main__':
     j=Jeu()

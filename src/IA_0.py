@@ -13,6 +13,18 @@ import numpy.random as rnd
 
 class IA_0(Joueur):
     
+    def jouer(self,no_carte,position):
+        '''
+        Joue une carte de la main d'un joueur dans la position donnée
+        Correspond aux actions successives de placer et piocher pour compléter la main
+        
+        Paramètres
+        ----------
+        Carte choisie
+        Position visée
+        '''
+        self.placer(no_carte)
+        self.piocher()
     
     def placer(self,no_carte):
         '''
@@ -24,20 +36,22 @@ class IA_0(Joueur):
         Position visée sous la forme d'un tuple
         '''
         
-        position=(rnd.randint(4,7),rnd.randint(0,9))
+        no_borne=(rnd.randint(0,9))
         
-        while not self.peutJouer(position):
-             position=(rnd.randint(4,7),rnd.randint(0,9))
+        while not self.peutJouer(no_borne):
+             no_borne=(rnd.randint(0,9))
         
-        
+        ordonnee=self.jeu.ensembleBorne[no_borne].g2.carteCourante
+        self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
+            
         #Placement de la carte sur le tapis
-        self.plateau.tapis[position[0]][position[1]]=self[no_carte] 
+        self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
         self.jeu.rafraichissementIntegral()
        
         #On mémorise la borne sur laquelle la carte a été placée
-        borneEnCours=self.jeu.ensembleBorne[position[1]]
+        borneEnCours=self.jeu.ensembleBorne[no_borne]
         
         #Si jamais un des groupes est complété, on change la valeur de premierComplete !
         borneEnCours.verifPremierComplete(self.jeu)
@@ -46,7 +60,6 @@ class IA_0(Joueur):
         borneEnCours.comparer()
         
         #Suppression de la carte de la main du joueur
-        del(self[no_carte])
-        
+        del(self[no_carte])        
    
         
