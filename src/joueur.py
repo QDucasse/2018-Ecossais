@@ -68,10 +68,7 @@ class Joueur(list):
         Carte choisie
         Position visée sous la forme d'un entier correspondant à une borne
         '''
-        print('ord1avant')
-        print(self.jeu.ensembleBorne[no_borne].g1.carteCourante)
-        print('ord2avant')
-        print(self.jeu.ensembleBorne[no_borne].g2.carteCourante)
+        
         if self.jeu.joueurCourant==1:
             ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
             
@@ -97,11 +94,6 @@ class Joueur(list):
         
         #Suppression de la carte de la main du joueur
         del(self[no_carte])
-       
-        print('ord1apres')
-        print(self.jeu.ensembleBorne[no_borne].g1.carteCourante)
-        print('ord2apres')
-        print(self.jeu.ensembleBorne[no_borne].g2.carteCourante)
    
     def peutJouer(self,no_borne):
         '''
