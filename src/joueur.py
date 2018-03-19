@@ -72,7 +72,7 @@ class Joueur(list):
         if self.jeu.joueurCourant==1:
             ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
             
-            self.jeu.ensembleBorne[no_borne].g1.carteCourante+=1
+            self.jeu.ensembleBorne[no_borne].g1.carteCourante-=1
         elif self.jeu.joueurCourant==2:
             ordonnee=self.jeu.ensembleBorne[no_borne].g2.carteCourante
             self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
@@ -115,7 +115,7 @@ class Joueur(list):
             cd1 = (no_borne<9) and (no_borne>-1)
             if self.jeu.joueurCourant==1:
                 ord1 = self.jeu.ensembleBorne[no_borne].g1.carteCourante 
-                cd2=ord1<3  #Vérif bon côté du plateau
+                cd2=ord1>-1  #Vérif bon côté du plateau
                 cd3=str(self.plateau.tapis[ord1][no_borne])=='  ' #Vérif emplacement vide
             else:
                 ord2=self.jeu.ensembleBorne[no_borne].g2.carteCourante
