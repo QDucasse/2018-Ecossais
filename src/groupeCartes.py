@@ -24,6 +24,7 @@ class GroupeCartes():
         self.C1 = C1
         self.C2 = C2
         self.C3 = C3
+        self.carteCourante = 0
         self.totalPoints = C1.valeur + C2.valeur + C3.valeur
         self.force = 0
     
