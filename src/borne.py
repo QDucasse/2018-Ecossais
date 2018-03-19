@@ -37,7 +37,10 @@ class Borne():
                              Carte(self.plateau.tapis[5][self.position].valeur,self.plateau.tapis[5][self.position].couleur),
                              Carte(self.plateau.tapis[6][self.position].valeur,self.plateau.tapis[6][self.position].couleur)) 
                                 # le groupe de cartes du côté du joueur 2
-                                
+        
+        self.g1.carteCourante=0                
+        self.g2.carteCourante=4                        
+        
         
     def __str__(self):
         '''
@@ -127,9 +130,25 @@ class Borne():
         ----------
         Aucun
         '''
+        sauvegardeCarteCourante1=self.g1.carteCourante
+        sauvegardeCarteCourante2=self.g2.carteCourante
+        
         self.g1=GroupeCartes(Carte(self.plateau.tapis[0][self.position].valeur,self.plateau.tapis[0][self.position].couleur),
                              Carte(self.plateau.tapis[1][self.position].valeur,self.plateau.tapis[1][self.position].couleur),
                              Carte(self.plateau.tapis[2][self.position].valeur,self.plateau.tapis[2][self.position].couleur))
         self.g2=GroupeCartes(Carte(self.plateau.tapis[4][self.position].valeur,self.plateau.tapis[4][self.position].couleur),
                              Carte(self.plateau.tapis[5][self.position].valeur,self.plateau.tapis[5][self.position].couleur),
                              Carte(self.plateau.tapis[6][self.position].valeur,self.plateau.tapis[6][self.position].couleur))
+       
+        self.g1.carteCourante=sauvegardeCarteCourante1
+        self.g2.carteCourante=sauvegardeCarteCourante2
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
