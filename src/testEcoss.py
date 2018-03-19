@@ -39,7 +39,7 @@ class TestJoueur(unittest.TestCase):
         joueur1.piocher()
         strCarte=str(joueur1[0])
         joueur1.placer(0,0)
-        self.assertEqual(str(j.plateau.tapis[0][0]),strCarte)
+        self.assertEqual(str(j.plateau.tapis[2][0]),strCarte)
         self.assertEqual(j.borne1.g1.carteCourante,1)
     
     def testPlacerJ2(self):
