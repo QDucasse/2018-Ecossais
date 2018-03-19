@@ -1,0 +1,1 @@
+Pour lancer le programme, il suffit d’exécuter le code de ecossais.py !
