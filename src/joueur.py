@@ -59,24 +59,35 @@ class Joueur(list):
         self.piocher()
     
     
-    def placer(self,no_carte,position):
+    def placer(self,no_carte,no_borne):
         '''
         Place la carte sélectionnée à l'emplacement donné
         
         Paramètres
         ----------
         Carte choisie
-        Position visée sous la forme d'un tuple
+        Position visée sous la forme d'un entier correspondant à une borne
         '''
-        
+        print('ord1avant')
+        print(self.jeu.ensembleBorne[no_borne].g1.carteCourante)
+        print('ord2avant')
+        print(self.jeu.ensembleBorne[no_borne].g2.carteCourante)
+        if self.jeu.joueurCourant==1:
+            ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
+            
+            self.jeu.ensembleBorne[no_borne].g1.carteCourante+=1
+        elif self.jeu.joueurCourant==2:
+            ordonnee=self.jeu.ensembleBorne[no_borne].g2.carteCourante
+            self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
+            
         #Placement de la carte sur le tapis
-        self.plateau.tapis[position[0]][position[1]]=self[no_carte] 
+        self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
         self.jeu.rafraichissementIntegral()
        
         #On mémorise la borne sur laquelle la carte a été placée
-        borneEnCours=self.jeu.ensembleBorne[position[1]]
+        borneEnCours=self.jeu.ensembleBorne[no_borne]
         
         #Si jamais un des groupes est complété, on change la valeur de premierComplete !
         borneEnCours.verifPremierComplete(self.jeu)
@@ -86,9 +97,13 @@ class Joueur(list):
         
         #Suppression de la carte de la main du joueur
         del(self[no_carte])
-        
+       
+        print('ord1apres')
+        print(self.jeu.ensembleBorne[no_borne].g1.carteCourante)
+        print('ord2apres')
+        print(self.jeu.ensembleBorne[no_borne].g2.carteCourante)
    
-    def peutJouer(self,position):
+    def peutJouer(self,no_borne):
         '''
         Vérifie que le joueur courant peut bien placer sa carte à l'endroit choisi
         
@@ -103,17 +118,19 @@ class Joueur(list):
         #Vérification du type des données insérées
 
 
-        if (type(position)==tuple):
-            #Vérification côté du plateau et emplacement différent d'une borne
+        if (type(no_borne)==int):
+        #Vérification côté du plateau et emplacement différent d'une borne
+            cd1 = (no_borne<9) and (no_borne>-1)
             if self.jeu.joueurCourant==1:
-                cd1= (position[0]<3) and (position[0]>=0)
+                ord1 = self.jeu.ensembleBorne[no_borne].g1.carteCourante 
+                cd2=ord1<3  #Vérif bon côté du plateau
+                cd3=str(self.plateau.tapis[ord1][no_borne])=='  ' #Vérif emplacement vide
             else:
-                cd1= (position[0]>3) and (position[0]<=6)
+                ord2=self.jeu.ensembleBorne[no_borne].g2.carteCourante
+                cd2=ord2<7 #Vérif bon côté du plateau
+                cd3=str(self.plateau.tapis[ord2][no_borne])=='  ' #Vérif emplacement vide
             
-            #Vérification emplacement vide
-            cd2=str(self.plateau.tapis[position[0]][position[1]])=='  '
-    
-            return cd1 and cd2
+            return cd1 and cd2 and cd3
         
         else:
             return False
@@ -130,5 +147,6 @@ class Joueur(list):
         Aucun
         '''
         if self.jeu.pioche!=[]:
-            self.append(Carte(int(self.jeu.pioche.pop()[1]),self.jeu.pioche.pop()[0]))
+            nouvelleCarte=self.jeu.pioche.pop()
+            self.append(Carte(int(nouvelleCarte[1]),nouvelleCarte[0]))
 
