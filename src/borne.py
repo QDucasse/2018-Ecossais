@@ -38,7 +38,7 @@ class Borne():
                              Carte(self.plateau.tapis[6][self.position].valeur,self.plateau.tapis[6][self.position].couleur)) 
                                 # le groupe de cartes du côté du joueur 2
         
-        self.g1.carteCourante=0                
+        self.g1.carteCourante=2                
         self.g2.carteCourante=4                        
         
         
