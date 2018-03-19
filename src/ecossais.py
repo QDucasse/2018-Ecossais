@@ -3,7 +3,7 @@
 """
 Created on Mon Feb 12 15:46:45 2018
 
-@author: ducassqu
+@author: quentin
 """
 from random import shuffle
 
@@ -27,6 +27,7 @@ class Jeu():
 
         '''
         self.plateau=Plateau(9)
+        
         self.J1=Joueur(6,1,self)
         self.J2=Joueur(6,2,self)
         self.nbTours=0
@@ -136,7 +137,12 @@ class Jeu():
         else:
             self.joueurCourant=1
         self.nbTours=self.nbTours+1
-        
+    
+    def bonNumeroCarte(self,no_carte):
+        '''
+        Vérifie que le numéro correspond bien à une carte
+        '''
+        return (no_carte<=5 and no_carte>=0)
         
     def unTourPvP(self):
         '''
@@ -160,20 +166,22 @@ class Jeu():
         ######### On demande au joueur de sélectionner sa carte et la position visée #########
         
         no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) -1
-        position= eval(input('Sélectionnez la position visée sous la forme (x,y) \n'))
+        while not self.bonNumeroCarte(no_carte):
+            no_carte= eval(input('Sélectionnez un numéro de carte valable \n'))
+        no_borne = eval(input('Sélectionnez la borne visée (par son numéro de 1 à 9) \n')) -1
         if self.joueurCourant==1:
-            while not self.J1.peutJouer(position):
+            while not self.J1.peutJouer(no_borne):
                 #On vérifie que le joueur peut bien jouer à l'endroit sélectionné 
                 #et dans le cas contraire, on lui redemande une position
-                position= eval(input('Sélectionnez une position valable \n'))    
+                no_borne= eval(input('Sélectionnez une position valable \n'))    
             else:
-                self.J1.jouer(no_carte,position)
+                self.J1.jouer(no_carte,no_borne)
        
         else:
-            while not self.J2.peutJouer(position):
-                position= eval(input('Sélectionnez une position valable \n'))    
+            while not self.J2.peutJouer(no_borne):
+                no_borne= eval(input('Sélectionnez une position valable \n'))    
             else:
-                self.J2.jouer(no_carte,position)
+                self.J2.jouer(no_carte,no_borne)
         
         self.rafraichissementIntegral()
         
