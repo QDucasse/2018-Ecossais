@@ -25,60 +25,47 @@ class TestJoueur(unittest.TestCase):
     def testJouer(self):
         j=Jeu()
         Toto = Joueur(6, randint(1,3), j)
-        for i in range(Toto.taille):
-            Toto.piocher()          
-        no = randint(0,6)
-        abs = randint(8)
-        ord = randint(6)
-        position = (abs, ord)
+        Toto.piocher()          
+        no = 0
+        no_borne = 1
         
-        Toto.jouer(no,position)
-        if len(j.pioche)!=0:
-            self.assertEqual(6,len(Toto))
+        Toto.jouer(no,no_borne)
+        self.assertEqual(1,len(Toto))
         
         
-    def testPlacer(self):
+    def testPlacerJ1(self):
         j=Jeu()
         joueur1 = Joueur(6,1,j)
         joueur1.piocher()
         strCarte=str(joueur1[0])
-        joueur1.placer(0,(0,0))
+        joueur1.placer(0,0)
         self.assertEqual(str(j.plateau.tapis[0][0]),strCarte)
+        self.assertEqual(j.borne1.g1.carteCourante,1)
     
-
+    def testPlacerJ2(self):
+        j=Jeu()
+        joueur2 = Joueur(6,2,j)
+        joueur2.piocher()
+        strCarte=str(joueur2[0])
+        j.joueurCourant=2
+        joueur2.placer(0,0)
+        self.assertEqual(str(j.plateau.tapis[4][0]),strCarte)
+        self.assertEqual(j.borne1.g2.carteCourante,5)
          
-    def testPeutJouerPositionMauvaisType1(self):
+    def testPeutJouerNoBorneMauvaisType1(self):
          j=Jeu()
          j.joueurCourant=1
-         self.assertEqual(j.J1.peutJouer(4),False)
+         self.assertEqual(j.J1.peutJouer((0,0)),False)
          
     def testPeutJouerPositionMauvaisType2(self):
          j=Jeu()
          j.joueurCourant=1
          self.assertEqual(j.J1.peutJouer('a'),False)
-    
-    def testPeutJouerPositionMauvaisJoueur(self):
-         j=Jeu()
-         j.joueurCourant=1
-         self.assertEqual(j.J1.peutJouer((4,0)),False)
-         
-    def testPeutJouerPositionOccupee(self):
-        j=Jeu()
-        j.joueurCourant=1
-        plateau = j.plateau
-        plateau.tapis[0][0]=Carte(1,'A')
-        self.assertEqual(j.J1.peutJouer((0,0)),False)
-        
-         
-    def testPeutJouerPositionBorne(self):
-        j=Jeu()
-        j.joueurCourant=1
-        self.assertEqual(j.J1.peutJouer((3,0)),False)
-       
+           
     def testPeutJouerTrue(self):
         j=Jeu()
         j.joueurCourant=1
-        self.assertEqual(j.J1.peutJouer((0,0)),True)
+        self.assertEqual(j.J1.peutJouer(0),True)
         
         
 #    def testPeutJouer(self):
