@@ -35,6 +35,8 @@ class TestBorne(unittest.TestCase):
         b=Borne(0,p)
         self.assertEqual(str(b.g1),str(GroupeCartes(Carte(1,'A'),Carte(2,'B'),Carte(3,'C'))))
         self.assertEqual(str(b.g2),str(GroupeCartes(Carte(4,'D'),Carte(5,'E'),Carte(6,'F'))))
+        self.assertEqual(b.g1.carteCourante,0)
+        self.assertEqual(b.g2.carteCourante,4)
         
     def testPeutComparerTrue(self):
         p=Plateau(9)
