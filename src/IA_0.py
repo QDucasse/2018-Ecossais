@@ -26,7 +26,7 @@ class IA_0(Joueur):
         self.placer(no_carte)
         self.piocher()
     
-    def placer(self,no_carte):
+    def placer(self,no_carte=rnd.randint(0,6)):
         '''
         Place la carte sélectionnée à l'emplacement donné
         
