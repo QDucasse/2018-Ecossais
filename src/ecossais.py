@@ -121,8 +121,8 @@ class Jeu():
                     return (True,'VJ1') 
                 elif etatBornes[i:i+3]==['J2','J2','J2']:
                     return (True,'VJ2')
-      
-        
+                if i==6:
+                    return (False,'VXX')
     
     def tourSuivant(self):
         '''
@@ -168,7 +168,7 @@ class Jeu():
         no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) -1
         while not self.bonNumeroCarte(no_carte):
             no_carte= eval(input('Sélectionnez un numéro de carte valable \n')) -1
-        no_borne = eval(input('Sélectionnez la borne visée (par son numéro de 1 à 9) \n')) -1
+        no_borne = eval(input('Sélectionnez la borne visée (par son numéro de 1 à 9) \n'))
         if self.joueurCourant==1:
             while not self.J1.peutJouer(no_borne):
                 #On vérifie que le joueur peut bien jouer à l'endroit sélectionné 
