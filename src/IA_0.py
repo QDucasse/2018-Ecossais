@@ -13,7 +13,7 @@ import numpy.random as rnd
 
 class IA_0(Joueur):
     
-    def jouer(self,no_carte,position):
+    def jouer(self,no_carte, no_IA=2):
         '''
         Joue une carte de la main d'un joueur dans la position donnée
         Correspond aux actions successives de placer et piocher pour compléter la main
@@ -21,14 +21,15 @@ class IA_0(Joueur):
         Paramètres
         ----------
         Carte choisie
-        Position visée
+        Numéro de joueur de l'IA (1 ou 2, par défaut 2)
         '''
-        self.placer(no_carte)
+        self.placer(no_carte, no_IA)
         self.piocher()
-    
-    def placer(self,no_carte=rnd.randint(0,6)):
+
+
+    def placer(self,no_carte=rnd.randint(0,6), no_IA=2):
         '''
-        Place la carte sélectionnée à l'emplacement donné
+        Place une carte au hasard sur la zone de jeu de l'IA
         
         Paramètres
         ----------
@@ -41,8 +42,13 @@ class IA_0(Joueur):
         while not self.peutJouer(no_borne):
              no_borne=(rnd.randint(0,9))
         
-        ordonnee=self.jeu.ensembleBorne[no_borne].g2.carteCourante
-        self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
+        if no_IA == 1:
+            ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
+            self.jeu.ensembleBorne[no_borne].g1.carteCourante-=1
+        
+        elif no_IA == 2:
+            ordonnee=self.jeu.ensembleBorne[no_borne].g2.carteCourante
+            self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
             
         #Placement de la carte sur le tapis
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
