@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -5,8 +6,10 @@ Created on Mon Feb 12 15:46:45 2018
 
 @author: quentin
 """
+
 from random import shuffle
 from IA_0 import IA_0
+from IA_1 import IA_1
 from joueur import Joueur
 from carte import Carte
 from plateau import Plateau
@@ -31,6 +34,7 @@ class Jeu():
         self.J1=Joueur(6,1,self)
         self.J2=Joueur(6,2,self)
         self.nbTours=0
+        self.coupsJoues=0
         self.joueurCourant=1
         
         #Initialisation des bornes
@@ -68,7 +72,7 @@ class Jeu():
             La chaîne de caractères qui sera affichée via ''print''
         '''
         
-        s='{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
+        s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
         s=s+str(self.plateau)
         return s
         
@@ -136,7 +140,9 @@ class Jeu():
             self.joueurCourant=2
         else:
             self.joueurCourant=1
-        self.nbTours=self.nbTours+1
+        
+        self.nbTours=self.nbTours + (self.coupsJoues%2)
+        self.coupsJoues = self.coupsJoues+1
     
     def bonNumeroCarte(self,no_carte):
         '''
@@ -168,7 +174,7 @@ class Jeu():
         no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) -1
         while not self.bonNumeroCarte(no_carte):
             no_carte= eval(input('Sélectionnez un numéro de carte valable \n')) -1
-        no_borne = eval(input('Sélectionnez la borne visée (par son numéro de 1 à 9) \n'))
+        no_borne = eval(input('Sélectionnez la borne visée (par son numéro de 1 à 9) \n'))-1
         if self.joueurCourant==1:
             while not self.J1.peutJouer(no_borne):
                 #On vérifie que le joueur peut bien jouer à l'endroit sélectionné 
@@ -234,7 +240,7 @@ class Jeu():
         
         ######### Changement de joueur et incrémentation du tour #############################
         
-        self.nbTours=self.nbTours+1
+        self.tourSuivant()
         
         
     def start(self):
@@ -255,13 +261,29 @@ class Jeu():
                  self.unTourPvP()
         ### PAREIL, IL FAUT FAIRE UNE FONCTION STARTPVP STARTPVIA ET STARTIAVIA
         elif mode=='I':
-            self.J2=IA_0(6,2,self)
-            for i in range(self.J1.taille):
-                self.J1.piocher()
-                self.J2.piocher()
-            while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
-                 self.unTourPvIA()
-        
+            niveau=input('Sélectionnez le niveau de votre adversaire: \n0 = Aleatoire \n1 = Groupements brelans\n')
+            
+            if niveau=='0':
+                self.J2=IA_0(6,2,self)
+                for i in range(self.J1.taille):
+                    self.J1.piocher()
+                    self.J2.piocher()
+                while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
+                     self.unTourPvIA()
+            
+            if niveau=='1':
+                self.J2=IA_1(6,2,self)
+                for i in range(self.J1.taille):
+                    self.J1.piocher()
+                    self.J2.piocher()
+                while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
+                     self.unTourPvIA()
+
+
+
+
+
+
 if __name__=='__main__':
     j=Jeu()
     j.start()
