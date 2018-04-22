@@ -114,15 +114,15 @@ class Joueur(list):
         #Vérification côté du plateau et emplacement différent d'une borne
             cd1 = (no_borne<9) and (no_borne>-1)
             if self.jeu.joueurCourant==1:
-                ord1 = self.jeu.ensembleBorne[no_borne].g1.carteCourante 
+                ord1 = max(0,self.jeu.ensembleBorne[no_borne].g1.carteCourante) 
                 cd2=ord1>-1  #Vérif bon côté du plateau
                 cd3=str(self.plateau.tapis[ord1][no_borne])=='  ' #Vérif emplacement vide
             else:
-                ord2=self.jeu.ensembleBorne[no_borne].g2.carteCourante
+                ord2=min(6,self.jeu.ensembleBorne[no_borne].g2.carteCourante)
                 cd2=ord2<7 #Vérif bon côté du plateau
                 cd3=str(self.plateau.tapis[ord2][no_borne])=='  ' #Vérif emplacement vide
             
-            return cd1 and cd2 and cd3
+            return cd1 and cd2 and cd3 
         
         else:
             return False
