@@ -16,6 +16,7 @@ from plateau import Plateau
 from groupeCartes import GroupeCartes
 from borne import Borne
 import numpy.random as rnd   
+from time import sleep
     
 class Jeu():
     
@@ -71,11 +72,17 @@ class Jeu():
         s: str
             La chaîne de caractères qui sera affichée via ''print''
         '''
+        if not self.testVictoire()[0]:
+            s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
+            s=s+str(self.plateau)
         
-        s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
-        s=s+str(self.plateau)
+        else :
+            s = 'Et c\'est fini :\n\n'+ str(self.plateau)
+        
         return s
         
+    
+    
     def rafraichissementIntegral(self):
         '''
         Rafraîchissement de l'intégralité des bornes.
@@ -115,19 +122,23 @@ class Jeu():
         
         #Condition 1: 5 bornes en tout
         if etatBornes.count('J1')==5:
-            return (True,'VJ1')
+            return (True,'J1')
         elif etatBornes.count('J2')==5:
-            return (True,'VJ2')
+            return (True,'J2')
         else:
             for i in range(7):
                 #condition 2: 3 bornes successives
                 if etatBornes[i:i+3]==['J1','J1','J1']:
-                    return (True,'VJ1') 
+                    return (True,'J1') 
                 elif etatBornes[i:i+3]==['J2','J2','J2']:
-                    return (True,'VJ2')
+                    return (True,'J2')
                 if i==6:
-                    return (False,'VXX')
-    
+                    return (False,'XX')
+
+
+
+
+
     def tourSuivant(self):
         '''
         Change le compteur de tour et le joueur courant
@@ -143,12 +154,18 @@ class Jeu():
         
         self.nbTours=self.nbTours + (self.coupsJoues%2)
         self.coupsJoues = self.coupsJoues+1
-    
+
+
+
+
     def bonNumeroCarte(self,no_carte):
         '''
         Vérifie que le numéro correspond bien à une carte
         '''
-        return (no_carte<=5 and no_carte>=0)
+        return (no_carte<=len(self.J2)-1 and no_carte>=0)
+
+
+
         
     def unTourPvP(self):
         '''
@@ -197,6 +214,8 @@ class Jeu():
         
         self.tourSuivant()
         
+        
+        
     def unTourPvIA(self):
         '''
         Fait progresser chacune des actions d'une case et donne la main à un des joueurs :
@@ -242,7 +261,46 @@ class Jeu():
         
         self.tourSuivant()
         
+
+
+
+    def unTourIAvIA(self):
+        '''
+        Fait progresser chacune des actions d'une case et donne la main à l'une des IA :
+            L'état du jeu s'affiche
+            Le joueur en question joue une carte (place + pioche)
+            Le nombre de tours s'incrémente
         
+        Paramètres
+        ----------
+        Aucun
+        '''
+        ######### Affichage du jeu et du la main du joueur ####################################
+        
+        print(self)
+        if self.joueurCourant==1:
+            print(self.J1)
+        if self.joueurCourant==2:
+            print(self.J2)
+        
+        ######### L'IA en cours choisit sa carte et la position visée #########
+        if self.joueurCourant==1:
+            self.J1.jouer(1)
+            
+        elif self.joueurCourant==2:
+            self.J2.jouer(2)
+    
+        self.rafraichissementIntegral()
+        
+        ######### Changement de joueur et incrémentation du tour #############################
+        sleep(0.1)
+        self.tourSuivant()
+
+
+
+
+
+
     def start(self):
         '''
         Lance une partie entre différents joueurs
@@ -252,12 +310,12 @@ class Jeu():
         Aucun
         '''
         print('Écossais Bagarreurs ! \nLe jeu oppose deux joueurs avec les règles de base de Shotten Totten.\nLe côté du joueur 1 est en haut du plateau, celui du joueur 2 en bas')
-        mode=input('Sélectionnez votre mode de jeu: \nH pour Humain contre Humain ou I contre une IA \n')
+        mode=input('Sélectionnez votre mode de jeu: \nH pour Humain contre Humain \nou I contre une IA \nou II pour l\'opposition de deux IA\n\n')
         if mode=='H':
             for i in range(self.J1.taille):
                 self.J1.piocher()
                 self.J2.piocher()
-            while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
+            while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
                  self.unTourPvP()
         ### PAREIL, IL FAUT FAIRE UNE FONCTION STARTPVP STARTPVIA ET STARTIAVIA
         elif mode=='I':
@@ -268,7 +326,7 @@ class Jeu():
                 for i in range(self.J1.taille):
                     self.J1.piocher()
                     self.J2.piocher()
-                while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
+                while self.J2!=[] and (not self.testVictoire()[0]):
                      self.unTourPvIA()
             
             if niveau=='1':
@@ -276,11 +334,30 @@ class Jeu():
                 for i in range(self.J1.taille):
                     self.J1.piocher()
                     self.J2.piocher()
-                while (self.J1!=[] and self.J2!=[]) or (not self.testVictoire()[0]):
+                while self.J2!=[] and (not self.testVictoire()[0]):  
                      self.unTourPvIA()
 
 
-
+        elif mode=='II':    #On sélectionne les niveaux des deux IA et on initialise la partie
+            niveau1=input('Sélectionnez le niveau de l\'IA Joueur 1: \n0 = Aleatoire \n1 = Groupements brelans\n')
+            niveau2=input('Sélectionnez le niveau de l\'IA Joueur 2: \n0 = Aleatoire \n1 = Groupements brelans\n')
+            if niveau1=='0':
+                self.J1 = IA_0(6,2,self)
+            if niveau1=='1':
+                self.J1 = IA_1(6,2,self)
+            if niveau2=='0':
+                self.J2 = IA_0(6,2,self)
+            if niveau2=='1':
+                self.J2 = IA_1(6,2,self)
+                
+            for i in range(self.J1.taille):
+                    self.J1.piocher()
+                    self.J2.piocher()
+            while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
+                 self.unTourIAvIA()
+        
+        print("\n\n\n", self)
+        print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!")
 
 
 

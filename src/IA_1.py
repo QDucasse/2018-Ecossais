@@ -13,7 +13,7 @@ import numpy.random as rnd
 
 class IA_1(Joueur):
     
-    def jouer(self,no_carte, no_IA=2):
+    def jouer(self,no_IA=2):
         '''
         Joue une carte de la main d'un joueur 
         Correspond aux actions successives de placer et piocher pour compléter la main
@@ -23,11 +23,11 @@ class IA_1(Joueur):
         Carte choisie
         Numéro de joueur de l'IA (1 ou 2, par défaut 2)
         '''
-        self.placer(no_carte, no_IA)
+        self.placer(no_IA)
         self.piocher()
 
 
-    def placer(self,no_carte = 0, no_IA=2):
+    def placer(self, no_IA=2):
         '''
         Place une carte de valeur k sur la borne indexée par le numéro k.
         
@@ -36,18 +36,18 @@ class IA_1(Joueur):
         Carte choisie
         Position visée sous la forme d'un tuple
         '''
-
+        no_carte = 0
         no_borne = self[no_carte].valeur-1
         
-        while no_carte <5 and not self.peutJouer(no_borne):      #Si possible, on place la carte de valeur k
-             no_carte += 1                                       #sur la borne k 
+        while self.jeu.bonNumeroCarte(no_carte+1) and not self.peutJouer(no_borne): #Si possible, on place la carte de valeur k sur la borne k
+             no_carte += 1
              no_borne = self[no_carte].valeur-1
 
-        if no_carte ==5 and not self.peutJouer(no_borne):#si on a pas de carte de la même valeur, hasard
+        if not self.peutJouer(no_borne):#si on a pas de carte de la même valeur, hasard
             for b in range(0,9):
                 if self.peutJouer(b):
                     no_borne = b
-                    no_carte = rnd.randint(0,6)
+                    no_carte = rnd.randint(0,len(self.jeu.J2))
         
                     
         if no_IA == 1:
@@ -58,8 +58,10 @@ class IA_1(Joueur):
             ordonnee=self.jeu.ensembleBorne[no_borne].g2.carteCourante
             self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
         
+        #print("Numéro de carte ", no_carte, "\nNUméro de borne ", no_borne, "\nOrdonnée ", ordonnee)
         
         #Placement de la carte sur le tapis
+        
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
