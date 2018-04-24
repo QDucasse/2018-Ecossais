@@ -116,7 +116,7 @@ class Borne():
             if (self.g1.estComplet() and not self.g2.estComplet()):
                 self.premierComplete=1
         else:
-            if (self.g1.estComplet() and not self.g2.estComplet()):
+            if (self.g2.estComplet() and not self.g1.estComplet()):
                 self.premierComplete=2
         
         
