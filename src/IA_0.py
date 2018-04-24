@@ -13,7 +13,7 @@ import numpy.random as rnd
 
 class IA_0(Joueur):
     
-    def jouer(self,no_carte, no_IA=2):
+    def jouer(self, no_IA=2):
         '''
         Joue une carte de la main d'un joueur dans la position donnée
         Correspond aux actions successives de placer et piocher pour compléter la main
@@ -23,11 +23,14 @@ class IA_0(Joueur):
         Carte choisie
         Numéro de joueur de l'IA (1 ou 2, par défaut 2)
         '''
+        no_carte=rnd.randint(0,6)
+        while not self.jeu.bonNumeroCarte(no_carte):
+            no_carte=rnd.randint(0,6)
         self.placer(no_carte, no_IA)
         self.piocher()
 
 
-    def placer(self,no_carte=rnd.randint(0,6), no_IA=2):
+    def placer(self,no_carte, no_IA=2):
         '''
         Place une carte au hasard sur la zone de jeu de l'IA
         
@@ -51,6 +54,7 @@ class IA_0(Joueur):
             self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
             
         #Placement de la carte sur le tapis
+        
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
         
         #Rafraîchissement des bornes pour y faire apparaître la carte

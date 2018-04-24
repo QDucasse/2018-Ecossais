@@ -72,12 +72,14 @@ class Jeu():
         s: str
             La chaîne de caractères qui sera affichée via ''print''
         '''
+
         if not self.testVictoire()[0]:
             s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
             s=s+str(self.plateau)
         
         else :
             s = 'Et c\'est fini :\n\n'+ str(self.plateau)
+
         
         return s
         
@@ -116,7 +118,7 @@ class Jeu():
         
         Renvoie
         -------
-        True ou False ainsi que VJi avec i le numéro du joueur gagnant
+        True ou False ainsi que Ji avec i le numéro du joueur gagnant
         '''
         etatBornes=self.plateau.tapis[3][:] #La liste des bornes du plateau
         
@@ -180,11 +182,12 @@ class Jeu():
         '''
         ######### Affichage du jeu et du la main du joueur ####################################
         
-        print(self)
-        if self.joueurCourant==1:
-            print(self.J1)
-        else:
-            print(self.J2)
+        if not(self.joueurCourant == 1 and self.testVictoire()[0]):
+            print(self)
+            if self.joueurCourant==1:
+                print(self.J1)
+            else:
+                print(self.J2)
         
         ######### On demande au joueur de sélectionner sa carte et la position visée #########
         
@@ -247,11 +250,7 @@ class Jeu():
                 self.J1.jouer(no_carte,no_borne)
             
         elif self.joueurCourant==2:
-            no_carte=rnd.randint(0,6)
-            while not self.bonNumeroCarte(no_carte):
-                no_carte=rnd.randint(0,6)
-            else:
-                self.J2.jouer(no_carte)
+            self.J2.jouer()
             
     ###CETTE PARTIE PEUT ÊTRE EXTRAITE EN TANT QUE METHODE A PART
     
@@ -293,7 +292,9 @@ class Jeu():
         self.rafraichissementIntegral()
         
         ######### Changement de joueur et incrémentation du tour #############################
+
         sleep(0.1)
+
         self.tourSuivant()
 
 
@@ -353,7 +354,9 @@ class Jeu():
             for i in range(self.J1.taille):
                     self.J1.piocher()
                     self.J2.piocher()
+
             while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
+
                  self.unTourIAvIA()
         
         print("\n\n\n", self)
