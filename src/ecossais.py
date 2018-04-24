@@ -72,12 +72,14 @@ class Jeu():
         s: str
             La chaîne de caractères qui sera affichée via ''print''
         '''
-        if self.testVictoire()[0] and self.joueurCourant == 1:
-            s = 'Et c\'est fini :\n\n'+ str(self.plateau)
-        
-        else:
+
+        if not self.testVictoire()[0]:
             s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
             s=s+str(self.plateau)
+        
+        else :
+            s = 'Et c\'est fini :\n\n'+ str(self.plateau)
+
         
         return s
         
@@ -290,7 +292,9 @@ class Jeu():
         self.rafraichissementIntegral()
         
         ######### Changement de joueur et incrémentation du tour #############################
-        #sleep(0.1)
+
+        sleep(0.1)
+
         self.tourSuivant()
 
 
@@ -350,7 +354,9 @@ class Jeu():
             for i in range(self.J1.taille):
                     self.J1.piocher()
                     self.J2.piocher()
-            while self.J2!=[] and not (self.joueurCourant == 1 and self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte ou que l'un des deux a gagné lors de la fin du tour
+
+            while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
+
                  self.unTourIAvIA()
         
         print("\n\n\n", self)
