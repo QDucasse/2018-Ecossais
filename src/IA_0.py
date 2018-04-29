@@ -20,7 +20,6 @@ class IA_0(Joueur):
         
         Paramètres
         ----------
-        Carte choisie
         Numéro de joueur de l'IA (1 ou 2, par défaut 2)
         '''
         no_carte=rnd.randint(0,6)
