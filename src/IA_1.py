@@ -33,7 +33,6 @@ class IA_1(Joueur):
         
         Paramètres
         ----------
-        Carte choisie
         Position visée sous la forme d'un tuple
         '''
         no_carte = 0

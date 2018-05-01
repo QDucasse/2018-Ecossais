@@ -10,14 +10,18 @@ Created on Mon Feb 12 15:46:45 2018
 from random import shuffle
 from IA_0 import IA_0
 from IA_1 import IA_1
+from IA_2 import IA_2
 from joueur import Joueur
 from carte import Carte
 from plateau import Plateau
 from groupeCartes import GroupeCartes
 from borne import Borne
-import numpy.random as rnd   
+import numpy.random as rnd  
+import numpy as np 
 from time import sleep
-    
+import matplotlib.pyplot as plt
+
+
 class Jeu():
     
     
@@ -73,13 +77,16 @@ class Jeu():
             La chaîne de caractères qui sera affichée via ''print''
         '''
 
-        if not self.testVictoire()[0]:
-            s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
-            s=s+str(self.plateau)
-        
-        else :
+        if self.testVictoire()[0] and self.joueurCourant == 1:
             s = 'Et c\'est fini :\n\n'+ str(self.plateau)
-
+     
+        else:
+            s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
+            s=s+'Probabilités pour ce tour (joueur {0}):\n\n'.format(self.joueurCourant)
+            num = self.joueurCourant
+            s=s+str(self.proba(num))
+            s=s+'\n\n'
+            s=s+str(self.plateau)
         
         return s
         
@@ -105,6 +112,8 @@ class Jeu():
         self.borne7.rafraichir()    
         self.borne8.rafraichir()    
         self.borne9.rafraichir()    
+    
+    
     
     def testVictoire(self):
         '''
@@ -156,7 +165,7 @@ class Jeu():
         
         self.nbTours=self.nbTours + (self.coupsJoues%2)
         self.coupsJoues = self.coupsJoues+1
-
+        
 
 
 
@@ -167,8 +176,155 @@ class Jeu():
         return (no_carte<=len(self.J2)-1 and no_carte>=0)
 
 
-
+    
+    def proba2(self, no_IA):
+        '''
+        Calcule les probabilités (égale à 1 si la carte est déjà dans la main) d'obtenir chacune des cartes du jeu entre le tour en cours et la fin du jeu. L'intérêt est de récupérer par traitement simple les probabilités d'obtenir une couleur ou une valeur donnée. Les probabilités sont regroupées sous forme d'un tableau (SANS les en-têtes  indiquant les lignes et colonnes):
+            
+             | 1 2 3 4 5 6 7 8 9
+            _|_________________
+            A| X X X X X X X X X
+            B| X X X X X X X X X 
+            C| X X X X X X X X X
+            D| X X X X X X X X X 
+            E| X X X X X X X X X
+            F| X X X X X X X X X
         
+        Paramètre
+        ----------
+        Le numéro de joueur de l'IA pour laquelle on veut les probabilités.
+        '''
+        probaChart = np.zeros((6,9))
+        listeCouleurs = ['A','B','C','D','E','F']
+        tapisStr = [[str(self.plateau.tapis[i][j]) for j in range(len(self.plateau.tapis[0]))] for i in range(len(self.plateau.tapis))]
+        mainJ1 = [str(self.J1[i]) for i in range(len(self.J1))]
+        mainJ2 = [str(self.J2[i]) for i in range(len(self.J2))]
+        
+        for valeur in range(1,10):
+            for color in range(6):
+                cartePosee = False
+                couleur = listeCouleurs[color]
+                
+                for ligne in range(7):
+                    if '%c%i'%(couleur,valeur) in tapisStr[ligne]:     #La carte est posée sur le plateau
+                        probaChart[color, valeur-1] = 0
+                        cartePosee = True
+                
+                if no_IA == 1 and '%c%i'%(couleur,valeur) in mainJ1:
+                    probaChart[color, valeur-1] = 1
+                
+                elif no_IA == 2 and '%c%i'%(couleur,valeur) in mainJ2:
+                    probaChart[color, valeur-1] = 1
+                    
+                elif  not cartePosee and len(self.pioche) != 0:
+                    proba = 0
+                    prod = 1                    #probabilité d'intersection de non-sortie de la carte
+                    P = 2*self.nbTours + self.joueurCourant    #numéro du piochage
+                    N = 42                      #nombre initial de cartes  dans la pioche
+                    
+                    if no_IA == 1:              
+                        proba = 1/(len(self.J1)+N-(P-1))       #proba de piocher la carte à ce tour
+                        
+                        for k in range(int((P+1)/2), int(N/2)): #sommation des probas de piocher la carte 
+                            prod = 1                            #à un tour ultérieur
+                            
+                            for i in range(P, 1+2*k):           #le produit des probabilités de ne pas la
+                                prod = prod*(1 - 1/(len(self.J2)+N+1-i)) #piocher entre ce tour et le tour 
+                                                                         #ultérieur où on la pioche
+                            proba += prod*(1/(len(self.J2)+N+1-(2*k+1)))
+                        
+                        
+                    elif no_IA == 2:                                     # de même pour J2
+                        proba = 1/(len(self.J1)+N-(P-1))
+                        
+                        for k in range(int(1+P/2), int(1+N/2)):
+                            prod = 1
+                            
+                            for i in range(P, 2*k):
+                                prod = prod*(1 - 1/(len(self.J2)+N+1-i))
+                                
+                            proba += prod*(1/(len(self.J2)+N+1-(2*k))) 
+                            
+                        
+                    probaChart[color, valeur-1] = proba          #on recense les valeurs dans un tableau
+                                                                 #pour les récupérer facilement après
+                elif len(self.pioche) == 0:
+                    probaChart[color, valeur-1] = 0
+        
+        return probaChart
+                    
+   
+    def proba(self, no_IA):
+        global p11
+        global p22
+        global t
+        '''
+        Calcule les probabilités (égale à 1 si la carte est déjà dans la main) d'obtenir chacune des cartes du jeu entre le tour en cours et la fin du jeu. L'intérêt est de récupérer par traitement simple les probabilités d'obtenir une couleur ou une valeur donnée. Les probabilités sont regroupées sous forme d'un tableau (SANS les en-têtes  indiquant les lignes et colonnes):
+            
+             | 1 2 3 4 5 6 7 8 9
+            _|_________________
+            A| X X X X X X X X X
+            B| X X X X X X X X X 
+            C| X X X X X X X X X
+            D| X X X X X X X X X 
+            E| X X X X X X X X X
+            F| X X X X X X X X X
+        
+        Paramètre
+        ----------
+        Le numéro de joueur de l'IA pour laquelle on veut les probabilités.
+        '''
+        probaChart = np.zeros((6,9))
+        listeCouleurs = ['A','B','C','D','E','F']
+        tapisStr = [[str(self.plateau.tapis[i][j]) for j in range(len(self.plateau.tapis[0]))] for i in range(len(self.plateau.tapis))]
+        mainJ1 = [str(self.J1[i]) for i in range(len(self.J1))]
+        mainJ2 = [str(self.J2[i]) for i in range(len(self.J2))]
+        
+        for valeur in range(1,10):
+            for color in range(6):
+                cartePosee = False
+                couleur = listeCouleurs[color]
+                
+                for ligne in range(7):
+                    if '%c%i'%(couleur,valeur) in tapisStr[ligne]:     #La carte est posée sur le plateau
+                        probaChart[color, valeur-1] = 0
+                        cartePosee = True
+                
+                if no_IA == 1 and '%c%i'%(couleur,valeur) in mainJ1:
+                    probaChart[color, valeur-1] = 1
+                
+                elif no_IA == 2 and '%c%i'%(couleur,valeur) in mainJ2:
+                    probaChart[color, valeur-1] = 1
+                    
+                elif  not cartePosee and len(self.pioche) != 0:
+                    
+                    proba = (len(self.pioche)+(no_IA+1)%2)/(2*(len(self.pioche)+6))
+                    if no_IA == 1:
+                        p11[t] = proba            #listes pour débug
+                    elif no_IA == 2:
+                        p22[t] = proba
+                    
+                    # pour J1, il reste N = len(pioche)/2 piochages
+                    # pour J2, il reste N = (len(pioche)+1)/2 piochages
+                    # La probabilité de tirer une carte que l'on suppose non tirée jusque-là
+                    # est de N/Total des cartes inconnues.
+                    # Tirages sans remises.
+                    
+                    
+                    probaChart[color, valeur-1] = proba          #on recense les valeurs dans un tableau
+                                                                 #pour les récupérer facilement après
+                elif len(self.pioche) == 0:
+                    probaChart[color, valeur-1] = 0
+        if no_IA == 2:
+            t+=1
+        return probaChart
+                    
+   
+    
+    
+
+
+     
     def unTourPvP(self):
         '''
         Fait progresser chacune des actions d'une case et donne la main à un des joueurs :
@@ -343,21 +499,20 @@ class Jeu():
             niveau1=input('Sélectionnez le niveau de l\'IA Joueur 1: \n0 = Aleatoire \n1 = Groupements brelans\n')
             niveau2=input('Sélectionnez le niveau de l\'IA Joueur 2: \n0 = Aleatoire \n1 = Groupements brelans\n')
             if niveau1=='0':
-                self.J1 = IA_0(6,2,self)
+                self.J1 = IA_0(6,1,self)
             if niveau1=='1':
-                self.J1 = IA_1(6,2,self)
+                self.J1 = IA_1(6,1,self)
             if niveau2=='0':
                 self.J2 = IA_0(6,2,self)
             if niveau2=='1':
                 self.J2 = IA_1(6,2,self)
                 
             for i in range(self.J1.taille):
-                    self.J1.piocher()
-                    self.J2.piocher()
+                self.J1.piocher()
+                self.J2.piocher()
 
             while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
-
-                 self.unTourIAvIA()
+                self.unTourIAvIA()
         
         print("\n\n\n", self)
         print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!")
@@ -365,5 +520,34 @@ class Jeu():
 
 
 if __name__=='__main__':
-    j=Jeu()
-    j.start()
+    global  t, p11, p22
+    t=0
+    p11 = [0]*21
+    p22 = [0]*21
+    game=Jeu()
+    game.start()
+    print(len(p11), len(p22))
+    print(p11,'\n', p22)
+    plt.plot(p11, label='J1 proba1')
+    plt.plot(p22, label='J2 proba2')
+    plt.legend()
+
+        
+#p1 = [0.4375, 0.43478261, 0.43181818, 0.42857143, 0.425, 0.42105263, 0.41666667, 0.41176471, 0.40625, 0.4, 0.39285714, 0.38461538, 0.375, 0.36363636, 0.35, 0.33333333, 0.3125, 0.28571429, 0.25, 0.2, 0.125]
+#
+#p2 = [0.44680851, 0.44444444, 0.44186047, 0.43902439, 0.43589744, 0.43243243, 0.42857143, 0.42424242, 0.41935484, 0.4137931, 0.40740741, 0.4, 0.39130435, 0.38095238, 0.36842105, 0.35294118, 0.33333333, 0.30769231, 0.27272727, 0.22222222, 0.14285714, ]
+#        
+#plt.plot(p1, label='J1 proba1')
+#plt.plot(p2, label='J2 proba2')
+#plt.legend()
+
+
+
+
+
+
+
+
+
+
+
