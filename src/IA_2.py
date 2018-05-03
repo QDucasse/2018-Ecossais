@@ -1,49 +1,57 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Mar 10 16:40:31 2018
+Created on Thu Mar 29 11:25:00 2018
 
-@author: quentin
+@author: Matthieu
 """
+
 
 from carte import Carte
 from plateau import Plateau
 from joueur import Joueur
 import numpy.random as rnd
 
-class IA_0(Joueur):
+class IA_2(Joueur):
     
-    def jouer(self, no_IA=2):
+    def jouer(self,no_IA=2):
         '''
-        Joue une carte de la main d'un joueur dans la position donnée
+        Joue une carte de la main d'un joueur 
         Correspond aux actions successives de placer et piocher pour compléter la main
         
         Paramètres
         ----------
+        Carte choisie
         Numéro de joueur de l'IA (1 ou 2, par défaut 2)
         '''
-        no_carte=rnd.randint(0,6)
-        while not self.jeu.bonNumeroCarte(no_carte):
-            no_carte=rnd.randint(0,6)
-        self.placer(no_carte, no_IA)
+        self.placer(no_IA)
         self.piocher()
 
 
-    def placer(self,no_carte, no_IA=2):
+    def placer(self, no_IA=2):
         '''
-        Place une carte au hasard sur la zone de jeu de l'IA
+        Place une carte de valeur k sur la borne indexée par le numéro k.
+        100 % de victoire face à IA_0
+        100 % de victoire face à IA_1
+        
         
         Paramètres
         ----------
-        Carte choisie
         Position visée sous la forme d'un tuple
         '''
+        no_carte = 0
+        no_borne = self[no_carte].valeur-1
         
-        no_borne=(rnd.randint(0,9))
+        while self.jeu.bonNumeroCarte(no_carte+1) and not self.peutJouer(no_borne): #Si possible, on place la carte de valeur k sur la borne k
+             no_carte += 1
+             no_borne = self[no_carte].valeur-1
+
+        if not self.peutJouer(no_borne):#si on a pas de carte de la même valeur, hasard
+            for b in range(0,9):
+                if self.peutJouer(b):
+                    no_borne = b
+                    no_carte = rnd.randint(0,len(self.jeu.J2))
         
-        while not self.peutJouer(no_borne):
-             no_borne=(rnd.randint(0,9))
-        
+                    
         if no_IA == 1:
             ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
             self.jeu.ensembleBorne[no_borne].g1.carteCourante-=1
@@ -51,7 +59,7 @@ class IA_0(Joueur):
         elif no_IA == 2:
             ordonnee=self.jeu.ensembleBorne[no_borne].g2.carteCourante
             self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
-            
+        
         #Placement de la carte sur le tapis
         
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 

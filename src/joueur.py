@@ -12,7 +12,7 @@ from plateau import Plateau
 class Joueur(list):
     
     
-    def __init__(self,taille,no,partie):
+    def __init__(self, taille,no,partie):
         ''' 
         Crée un joueur à travers une main de taille donnée et un numéro caractéristique.
         
@@ -94,7 +94,10 @@ class Joueur(list):
         
         #Suppression de la carte de la main du joueur
         del(self[no_carte])
-   
+
+
+
+
     def peutJouer(self,no_borne):
         '''
         Vérifie que le joueur courant peut bien placer sa carte à l'endroit choisi
