@@ -21,7 +21,8 @@ import numpy.random as rnd
 import numpy as np 
 from time import sleep
 import matplotlib.pyplot as plt
-
+import datetime
+import pickle
 
 class Jeu():
     
@@ -455,9 +456,42 @@ class Jeu():
         self.tourSuivant()
 
 
-
-
-
+    def save(self):
+        now = datetime.datetime.now()
+        fichier = open('saves/sauvegarde_{0}'.format(now),'wb')
+        pickler = pickle.Pickler(fichier)
+        pickler.dump(self.ensembleBorne)
+        pickler.dump(self.J1)
+        pickler.dump(self.J2)
+        pickler.dump(self.joueurCourant)
+        pickler.dump(self.nbTours)
+        pickler.dump(self.pioche)
+        fichier.close()
+        
+    def loadAndPlay(self,fichier):
+        fichierOuvert = open(fichier,'rb')
+        depickler = pickle.Unpickler(fichierOuvert)
+        self.ensembleBorne = depickler.load()
+        self.borne1 = self.ensembleBorne[0]
+        self.borne1 = self.ensembleBorne[1]
+        self.borne1 = self.ensembleBorne[2]
+        self.borne1 = self.ensembleBorne[3]
+        self.borne1 = self.ensembleBorne[4]
+        self.borne1 = self.ensembleBorne[5]
+        self.borne1 = self.ensembleBorne[6]
+        self.borne1 = self.ensembleBorne[7]
+        self.borne1 = self.ensembleBorne[8]
+        self.J1 = depickler.load()
+        self.J2 = depickler.load()
+        self.JoueurCourant = depickler.load()
+        self.nbTours = depickler.load()
+        self.pioche = depickler.load()
+        fichierOuvert.close()
+        
+        
+        
+        
+############# Fonction de départ pour l'interface dans la console Python #####################
 
     def start(self, test = False):
         global T1, T2
@@ -540,21 +574,23 @@ class Jeu():
                     self.unTourIAvIA()
                     
         print("\n\n\n", self)
-        print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!")
+        print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!\n\n\n")
         if self.testVictoire()[1] == 'J1':
             T1 += 1
         if self.testVictoire()[1] == 'J2':
             T2 += 1
 
+############## Redéfinition et spécification de la fonction start() pour différents cas (IHM) ###############
 
 if __name__=='__main__':
+    pass
 
-    global T1, T2
-    T1, T2, = 0, 0
-    for k in range(50):
-        game=Jeu()
-        game.start(True)
-    print("Victoires J1 :", 100*T1/(T1+T2), '%')
+#    global T1, T2
+#    T1, T2, = 0, 0
+#    for k in range(50):
+#        game=Jeu()
+#        game.start(True)
+#    print("Victoires J1 :", 100*T1/(T1+T2), '%')
 
 
 
@@ -582,16 +618,15 @@ if __name__=='__main__':
 
 
 
-g = Jeu()
-g.plateau.tapis[2][0] = Carte(1, 'D')    
-g.plateau.tapis[2][1] = Carte(2, 'E')
-g.plateau.tapis[1][1] = Carte(1, 'F')
-g.plateau.tapis[2][2] = Carte(6, 'D')
+#g = Jeu()
+#g.plateau.tapis[2][0] = Carte(1, 'D')    
+#g.plateau.tapis[2][1] = Carte(2, 'E')
+#g.plateau.tapis[1][1] = Carte(1, 'F')
+#g.plateau.tapis[2][2] = Carte(6, 'D')
 #
 #a = Carte(1, 'D')
 #b = Carte(2, 'E')
 #c = Carte(1, 'F')
 #d = Carte(6, 'D')
 #
-#sorted([(a, 'a'), (b, 'b') , (c,' c'), (d, 'd')], key=lambda card: card[0].valeur)   # sort by value
-
+# sorted([(a, 'a'), (b, 'b') , (c,' c'), (d, 'd')], key=lambda card: card[0].valeur)   # sort by value
