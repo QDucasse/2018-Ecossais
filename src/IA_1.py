@@ -28,9 +28,7 @@ class IA_1(Joueur):
     
     def placer(self, no_IA=2):
         '''
-        Place une carte sur une borne de manière à y avoir plus de points que l'adversaire.
-        84% de victoire face à IA_0 en J1
-        76% de victoire face à IA_0 en J2
+        Place une carte de valeur k sur la borne indexée par le numéro k.
         
         Paramètres
         ----------
@@ -39,54 +37,30 @@ class IA_1(Joueur):
         
         #Tri de la main par valeurs croissantes
         
-        mainClassee = sorted(self, key=lambda card: card.valeur)
-        for i in range(len(self)):
-            self[i] = mainClassee[i]
+        self = sorted(self, key=lambda card: card.valeur)
         
+       
         
         advList = []   #Liste des bornes où l'adversaire a joué
-        
         for i in range(9):  #RQ : no_IA -> 1 + no_IA%2  =>  1->2 et 2->1
-            
-            #on regarde le plateau côté adversaire et on cherche les bornes où il a plus de points que IA
-            totAdv = self.jeu.plateau.totalPoints(i, 1 + no_IA%2)  
-            
-            if self.peutJouer(i) and totAdv > self.jeu.plateau.totalPoints(i, no_IA) :  
-                advList.append(i)
-        
+            totAdv = self.jeu.plateau.totalPoints(i, 1 + no_IA%2)      #on regarde le plateau côté
+            if totAdv > self.jeu.plateau.totalPoints(i, no_IA) :       #adversaire et on cherche les bornes         
+                advList.append(i)                                      #où il a plus de points que IA
         advList = sorted(advList, key=lambda i: self.jeu.plateau.totalPoints(i, 1 + no_IA%2)-self.jeu.plateau.totalPoints(i, no_IA))  #classement par écart de point entre les deux camps
+        no_borne = advList[0]
         
         
-        if advList != []:
-            #Choix de la borne
-            no_borne = advList[0]
-            k, fin = 0, 0
-            while not (fin or self.peutJouer(no_borne)):
-                k += 1
-                if k < len(advList):
-                    no_borne = advList[k]
-                else:
-                    fin = 1
-            
-            
-            #Choix de la carte
-            no_carte = 0
-            advPoints = self.jeu.plateau.totalPoints(no_borne, 1 + no_IA%2)
-            Points = self.jeu.plateau.totalPoints(no_borne, no_IA)
-            
-            while no_carte < len(self) and not Points + self[no_carte].valeur > advPoints :  #tant qu'on a pas plus de points que l'adversaire
-                no_carte += 1
+        #Choix de la carte
+        
+        no_carte = 0
+        advPoints = self.jeu.plateau.totalPoints(advList[0], 1 + no_IA%2)
+        Points = self.jeu.plateau.totalPoints(advList[0], no_IA)
+        while advPoints - Points - self[no_carte].valeur > 0 or not self.peutJouer(no_borne):
+            no_carte += 1
           
-        # ajout choix random en cas d'impossibilité ou que IA est le premier joueur
-        if advList == [] or no_carte == len(self):
-            no_carte=rnd.randint(0,6)
-            while not self.jeu.bonNumeroCarte(no_carte):
-                no_carte=rnd.randint(0,6)
-            no_borne=(rnd.randint(0,9))
-            while not self.peutJouer(no_borne):
-                no_borne=(rnd.randint(0,9))
-            
-        
+        #########################################################################################
+        ############ ajouter choix random en cas d'impossibilité ################################
+        #########################################################################################
         if no_IA == 1:
             ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
             self.jeu.ensembleBorne[no_borne].g1.carteCourante-=1
@@ -96,6 +70,7 @@ class IA_1(Joueur):
             self.jeu.ensembleBorne[no_borne].g2.carteCourante+=1
             
         #Placement de la carte sur le tapis
+        
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
         
         #Rafraîchissement des bornes pour y faire apparaître la carte

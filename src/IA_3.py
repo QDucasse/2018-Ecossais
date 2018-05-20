@@ -25,38 +25,9 @@ class IA_3(Joueur):
         self.piocher()
     
     
-    def recupBorne(self, no_borne): #permet de récupérer l'objet borne et ses fonctionnalités
-        if no_borne == 1:
-            return self.jeu.borne1
-        if no_borne == 2:
-            return self.jeu.borne2
-        if no_borne == 3:
-            return self.jeu.borne3
-        if no_borne == 4:
-            return self.jeu.borne4
-        if no_borne == 5:
-            return self.jeu.borne5
-        if no_borne == 6:
-            return self.jeu.borne6
-        if no_borne == 7:
-            return self.jeu.borne7
-        if no_borne == 8:
-            return self.jeu.borne8
-        if no_borne == 9:
-            return self.jeu.borne9
     
-    
-    def strategie(self, no_borne, no_IA):
-        
-        B = self.recupBorne(no_borne)
-        
-        if no_IA == 1 and B.g2.estComplet():
-            advTot = B.g2.calculForce()
-        if no_IA == 2 and B.g1.estComplet():
-            advTot = B.g1.calculForce()
-        
-        
-    
+    def strategie(self, no_borne):
+        pass
     
     def placer(self, no_carte, no_borne):
         
