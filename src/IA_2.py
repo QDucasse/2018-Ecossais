@@ -30,6 +30,9 @@ class IA_2(Joueur):
     def placer(self, no_IA=2):
         '''
         Place une carte de valeur k sur la borne indexée par le numéro k.
+        100 % de victoire face à IA_0
+        100 % de victoire face à IA_1
+        
         
         Paramètres
         ----------

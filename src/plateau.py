@@ -50,14 +50,14 @@ class Plateau():
     def totalPoints(self, no_borne, no_joueur):
         
         if no_joueur == 1:
-            C1 = self.tapis[2][no_borne-1]
-            C2 = self.tapis[1][no_borne-1]
-            C3 = self.tapis[0][no_borne-1]
+            C1 = self.tapis[2][no_borne]
+            C2 = self.tapis[1][no_borne]
+            C3 = self.tapis[0][no_borne]
         
         if no_joueur == 2:
-            C1 = self.tapis[4][no_borne-1]
-            C2 = self.tapis[5][no_borne-1]
-            C3 = self.tapis[6][no_borne-1]
+            C1 = self.tapis[4][no_borne]
+            C2 = self.tapis[5][no_borne]
+            C3 = self.tapis[6][no_borne]
         
         return C1.valeur + C2.valeur + C3.valeur
     

@@ -21,7 +21,7 @@ import numpy.random as rnd
 import numpy as np 
 from time import sleep
 import matplotlib.pyplot as plt
-
+import time
 
 class Jeu():
     
@@ -256,9 +256,9 @@ class Jeu():
                     
    
     def proba(self, no_IA):
-        global p11
-        global p22
-        global t
+#        global p11
+#        global p22
+#        global t
         '''
         Calcule les probabilités (égale à 1 si la carte est déjà dans la main) d'obtenir chacune des cartes du jeu entre le tour en cours et la fin du jeu. L'intérêt est de récupérer par traitement simple les probabilités d'obtenir une couleur ou une valeur donnée. Les probabilités sont regroupées sous forme d'un tableau (SANS les en-têtes  indiquant les lignes et colonnes):
             
@@ -300,10 +300,10 @@ class Jeu():
                 elif  not cartePosee and len(self.pioche) != 0:
                     
                     proba = (len(self.pioche)+(no_IA+1)%2)/(2*(len(self.pioche)+6))
-                    if no_IA == 1:
-                        p11[t] = proba            #listes pour débug
-                    elif no_IA == 2:
-                        p22[t] = proba
+#                    if no_IA == 1:
+#                        p11[t] = proba            #listes pour débug
+#                    elif no_IA == 2:
+#                        p22[t] = proba
                     
                     # pour J1, il reste N = len(pioche)/2 piochages
                     # pour J2, il reste N = (len(pioche)+1)/2 piochages
@@ -316,8 +316,8 @@ class Jeu():
                                                                  #pour les récupérer facilement après
                 elif len(self.pioche) == 0:
                     probaChart[color, valeur-1] = 0
-        if no_IA == 2:
-            t+=1
+#        if no_IA == 2:
+#            t+=1
         return probaChart
                     
    
@@ -459,7 +459,8 @@ class Jeu():
 
 
 
-    def start(self):
+    def start(self, test = False):
+        global T1, T2
         '''
         Lance une partie entre différents joueurs
         
@@ -468,91 +469,119 @@ class Jeu():
         Aucun
         '''
         print('Écossais Bagarreurs ! \nLe jeu oppose deux joueurs avec les règles de base de Shotten Totten.\nLe côté du joueur 1 est en haut du plateau, celui du joueur 2 en bas')
-        mode=input('Sélectionnez votre mode de jeu: \nH pour Humain contre Humain \nou I contre une IA \nou II pour l\'opposition de deux IA\n\n')
-        if mode=='H':
-            for i in range(self.J1.taille):
-                self.J1.piocher()
-                self.J2.piocher()
-            while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
-                 self.unTourPvP()
-        ### PAREIL, IL FAUT FAIRE UNE FONCTION STARTPVP STARTPVIA ET STARTIAVIA
+        if not test:
+            mode=input('Sélectionnez votre mode de jeu: \nH pour Humain contre Humain \nou I contre une IA \nou II pour l\'opposition de deux IA\n\n')
+            if mode=='H':
+                for i in range(self.J1.taille):
+                    self.J1.piocher()
+                    self.J2.piocher()
+                while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
+                     self.unTourPvP()
+            ### PAREIL, IL FAUT FAIRE UNE FONCTION STARTPVP STARTPVIA ET STARTIAVIA
+            elif mode=='I':
+                niveau=input('Sélectionnez le niveau de votre adversaire: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Suites couleurs et probabilités\n')
+                
+                if niveau=='0':
+                    self.J2=IA_0(6,2,self)
+                
+                elif niveau=='1':
+                    self.J2=IA_1(6,2,self)
+                
+                elif niveau=='2':
+                    self.J2=IA_2(6,2,self)
+                
+                elif niveau=='3':
+                    self.J2=IA_3(6,2,self)
+                    
+                for i in range(self.J1.taille):
+                    self.J1.piocher()
+                    self.J2.piocher()
+                while self.J2!=[] and (not self.testVictoire()[0]):  
+                     self.unTourPvIA()
+
+
+            elif mode=='II':    #On sélectionne les niveaux des deux IA et on initialise la partie
+                niveau1=input('Sélectionnez le niveau de l\'IA Joueur 1: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Suites couleurs et probabilités\n')
+                niveau2=input('Sélectionnez le niveau de l\'IA Joueur 2: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Suites couleurs et probabilités\n')
+                
+                if niveau1=='0':
+                    self.J1 = IA_0(6,1,self)
+                if niveau1=='1':
+                    self.J1 = IA_1(6,1,self)
+                if niveau1=='2':
+                    self.J1 = IA_2(6,2,self)
+                if niveau1=='3':
+                    self.J1 = IA_3(6,2,self)
+                    
+                if niveau2=='0':
+                    self.J2 = IA_0(6,2,self)
+                if niveau2=='1':
+                    self.J2 = IA_1(6,2,self)
+                if niveau2=='2':
+                    self.J2 = IA_2(6,2,self)            
+                if niveau2=='3':
+                    self.J2 = IA_3(6,2,self)
+                    
+                for i in range(self.J1.taille):
+                    self.J1.piocher()
+                    self.J2.piocher()
+    
+                while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
+                    self.unTourIAvIA()
         
-        elif mode=='I':
-            niveau=input('Sélectionnez le niveau de votre adversaire: \n0 = Aleatoire \n1 = Groupements brelans\n')
-            
-            if niveau=='0':
-                self.J2=IA_0(6,2,self)
-            
-            elif niveau=='1':
-                self.J2=IA_1(6,2,self)
-            
-            elif niveau=='2':
-                self.J2=IA_2(6,2,self)
-            
-            elif niveau=='3':
-                self.J2=IA_3(6,2,self)
-                
+        if test:
+            T1, T2 = 100, 100
+            self.J1 = IA_3(6,1,self)
+            self.J2 = IA_3(6,2,self)
             for i in range(self.J1.taille):
-                self.J1.piocher()
-                self.J2.piocher()
-            while self.J2!=[] and (not self.testVictoire()[0]):  
-                 self.unTourPvIA()
-
-
-        elif mode=='II':    #On sélectionne les niveaux des deux IA et on initialise la partie
-            niveau1=input('Sélectionnez le niveau de l\'IA Joueur 1: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Stratégie et probabilités\n')
-            niveau2=input('Sélectionnez le niveau de l\'IA Joueur 2: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Stratégie et probabilités\n')
-            
-            if niveau1=='0':
-                self.J1 = IA_0(6,1,self)
-            if niveau1=='1':
-                self.J1 = IA_1(6,1,self)
-            if niveau1=='2':
-                self.J1 = IA_2(6,2,self)
-            if niveau1=='3':
-                self.J1 = IA_3(6,2,self)
-                
-            if niveau2=='0':
-                self.J2 = IA_0(6,2,self)
-            if niveau2=='1':
-                self.J2 = IA_1(6,2,self)
-            if niveau2=='2':
-                self.J2 = IA_2(6,2,self)            
-            if niveau2=='3':
-                self.J2 = IA_3(6,2,self)
-                
-            for i in range(self.J1.taille):
-                self.J1.piocher()
-                self.J2.piocher()
-
+                    self.J1.piocher()
+                    self.J2.piocher()
+    
             while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
                 self.unTourIAvIA()
-        
+            if self.testVictoire()[1] == 'J1':
+                T1 += 1
+            if self.testVictoire()[1] == 'J2':
+                T2 += 1        
+            
         print("\n\n\n", self)
         print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!")
-
+        
 
 
 if __name__=='__main__':
     game=Jeu()
-    game.start()
+    game.start(False)
     
     
     
     
-#
-#global  t, p11, p22
-#t=0
-#p11 = [0]*21
-#p22 = [0]*21
-#
-#print(len(p11), len(p22))
-#print(p11,'\n', p22)
-#plt.plot(p11, label='J1 proba1')
-#plt.plot(p22, label='J2 proba2')
-#plt.legend()
 
-        
+
+
+
+
+###############################################################################################################################################   ZONE TEST  ########################################################### ############################################################################################################
+
+
+
+#########################       Calcul des probas/test      ##################################
+#global T1, T2
+#    T1, T2, = 0, 0
+#    #for k in range(5):
+#        game=Jeu()
+#        game.start(True)
+#
+#    print("Victoires J1 :", 100*T1/(T1+T2), '%')
+#    global  t, p11, p22
+#    t=0
+#    p11 = [0]*21
+#    p22 = [0]*21
+#    print(len(p11), len(p22))
+#    print(p11,'\n', p22)
+#    plt.plot(p11, label='J1 proba1')
+#    plt.plot(p22, label='J2 proba2')
+#    plt.legend()        
 #p1 = [0.4375, 0.43478261, 0.43181818, 0.42857143, 0.425, 0.42105263, 0.41666667, 0.41176471, 0.40625, 0.4, 0.39285714, 0.38461538, 0.375, 0.36363636, 0.35, 0.33333333, 0.3125, 0.28571429, 0.25, 0.2, 0.125]
 #
 #p2 = [0.44680851, 0.44444444, 0.44186047, 0.43902439, 0.43589744, 0.43243243, 0.42857143, 0.42424242, 0.41935484, 0.4137931, 0.40740741, 0.4, 0.39130435, 0.38095238, 0.36842105, 0.35294118, 0.33333333, 0.30769231, 0.27272727, 0.22222222, 0.14285714, ]
@@ -564,17 +593,168 @@ if __name__=='__main__':
 
 
 
-
+####################  Exemple de plateau de jeu (pas viable)  #######################
 g = Jeu()
 g.plateau.tapis[2][0] = Carte(1, 'D')    
 g.plateau.tapis[2][1] = Carte(2, 'E')
 g.plateau.tapis[1][1] = Carte(1, 'F')
 g.plateau.tapis[2][2] = Carte(6, 'D')
 
+
+
+###################  Quelques cartes  ###############################
 a = Carte(1, 'D')
 b = Carte(2, 'E')
 c = Carte(1, 'F')
 d = Carte(6, 'D')
 
-sorted([(a, 'a'), (b, 'b') , (c,' c'), (d, 'd')], key=lambda card: card[0].valeur)   # sort by value
 
+
+
+################# Mesure des probas, pour être sûr  #################
+def MesProbas(nb = 150, lin = np.inf):
+    T1, T2 = [0]*42, [0]*42
+    
+    for p in range(42):
+        
+        for k in range(nb*int(p/lin+1)):
+            print('\n',100*k/(nb*int(p/lin+1)), '%  du tour', p+1, '/42')
+            g = Jeu()
+            g.pioche=[] 
+            for i in range(9):
+                for couleur in ['A','B','C','D','E','F']:
+                    g.pioche.append('%c%i'%(couleur,i+1))
+            if p!=0:
+                g.pioche = g.pioche[:-p]
+            
+            t = time.time()
+            for s in range(k):        #k%(1+int((p/lin+1)/2))
+                shuffle(g.pioche)
+            
+            
+            for i in range(g.J1.taille):
+                g.J1.piocher()
+                g.J2.piocher()
+            mainJ1 = [str(g.J1[j]) for j in range(len(g.J1))]
+            mainJ2 = [str(g.J2[j]) for j in range(len(g.J2))]
+            
+                
+            if 'A1' in mainJ1:
+#                T1 += 1
+#                T3 += 1
+                g.J1.pop(mainJ1.index('A1'))
+                
+            if 'A1' in mainJ2:
+#                T2 += 1
+#                T4 += 1
+                g.J2.pop(mainJ2.index('A1'))
+                
+            
+            print("Longueur pioche = ", len(g.pioche), 'Temps exec = ', time.time()-t)
+            
+             
+            if p%2 == 1:
+                g.J2.piocher()
+                mainJ2 = [str(g.J2[i]) for i in range(len(g.J2))]
+                if 'A1' in mainJ2:
+                    T2[p] += 1/(nb*int(p/lin+1))
+                g.J2.pop()
+            
+            while len(g.pioche) > 0:
+                
+                g.J1.piocher()
+                g.J2.piocher()
+                mainJ1 = [str(g.J1[i]) for i in range(len(g.J1))]
+                mainJ2 = [str(g.J2[i]) for i in range(len(g.J2))]
+                if 'A1' in mainJ1:
+                    T1[p] += 1/(nb*int(p/lin+1))
+                if 'A1' in mainJ2:
+                    T2[p] += 1/(nb*int(p/lin+1))
+                g.J1.pop()
+                g.J2.pop()
+                    
+        print ("Proba J1 :", T1, "\n\n Proba J2 :", T2, " \n\nTotal ", np.array(T1)+np.array(T2))
+#        print("origine J1 :", 100*np.array(T3)/nb, " origine J2 :", 100*np.array(T4)/nb)
+        
+    plt.plot(T1, 'b.', label = 'Probas J1')
+    plt.plot(T2, 'y.', label = 'Probas J2')
+    plt.legend()
+    plt.grid()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################# Mesure des probas, pour être sûr  #################
+def MesProbas2(nb = 150, lin = np.inf):
+    T1, T2 = [0]*42, [0]*42
+    
+    for p in range(42):
+        
+        g = Jeu()
+        Pioche=[] 
+        for i in range(9):
+            for couleur in ['A','B','C','D','E','F']:
+                Pioche.append('%c%i'%(couleur,i+1))
+                
+        if p != 0:
+            Pioche = Pioche[:-p]
+        
+        
+        for k in range(nb*int(p/lin+1)):
+            print(100*k/(nb*int(p/lin+1)), '%  du tour', p+1, '/42')
+            
+            g.pioche = [Pioche[i] for i in range(len(Pioche))]
+            shuffle(g.pioche)
+            Pioche = [g.pioche[i] for i in range(len(g.pioche))]
+            
+            
+            for i in range(g.J1.taille):
+                g.J1.piocher()
+                g.J2.piocher()
+            mainJ1 = [str(g.J1[j]) for j in range(len(g.J1))]
+            mainJ2 = [str(g.J2[j]) for j in range(len(g.J2))]
+            
+                
+            if 'A1' in mainJ1:
+#                T1 += 1
+#                T3 += 1
+                g.J1.pop(mainJ1.index('A1'))
+            if 'A1' in mainJ2:
+#                T2 += 1
+#                T4 += 1
+                g.J2.pop(mainJ2.index('A1'))
+                
+            
+            print("Longueur pioche = ", len(g.pioche), '\n')
+            
+                
+            while len(g.pioche) > 0:
+                g.J1.piocher()
+                g.J2.piocher()
+                mainJ1 = [str(g.J1[i]) for i in range(len(g.J1))]
+                mainJ2 = [str(g.J2[i]) for i in range(len(g.J2))]
+                if 'A1' in mainJ1:
+                    T1[p] += 1/(nb*int(p/lin+1))
+                if 'A1' in mainJ2:
+                    T2[p] += 1/(nb*int(p/lin+1))
+                g.J1.pop()
+                g.J2.pop()
+                    
+        print ("Proba J1 :", T1, "\n\n Proba J2 :", T2, " \n\nTotal ", np.array(T1)+np.array(T2))
+#        print("origine J1 :", 100*np.array(T3)/nb, " origine J2 :", 100*np.array(T4)/nb)
+        
+    plt.plot(T1, 'b.', label = 'Probas J1')
+    plt.plot(T2, 'y.', label = 'Probas J2')
+    plt.legend()
+    plt.grid()
