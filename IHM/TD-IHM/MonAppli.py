@@ -21,11 +21,7 @@ class MyWindow(QtWidgets.QMainWindow):
         # Configuration de l'interface utilisateur.
         
         QtWidgets.QMainWindow.__init__(self)
-        self.ui = uic.loadUi('interface.ui',self)
-        self.ecosys = Ecosysteme(60,150,int(1/20*self.ui.conteneur.width()*self.ui.conteneur.height()),self.ui.conteneur.width(),self.ui.conteneur.height())
-        # TO DO
-        
-        
+        self.ui = uic.loadUi('interface.ui',self)   
         palette = QtGui.QPalette()
         pixmap = QtGui.QPixmap("arrierPlan.png")
         palette.setBrush(QtGui.QPalette.Background,QtGui.QBrush(pixmap))

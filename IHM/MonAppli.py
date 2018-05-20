@@ -19,20 +19,52 @@ class MyWindow(QtWidgets.QMainWindow):
         # Configuration de l'interface utilisateur.
         
         QtWidgets.QMainWindow.__init__(self)
-        self.ui = uic.loadUi('interface.ui',self)
-        # TO DO
+        self.ui = uic.loadUi('interface.ui',self)   
+        
+        palette = QtGui.QPalette()
+        pixmap = QtGui.QPixmap("")
+        palette.setBrush(QtGui.QPalette.Background,QtGui.QBrush(pixmap))
+        self.ui.Principale_ihm.setPalette(palette)
+        
+        self.ui.bouton_pas.clicked.connect(self.un_pas)
+        
+#    def un_pas(self):
+#        # print("un pas')
+#        self.ecosys.unTour()
+#        self.ui.centralwidget.update()  # nécessaire pour la MAJ de l'IHM
+#        
+#        
+#    def paintEvent(self, e):
+#        qp = QtGui.QPainter()
+#        qp.begin(self)
+#        self.drawecosysteme(qp) # une méthode à définir
+#        qp.end()    
+#    
+#    def drawecosysteme(self):
+#        qp = QtGui.QPainter()
+#        qp.setPen(QtCore.Qt.red)
+#        qp.drawEllipse(x,y, r_x, r_y)
         
         
-        
-        
-        
-        
-        
-        
-        
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = MyWindow()
     window.show()
     app.exec_()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Principale_ihm</class>
+ <widget class="QMainWindow" name="Principale_ihm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,18 +17,19 @@
    <widget class="QWidget" name="J1B11" native="true">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>260</y>
+      <x>180</x>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
     </property>
+    <zorder>main_conteneur</zorder>
    </widget>
    <widget class="QWidget" name="J1B21" native="true">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>260</y>
+      <x>250</x>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -38,7 +39,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>260</y>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -48,7 +49,7 @@
     <property name="geometry">
      <rect>
       <x>380</x>
-      <y>260</y>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -58,7 +59,7 @@
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>260</y>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -68,7 +69,7 @@
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>260</y>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -78,7 +79,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>260</y>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -88,7 +89,7 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>260</y>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -98,7 +99,7 @@
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>260</y>
+      <y>290</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -108,7 +109,7 @@
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>330</y>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -118,7 +119,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>330</y>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -128,7 +129,7 @@
     <property name="geometry">
      <rect>
       <x>380</x>
-      <y>330</y>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -138,7 +139,7 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>330</y>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -148,7 +149,7 @@
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>330</y>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -157,8 +158,8 @@
    <widget class="QWidget" name="J1B22" native="true">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>330</y>
+      <x>250</x>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -167,8 +168,8 @@
    <widget class="QWidget" name="J1B12" native="true">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>330</y>
+      <x>180</x>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -178,7 +179,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>330</y>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -188,7 +189,7 @@
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>330</y>
+      <y>360</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -198,7 +199,7 @@
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>400</y>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -208,7 +209,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>400</y>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -218,7 +219,7 @@
     <property name="geometry">
      <rect>
       <x>380</x>
-      <y>400</y>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -231,7 +232,7 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>400</y>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -241,7 +242,7 @@
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>400</y>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -250,8 +251,8 @@
    <widget class="QWidget" name="J1B23" native="true">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>400</y>
+      <x>250</x>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -260,8 +261,8 @@
    <widget class="QWidget" name="J1B13" native="true">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>400</y>
+      <x>180</x>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -271,7 +272,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>400</y>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -281,7 +282,7 @@
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>400</y>
+      <y>430</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -337,21 +338,11 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="J2B21" native="true">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>150</y>
-      <width>51</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QWidget" name="J2B11" native="true">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>150</y>
+      <x>130</x>
+      <y>160</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -486,6 +477,7 @@
       <height>61</height>
      </rect>
     </property>
+    <zorder>main_conteneur</zorder>
    </widget>
    <widget class="QWidget" name="J2B43" native="true">
     <property name="geometry">
@@ -516,6 +508,7 @@
       <height>61</height>
      </rect>
     </property>
+    <zorder>main_conteneur</zorder>
    </widget>
    <widget class="QWidget" name="J2B23" native="true">
     <property name="geometry">
@@ -557,146 +550,11 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="widget_55" native="true">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>550</y>
-      <width>51</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_56" native="true">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>550</y>
-      <width>51</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_57" native="true">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>550</y>
-      <width>51</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_58" native="true">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>550</y>
-      <width>51</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_59" native="true">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>550</y>
-      <width>51</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget_60" native="true">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>550</y>
-      <width>51</width>
-      <height>61</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>220</y>
-      <width>548</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="borne1">
-       <property name="text">
-        <string>B1</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne2">
-       <property name="text">
-        <string>B2</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne3">
-       <property name="text">
-        <string>B3</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne4">
-       <property name="text">
-        <string>B4</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne5">
-       <property name="text">
-        <string>B5</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne6">
-       <property name="text">
-        <string>B6</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne7">
-       <property name="text">
-        <string>B7</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne8">
-       <property name="text">
-        <string>B8</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="borne9">
-       <property name="text">
-        <string>B9</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>620</y>
+      <x>250</x>
+      <y>550</y>
       <width>381</width>
       <height>32</height>
      </rect>
@@ -771,6 +629,233 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="borne2">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="borne1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="baseSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QWidget" name="J2B21" native="true">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>150</y>
+      <width>51</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <zorder>layoutWidget</zorder>
+   </widget>
+   <widget class="QPushButton" name="borne3">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="borne4">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="borne5">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="borne9">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="borne8">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="borne7">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="borne6">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>220</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>borne.jpg</normaloff>borne.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -931,7 +1016,7 @@
   <connection>
    <sender>bouton_quitter</sender>
    <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>Principale_ihm</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -947,7 +1032,7 @@
   <connection>
    <sender>actionQuitter</sender>
    <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>Principale_ihm</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
