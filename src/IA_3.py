@@ -14,46 +14,80 @@ class IA_3(Joueur):
     
     def jouer(self,no_IA=2):
         '''
+        Cette IA favorise l'apparition de suites couleur sur ses borne, avec brelans en cas d'impossibilité ou de mauvaise probabilité.
         Joue une carte de la main d'un joueur 
-        Correspond aux actions successives de choisir, placer et piocher pour compléter la main
+        Correspond aux actions successives de choisir, placer et piocher pour compléter la main.
+        
         
         Paramètres
         ----------
         Numéro de joueur de l'IA (1 ou 2, par défaut 2)
         '''
-        self.placer(no_carte, no_borne)
-        self.piocher()
+#        self.placer(no_carte, no_borne)
+#        self.piocher()
     
     
-    def recupBorne(self, no_borne): #permet de récupérer l'objet borne et ses fonctionnalités
-        if no_borne == 1:
-            return self.jeu.borne1
-        if no_borne == 2:
-            return self.jeu.borne2
-        if no_borne == 3:
-            return self.jeu.borne3
-        if no_borne == 4:
-            return self.jeu.borne4
-        if no_borne == 5:
-            return self.jeu.borne5
-        if no_borne == 6:
-            return self.jeu.borne6
-        if no_borne == 7:
-            return self.jeu.borne7
-        if no_borne == 8:
-            return self.jeu.borne8
-        if no_borne == 9:
-            return self.jeu.borne9
+
     
+    def chercheSuites(self, no_IA):
+        
+        ### on commence par trier la main par couleur puis valeur
+        mainClassee = sorted(self, key=lambda card: [card.couleur, card.valeur])
+        for i in range(len(self)):
+            self[i] = mainClassee[i]
+        
+        
+        
+        ### on cherche les embryons de suite déjà sur le tapis
+        suitesTap = []
+        for borne in self.jeu.ensembleBorne:
+            if no_IA == 1:
+                difVal = abs(borne.g1.C1.valeur-borne.g1.C2.valeur)
+                if not borne.g1.estComplet() and ((difVal>0 and difVal<2) or difVal==borne.g1.C1.valeur) :    # on a une ou deux cartes sur la borne, qui rendent possibles une suite
+                    suitesTap.append(borne)
+
+            if no_IA == 2:
+                difVal = abs(borne.g1.C1.valeur-borne.g1.C2.valeur)
+                if not borne.g1.estComplet() and ((difVal>0 and difVal<2) or difVal==borne.g1.C1.valeur) :    # on a une ou deux cartes sur la borne, qui rendent possibles une suite
+                    suitesTap.append(borne)
+                    
+        
+        ### on cherche les suites complètes ou possibles à compléter dans la main
+        suitesCompletesMain = []
+        suitesACompleterMain = []
+        dicoCouleur = {'A': 0, 'B' :1, 'C': 2, 'D': 3, 'E': 4, 'F': 5}
+        
+        for i in range(1,len(self)):
+            carte_prev = self[i-1]
+            carte = self[i]
+            try:
+                carte_next = self[i+1]
+            except:
+                carte_next = Carte(0, 'X')
+                
+            if carte_next.couleur == carte_prev.couleur and carte_next.valeur - carte_prev.valeur == 2:  #suite complète
+                suitesCompletesMain.append([i-1, i, i+1])
+                
+            elif carte.couleur == carte_prev.couleur and carte.valeur-carte_prev.valeur == 1:             #on va chercher la première ou la dernière de la suite
+                probaTot = self.jeu.proba[dicoCouleur[carte.couleur]][carte.valeur] + self.jeu.proba[dicoCouleur[carte.couleur]][carte_prev.valeur -2]
+#Probabilité d'obtenir la première ou dernière de la suite
+                if probaTot > 0.3:
+                    suitesACompleterMain.append = ([i-1, i])
+
+            elif carte.couleur == carte_prev.couleur and carte.valeur-carte_prev.valeur == 2:            
+#on va chercher la carte du milieu
+                probaTot = self.jeu.proba[dicoCouleur[carte.couleur]][carte_prev.valeur]
+#Probabilité d'obtenir la première ou dernière de la suite
+                if probaTot > 0.3:
+                    suitesACompleterMain.append = ([i-1, i])
+
+        return [suitesCompletesMain, suitesACompleterMain, suitesTap]
+        
+        
     
     def strategie(self, no_borne, no_IA):
         
-        B = self.recupBorne(no_borne)
-        
-        if no_IA == 1 and B.g2.estComplet():
-            advTot = B.g2.calculForce()
-        if no_IA == 2 and B.g1.estComplet():
-            advTot = B.g1.calculForce()
+        B = self.jeu.ensembleBorne[no_borne-1] #on récupère l'objet borne et ses fonctionnalités
         
         
     
@@ -95,3 +129,10 @@ class IA_3(Joueur):
         
         #Suppression de la carte de la main du joueur
         del(self[no_carte])   
+
+
+
+
+
+
+
