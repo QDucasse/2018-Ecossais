@@ -22,6 +22,9 @@ import numpy as np
 from time import sleep
 import matplotlib.pyplot as plt
 import time
+import datetime
+import pickle
+
 
 class Jeu():
     
@@ -455,9 +458,44 @@ class Jeu():
         self.tourSuivant()
 
 
-
-
-
+    def save(self):
+        now = datetime.datetime.now()
+        fichier = open('saves/sauvegarde_{0}'.format(now),'wb')
+        pickler = pickle.Pickler(fichier)
+        pickler.dump(self.ensembleBorne)
+        pickler.dump(self.J1)
+        pickler.dump(self.J2)
+        pickler.dump(self.joueurCourant)
+        pickler.dump(self.nbTours)
+        pickler.dump(self.pioche)
+        pickler.dump(self.plateau)
+        fichier.close()
+        
+    def loadAndPlay(self,fichier):
+        fichierOuvert = open(fichier,'rb')
+        depickler = pickle.Unpickler(fichierOuvert)
+        self.ensembleBorne = depickler.load()
+        self.borne1 = self.ensembleBorne[0]
+        self.borne1 = self.ensembleBorne[1]
+        self.borne1 = self.ensembleBorne[2]
+        self.borne1 = self.ensembleBorne[3]
+        self.borne1 = self.ensembleBorne[4]
+        self.borne1 = self.ensembleBorne[5]
+        self.borne1 = self.ensembleBorne[6]
+        self.borne1 = self.ensembleBorne[7]
+        self.borne1 = self.ensembleBorne[8]
+        self.J1 = depickler.load()
+        self.J2 = depickler.load()
+        self.JoueurCourant = depickler.load()
+        self.nbTours = depickler.load()
+        self.pioche = depickler.load()
+        self.plateau = depickler.load()
+        fichierOuvert.close()
+        
+        
+        
+        
+############# Fonction de départ pour l'interface dans la console Python #####################
 
     def start(self, test = False):
         global T1, T2
@@ -466,76 +504,31 @@ class Jeu():
         
         Paramètres
         ----------
-        Aucun
+        test : True ou False 
+        Permet de choisir si on veut lancer une partie ou une simulation de plusieurs combats d'IA
         '''
         print('Écossais Bagarreurs ! \nLe jeu oppose deux joueurs avec les règles de base de Shotten Totten.\nLe côté du joueur 1 est en haut du plateau, celui du joueur 2 en bas')
         if not test:
             mode=input('Sélectionnez votre mode de jeu: \nH pour Humain contre Humain \nou I contre une IA \nou II pour l\'opposition de deux IA\n\n')
             if mode=='H':
-                for i in range(self.J1.taille):
-                    self.J1.piocher()
-                    self.J2.piocher()
-                while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
-                     self.unTourPvP()
+                self.startPvP()
             ### PAREIL, IL FAUT FAIRE UNE FONCTION STARTPVP STARTPVIA ET STARTIAVIA
             elif mode=='I':
-                niveau=input('Sélectionnez le niveau de votre adversaire: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Suites couleurs et probabilités\n')
-                
-                if niveau=='0':
-                    self.J2=IA_0(6,2,self)
-                
-                elif niveau=='1':
-                    self.J2=IA_1(6,2,self)
-                
-                elif niveau=='2':
-                    self.J2=IA_2(6,2,self)
-                
-                elif niveau=='3':
-                    self.J2=IA_3(6,2,self)
-                    
-                for i in range(self.J1.taille):
-                    self.J1.piocher()
-                    self.J2.piocher()
-                while self.J2!=[] and (not self.testVictoire()[0]):  
-                     self.unTourPvIA()
+
+                niveau=input('Sélectionnez le niveau de votre adversaire: \n0 = Aleatoire \n1 = Groupements brelans\n')
+                self.startPvIA(niveau)
 
 
             elif mode=='II':    #On sélectionne les niveaux des deux IA et on initialise la partie
-                niveau1=input('Sélectionnez le niveau de l\'IA Joueur 1: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Suites couleurs et probabilités\n')
-                niveau2=input('Sélectionnez le niveau de l\'IA Joueur 2: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Suites couleurs et probabilités\n')
-                
-                if niveau1=='0':
-                    self.J1 = IA_0(6,1,self)
-                if niveau1=='1':
-                    self.J1 = IA_1(6,1,self)
-                if niveau1=='2':
-                    self.J1 = IA_2(6,2,self)
-                if niveau1=='3':
-                    self.J1 = IA_3(6,2,self)
-                    
-                if niveau2=='0':
-                    self.J2 = IA_0(6,2,self)
-                if niveau2=='1':
-                    self.J2 = IA_1(6,2,self)
-                if niveau2=='2':
-                    self.J2 = IA_2(6,2,self)            
-                if niveau2=='3':
-                    self.J2 = IA_3(6,2,self)
-                    
-                for i in range(self.J1.taille):
-                    self.J1.piocher()
-                    self.J2.piocher()
-    
-                while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
-                    self.unTourIAvIA()
+                niveau1=input('Sélectionnez le niveau de l\'IA Joueur 1: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Stratégie et probabilités\n')
+                niveau2=input('Sélectionnez le niveau de l\'IA Joueur 2: \n0 = Aleatoire \n1 = Peuples de qualité \n2 = Groupements brelans \n3 = Stratégie et probabilités\n') 
+                self.startIAvIA(niveau1,niveau2)
         
         if test:
-            T1, T2 = 100, 100
-            self.J1 = IA_3(6,1,self)
-            self.J2 = IA_3(6,2,self)
-            for i in range(self.J1.taille):
-                    self.J1.piocher()
-                    self.J2.piocher()
+            self.J1 = IA_0(6,1,self)
+            self.J2 = IA_1(6,2,self)
+            self.installation()
+            
     
             while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
                 self.unTourIAvIA()
@@ -545,17 +538,126 @@ class Jeu():
                 T2 += 1        
             
         print("\n\n\n", self)
-        print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!")
+        print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!\n\n\n")
+        if self.testVictoire()[1] == 'J1':
+            T1 += 1
+        if self.testVictoire()[1] == 'J2':
+            T2 += 1
+
+
+############## Redéfinition et spécification de la fonction start() pour différents cas (IHM) ###############
+
+    def installation(self):
+        '''
+        Distribue les cartes aux différents joueurs
         
+        Paramètres
+        ----------
+        Aucun
+        '''
+        for i in range(self.J1.taille):
+                    self.J1.piocher()
+                    self.J2.piocher()
+                               
+    def startPvP(self,load=False):
+        '''
+        Lance le jeu en mode PvP
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
+        if not load:
+            self.installation()
+        while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
+             self.unTourPvP()
+        
+    def startPvIA(self,niveau,load=False):
+        '''
+        Lance le jeu en mode PvIA
+        
+        Paramètres
+        ----------
+        Niveau de l'IA
+        '''
+        if niveau=='0':
+            self.J2=IA_0(6,2,self)
+        
+        elif niveau=='1':
+            self.J2=IA_1(6,2,self)
+        
+        elif niveau=='2':
+            self.J2=IA_2(6,2,self)
+        
+        elif niveau=='3':
+            self.J2=IA_3(6,2,self)
+        
+        if not load:
+            self.installation()
+            
+        while self.J2!=[] and (not self.testVictoire()[0]):  
+             self.unTourPvIA()
+        
+    def startIAvIA(self,niveau1,niveau2,load=False):
+        '''
+        Lance le jeu en mode IAvIA
+        
+        Paramètres
+        ----------
+        Niveaux des deux IA
+        '''
+        if niveau1=='0':
+            self.J1 = IA_0(6,1,self)
+        if niveau1=='1':
+            self.J1 = IA_1(6,1,self)
+        if niveau1=='2':
+            self.J1 = IA_2(6,2,self)
+        if niveau1=='3':
+            self.J1 = IA_3(6,2,self)
+            
+        if niveau2=='0':
+            self.J2 = IA_0(6,2,self)
+        if niveau2=='1':
+            self.J2 = IA_1(6,2,self)
+        if niveau2=='2':
+            self.J2 = IA_2(6,2,self)            
+        if niveau2=='3':
+            self.J2 = IA_3(6,2,self)
+            
+        if not load:
+            self.installation()
 
-
+        while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
+            self.unTourIAvIA()
+       
+    def startWithLoad(self):
+        '''
+        La fonction start utilisée après la mise en place du jeu par la fonction loadAndPlay()
+        /!\ A lancer après le load
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
+        print('Reprise de la partie en cours')
+        if type(self.J2) == Joueur:
+            self.startPvP(load=True)
+        if type(self.J1) != Joueur:
+            if type(self.J2)
+        
+            
+            
 if __name__=='__main__':
+
     game=Jeu()
     game.start(False)
-    
-    
-    
-    
+
+#    global T1, T2
+#    T1, T2, = 0, 0
+#    for k in range(50):
+#        game=Jeu()
+#        game.start(True)
+#    print("Victoires J1 :", 100*T1/(T1+T2), '%')
 
 
 
@@ -589,6 +691,7 @@ if __name__=='__main__':
 #plt.plot(p1, label='J1 proba1')
 #plt.plot(p2, label='J2 proba2')
 #plt.legend()
+
 
 
 
