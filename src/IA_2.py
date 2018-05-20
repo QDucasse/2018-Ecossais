@@ -13,6 +13,10 @@ import numpy.random as rnd
 
 class IA_2(Joueur):
     
+    def __init__(self,taille,no,partie):
+        super().__init__(taille,no,partie)
+        self.niveau = 2
+    
     def jouer(self,no_IA=2):
         '''
         Joue une carte de la main d'un joueur 

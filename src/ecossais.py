@@ -633,8 +633,8 @@ class Jeu():
         print('Reprise de la partie en cours')
         if type(self.J2) == Joueur:
             self.startPvP(load=True)
-        if type(self.J1) != Joueur:
-            if type(self.J2)
+        if type(self.J1) == IA_0:
+            if type(self.J2) == IA_0
         
             
             

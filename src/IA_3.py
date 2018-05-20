@@ -12,6 +12,10 @@ import numpy.random as rnd
 
 class IA_3(Joueur):
     
+    def __init__(self,taille,no,partie):
+        super().__init__(taille,no,partie)
+        self.niveau = 3
+    
     def jouer(self,no_IA=2):
         '''
         Joue une carte de la main d'un joueur 
@@ -25,25 +29,16 @@ class IA_3(Joueur):
         self.piocher()
     
     
-    def recupBorne(self, no_borne): #permet de récupérer l'objet borne et ses fonctionnalités
-        if no_borne == 1:
-            return self.jeu.borne1
-        if no_borne == 2:
-            return self.jeu.borne2
-        if no_borne == 3:
-            return self.jeu.borne3
-        if no_borne == 4:
-            return self.jeu.borne4
-        if no_borne == 5:
-            return self.jeu.borne5
-        if no_borne == 6:
-            return self.jeu.borne6
-        if no_borne == 7:
-            return self.jeu.borne7
-        if no_borne == 8:
-            return self.jeu.borne8
-        if no_borne == 9:
-            return self.jeu.borne9
+    def recupBorne(self, no_borne): 
+        #permet de récupérer l'objet borne et ses fonctionnalités
+        '''
+        Récupère l'objet borne et ses fonctionnalités
+        
+        Paramètres
+        ----------
+        no_borne le numéro de la borne visée
+        '''
+        return self.jeu.ensembleBorne[no_borne]
     
     
     def strategie(self, no_borne, no_IA):
