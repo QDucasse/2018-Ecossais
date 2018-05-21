@@ -210,12 +210,14 @@ class MyWindow(QtWidgets.QMainWindow):
     #Définition des fonctions de départ du jeu en fonction du mode souhaité
     
     def montreIA(self):
+        #Présente les fonctionnalités en appuyant sur 'Nouvelle Partie'
         self.ui.bouton_IA0.show()
         self.ui.bouton_IA1.show()
         self.ui.bouton_IA2.show()
         self.ui.bouton_IA3.show()
     
     def montreIASimulation(self):
+        #Présente les fonctionnalités en appuyant sur Simulation
         self.ui.bouton_IA0vIA0.show()
         self.ui.bouton_IA0vIA1.show()
         self.ui.bouton_IA0vIA2.show()
@@ -229,6 +231,7 @@ class MyWindow(QtWidgets.QMainWindow):
     
     
     def devoilerPlateauAvecJoueur(self):
+        #Présente le plateau en cas de choix via NouvellePartie
         self.ui.bouton_borne1.show()
         self.ui.bouton_borne2.show()
         self.ui.bouton_borne3.show()
@@ -247,6 +250,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.bouton_carte6.show()
         
     def devoilerPlateauSansJoueur(self):
+        #Présente le plateau en cas de choix via Simulation
         self.ui.bouton_borne1.show()
         self.ui.bouton_borne2.show()
         self.ui.bouton_borne3.show()
@@ -261,7 +265,13 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def startJvIA0(self):
         self.devoilerPlateauAvecJoueur()
-        self.jeu.startPvIA(0,True)
+        self.jeu.J2=IA_0(6,2,self.jeu)
+        self.jeu.installation()
+        while self.jeu.J2!=[] and (not self.jeu.testVictoire()[0]):  
+             if self.jeu.joueurCourant==2:
+                self.jeu.J2.placer()
+             else:
+                pass
         self.bouton_carte1.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[0].couleur, self.jeu.J1[0].valeur))
         self.bouton_carte2.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[1].couleur, self.jeu.J1[1].valeur))
         self.bouton_carte3.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[2].couleur, self.jeu.J1[2].valeur))
@@ -271,7 +281,13 @@ class MyWindow(QtWidgets.QMainWindow):
         
     def startJvIA1(self):
         self.devoilerPlateauAvecJoueur()
-        self.jeu.startPvIA(1,True)
+        self.jeu.J2=IA_1(6,2,self.jeu)
+        self.jeu.installation()
+        while self.jeu.J2!=[] and (not self.jeu.testVictoire()[0]):  
+             if self.jeu.joueurCourant==2:
+                self.jeu.J2.placer()
+             else:
+                pass
         self.bouton_carte1.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[0].couleur, self.jeu.J1[0].valeur))
         self.bouton_carte2.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[1].couleur, self.jeu.J1[1].valeur))
         self.bouton_carte3.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[2].couleur, self.jeu.J1[2].valeur))
@@ -282,7 +298,13 @@ class MyWindow(QtWidgets.QMainWindow):
   
     def startJvIA2(self):
         self.devoilerPlateauAvecJoueur()
-        self.jeu.startPvIA(2,True)
+        self.jeu.J2=IA_2(6,2,self.jeu)
+        self.jeu.installation()
+        while self.jeu.J2!=[] and (not self.jeu.testVictoire()[0]):  
+            if self.jeu.joueurCourant==2:
+                self.jeu.J2.placer()
+            else:
+                pass
         self.bouton_carte1.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[0].couleur, self.jeu.J1[0].valeur))
         self.bouton_carte2.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[1].couleur, self.jeu.J1[1].valeur))
         self.bouton_carte3.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[2].couleur, self.jeu.J1[2].valeur))
@@ -292,14 +314,21 @@ class MyWindow(QtWidgets.QMainWindow):
         
     def startJvIA3(self):
         self.devoilerPlateauAvecJoueur()
-        self.jeu.startPvIA(3,True)
+        self.jeu.J2=IA_3(6,2,self.jeu)
+        self.jeu.installation()
+        while self.jeu.J2!=[] and (not self.jeu.testVictoire()[0]):  
+            if self.jeu.joueurCourant==2:
+                self.jeu.J2.placer()
+            else:
+                pass
+        self.jeu.startPvIA(3,load=False ,IHM=True)
         self.bouton_carte1.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[0].couleur, self.jeu.J1[0].valeur))
         self.bouton_carte2.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[1].couleur, self.jeu.J1[1].valeur))
         self.bouton_carte3.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[2].couleur, self.jeu.J1[2].valeur))
         self.bouton_carte4.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[3].couleur, self.jeu.J1[3].valeur))
         self.bouton_carte5.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[4].couleur, self.jeu.J1[4].valeur))
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
-                
+    
     def startIA0vIA0(self):
         self.devoilerPlateauSansJoueur()
         self.jeu.startIAvIA('0','0')
@@ -340,7 +369,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.devoilerPlateauSansJoueur()
         self.jeu.startIAvIA('3','3')
         
-        
+       
         
     # Définition des fonctions propres aux boutons poussoirs
     # Cartes dans la main => On mémorise la carte sélectionnée

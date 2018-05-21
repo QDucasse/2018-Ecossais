@@ -462,7 +462,10 @@ class Jeu():
         sleep(0.1)
 
         self.tourSuivant()
+        
+        
 
+####### Sauvegarde et Chargement ########################
 
     def save(self):
         now = datetime.datetime.now()
@@ -566,10 +569,6 @@ class Jeu():
             
         print("\n\n\n", self)
         print("\nVICTOIRE DU JOUEUR ", self.testVictoire()[1], " !!!\n\n\n")
-        if self.testVictoire()[1] == 'J1':
-            T1 += 1
-        if self.testVictoire()[1] == 'J2':
-            T2 += 1
 
 
 ############## Redéfinition et spécification de la fonction start() pour différents cas (IHM) ###############
@@ -656,7 +655,8 @@ class Jeu():
 
         while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
             self.unTourIAvIA()
-       
+        else:
+            print(self.testVictoire()[1])
     def startWithLoad(self):
         '''
         La fonction start utilisée après la mise en place du jeu par la fonction loadAndPlay()
@@ -683,7 +683,8 @@ if __name__=='__main__':
     game.start(False)
 
     global T1, T2
-    T1, T2, = 0, 0
+    T1 = 0
+    T2 = 0
 #    for k in range(50):
 #        game=Jeu()
 #        game.start(True)
