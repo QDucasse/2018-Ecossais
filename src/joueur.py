@@ -130,7 +130,28 @@ class Joueur(list):
         else:
             return False
         
-      
+    def placerIHM(self,carte,no_borne):
+        '''
+        Fonction placer utilisée par l'IHM, elle ne supprime pas la carte de la main
+        
+        Paramètres
+        ----------
+        Carte et non pas no_carte comme placer()
+        no_borne
+        '''
+        
+        ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
+        self.jeu.ensembleBorne[no_borne].g1.carteCourante-=1     
+        #Placement de la carte sur le tapis
+        self.plateau.tapis[ordonnee][no_borne]=self[carte] 
+        #Rafraîchissement des bornes pour y faire apparaître la carte
+        self.jeu.rafraichissementIntegral()
+        #On mémorise la borne sur laquelle la carte a été placée
+        borneEnCours=self.jeu.ensembleBorne[no_borne]
+        #Si jamais un des groupes est complété, on change la valeur de premierComplete !
+        borneEnCours.verifPremierComplete(self.jeu)
+        #Comparaison si jamais les deux groupes sont complets
+        borneEnCours.comparer()
         
         
     def piocher(self):

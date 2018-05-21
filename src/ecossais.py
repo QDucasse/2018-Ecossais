@@ -86,11 +86,11 @@ class Jeu():
             s = 'Et c\'est fini :\n\n'+ str(self.plateau)
      
         else:
-            s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
-            s=s+'Probabilités pour ce tour (joueur {0}):\n\n'.format(self.joueurCourant)
-            num = self.joueurCourant
-            s=s+str(self.proba(num))
-            s=s+'\n\n'
+            s='\n\n{0} tours se sont écoulés, c\'est au joueur {1} de jouer, il reste {2} cartes dans la pioche \n\n'.format(self.nbTours,self.joueurCourant,len(self.pioche))
+#            s=s+'Probabilités pour ce tour (joueur {0}):\n\n'.format(self.joueurCourant)
+#            num = self.joueurCourant
+#            s=s+str(self.proba(num))
+#            s=s+'\n\n'                     A DECOMMENTER POUR AVOIR L'AFFICHAGE DES PROBABILITES AVANT LE PLATEAU
             s=s+str(self.plateau)
         
         return s
@@ -117,7 +117,7 @@ class Jeu():
         self.borne7.rafraichir()    
         self.borne8.rafraichir()    
         self.borne9.rafraichir()    
-    
+        
     
     
     def testVictoire(self):
@@ -326,7 +326,11 @@ class Jeu():
                     
    
     
-    
+    def joueurCourant(self):
+        if joueurCourant == 1:
+            return self.J1
+        else:
+            return self.J2
 
 
      
@@ -380,7 +384,7 @@ class Jeu():
         
         
         
-    def unTourPvIA(self):
+    def unTourPvIA(self,IHM=False):
         '''
         Fait progresser chacune des actions d'une case et donne la main à un des joueurs :
             L'état du jeu s'affiche
@@ -398,7 +402,8 @@ class Jeu():
             print(self.J1)
         
         ######### On demande au joueur de sélectionner sa carte et la position visée #########
-        if self.joueurCourant==1:
+        
+        if self.joueurCourant==1 and not IHM:
             no_carte= eval(input('J{0}, sélectionnez une carte (par son numéro de 1 à 6) \n'.format(self.joueurCourant))) -1
             while not self.bonNumeroCarte(no_carte):
                 no_carte= eval(input('Sélectionnez un numéro de carte valable \n')) -1
@@ -409,7 +414,7 @@ class Jeu():
                 no_borne= eval(input('Sélectionnez une position valable \n')) -1 
             else:
                 self.J1.jouer(no_carte,no_borne)
-            
+        
         elif self.joueurCourant==2:
             self.J2.jouer()
             
@@ -471,6 +476,19 @@ class Jeu():
         pickler.dump(self.pioche)
         pickler.dump(self.plateau)
         fichier.close()
+    
+    def saveIHM(self):
+        now = datetime.datetime.now()
+        fichier = open('../src/saves/sauvegarde_{0}'.format(now),'wb')
+        pickler = pickle.Pickler(fichier)
+        pickler.dump(self.ensembleBorne)
+        pickler.dump(self.J1)
+        pickler.dump(self.J2)
+        pickler.dump(self.joueurCourant)
+        pickler.dump(self.nbTours)
+        pickler.dump(self.pioche)
+        pickler.dump(self.plateau)
+        fichier.close()  
         
     def loadAndPlay(self,fichier):
         '''
@@ -581,7 +599,7 @@ class Jeu():
         while self.J2!=[] and (not self.testVictoire()[0]):  #Le jeu s'arrête quand J2 n'a plus de carte
              self.unTourPvP()
         
-    def startPvIA(self,niveau,load=False):
+    def startPvIA(self,niveau,load=False,IHM=False):
         '''
         Lance le jeu en mode PvIA
         
@@ -605,7 +623,7 @@ class Jeu():
             self.installation()
             
         while self.J2!=[] and (not self.testVictoire()[0]):  
-             self.unTourPvIA()
+             self.unTourPvIA(IHM)
         
     def startIAvIA(self,niveau1,niveau2,load=False):
         '''
