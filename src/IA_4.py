@@ -28,24 +28,7 @@ class IA_3(Joueur):
     
     
     def recupBorne(self, no_borne): #permet de récupérer l'objet borne et ses fonctionnalités
-        if no_borne == 1:
-            return self.jeu.borne1
-        if no_borne == 2:
-            return self.jeu.borne2
-        if no_borne == 3:
-            return self.jeu.borne3
-        if no_borne == 4:
-            return self.jeu.borne4
-        if no_borne == 5:
-            return self.jeu.borne5
-        if no_borne == 6:
-            return self.jeu.borne6
-        if no_borne == 7:
-            return self.jeu.borne7
-        if no_borne == 8:
-            return self.jeu.borne8
-        if no_borne == 9:
-            return self.jeu.borne9
+        return self.partie.ensembleBornes[no_borne]
     
     def advCombi(self, advTot):
         Combis = ['Somme', 'Suite', 'Couleur', 'Brelan', 'Suite Couleur']

@@ -5,6 +5,7 @@
 Created on Mon Feb 12 15:46:45 2018
 
 @author: quentin
+
 """
 
 from random import shuffle
@@ -472,6 +473,13 @@ class Jeu():
         fichier.close()
         
     def loadAndPlay(self,fichier):
+        '''
+        Charge un fichier situé dans saves/fichier par exemple
+        
+        Paramètres
+        ----------
+        Le chemin menant au fichier souhaité
+        '''
         fichierOuvert = open(fichier,'rb')
         depickler = pickle.Unpickler(fichierOuvert)
         self.ensembleBorne = depickler.load()
@@ -647,18 +655,17 @@ class Jeu():
             else:
                 self.startPvIA(self.J2.niveau,load=True)
         else:
-            self.startIAvIA(self.j1.niveau,self.J2.niveau,load=True)
+            self.startIAvIA(self.J1.niveau,self.J2.niveau,load=True)
         
         
             
             
 if __name__=='__main__':
-
     game=Jeu()
     game.start(False)
 
-#    global T1, T2
-#    T1, T2, = 0, 0
+    global T1, T2
+    T1, T2, = 0, 0
 #    for k in range(50):
 #        game=Jeu()
 #        game.start(True)
