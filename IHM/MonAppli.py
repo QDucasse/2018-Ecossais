@@ -8,6 +8,7 @@ Created on Thu May 17 14:33:50 2018
 
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
 from ecossais import Jeu
 from IA_0 import IA_0
 from IA_1 import IA_1
@@ -293,6 +294,11 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.bouton_borne8.show()
         self.ui.bouton_borne9.show()
 
+    def showDialogue(self,gagnant):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information) 
+        msg.setText('{}'.format(gagnant))
+        
     def finSimulation(self):
         '''
         Présente le tapis tel quel en fin de simulation
@@ -301,11 +307,21 @@ class MyWindow(QtWidgets.QMainWindow):
         ----------
         Aucun
         '''
+        for j in range(4,7):
+            for i in range(9):
+               self.dictionnaire['J2B{0}{1}'.format(i+1,j-3)].setStyleSheet("background-image: url({}{}.png)".format(self.jeu.plateau.tapis[j][i].couleur, self.jeu.plateau.tapis[j][i].valeur))
+        for j in range(3):
+            for i in range(9):
+               self.dictionnaire['J1B{0}{1}'.format(i+1,j+1)].setStyleSheet("background-image: url({}{}.png)".format(self.jeu.plateau.tapis[j][i].couleur, self.jeu.plateau.tapis[j][i].valeur))
+
         for i in range(9):
-            for j in range(4,7):
-               self.dictionnaire['J2B{0}{1}'.format(i+1,j-3)].setStyleSheet("background-image: url({}{}.png)".format(self.jeu.plateau.tapis[i][j].couleur, self.jeu.plateau.tapis[i][j].valeur))
-            for j in range(3):
-               self.dictionnaire['J1B{0}{1}'.format(i+1,j+1)].setStyleSheet("background-image: url({}{}.png)".format(self.jeu.plateau.tapis[i][j].couleur, self.jeu.plateau.tapis[i][j].valeur))
+            if self.jeu.plateau.tapis[3][i] == 'J1':
+                self.dictionnaire['B{}'.format(i+1)].move(120+i*70,290)
+            if self.jeu.plateau.tapis[3][i] == 'J2':
+                self.dictionnaire['B{}'.format(i+1)].move(120+i*70,250)
+        
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))                
 
     def tourAdversaire(self):
         '''
@@ -320,6 +336,8 @@ class MyWindow(QtWidgets.QMainWindow):
             carteCourante = (self.jeu.ensembleBorne[self.jeu.J2.emplacementVise-1]).g2.carteCourante
             self.dictionnaire['J2B{0}{1}'.format(self.jeu.J2.emplacementVise+1,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J2[0].couleur, self.jeu.J2[0].valeur))
             self.jeu.J2.piocher() 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
 
     def startJvIA0(self):
         '''
@@ -663,8 +681,15 @@ class MyWindow(QtWidgets.QMainWindow):
             self.bouton_borne1.setEnabled(False)
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
-        self.bouton_carte6.show()    
-        self.tourAdversaire()
+        self.bouton_carte6.show() 
+        if self.jeu.plateau.tapis[3][0] == 'J1':
+            self.bouton_borne1.move(120,290)
+        if self.jeu.plateau.tapis[3][0] == 'J2':
+            self.bouton_borne1.move(120,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
     def borne2(self):
         '''
@@ -684,7 +709,14 @@ class MyWindow(QtWidgets.QMainWindow):
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][1] == 'J1':
+            self.bouton_borne2.move(190,290)
+        if self.jeu.plateau.tapis[3][1] == 'J2':
+            self.bouton_borne2.move(190,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
     def borne3(self):
         '''
@@ -704,7 +736,14 @@ class MyWindow(QtWidgets.QMainWindow):
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][2] == 'J1':
+            self.bouton_borne3.move(260,290)
+        if self.jeu.plateau.tapis[3][2] == 'J2':
+            self.bouton_borne3.move(260,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
     def borne4(self):
         '''
@@ -724,7 +763,14 @@ class MyWindow(QtWidgets.QMainWindow):
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][3] == 'J1':
+            self.bouton_borne4.move(330,290)
+        if self.jeu.plateau.tapis[3][3] == 'J2':
+            self.bouton_borne4.move(330,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
     def borne5(self):
         '''
@@ -744,7 +790,15 @@ class MyWindow(QtWidgets.QMainWindow):
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][4] == 'J1':
+            self.bouton_borne5.move(400,290)
+        if self.jeu.plateau.tapis[3][4] == 'J2':
+            self.bouton_borne5.move(400,250) 
+        
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
     def borne6(self):
         '''
@@ -764,7 +818,14 @@ class MyWindow(QtWidgets.QMainWindow):
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][5] == 'J1':
+            self.bouton_borne6.move(470,290)
+        if self.jeu.plateau.tapis[3][5] == 'J2':
+            self.bouton_borne6.move(470,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
     def borne7(self):
         '''
@@ -779,12 +840,19 @@ class MyWindow(QtWidgets.QMainWindow):
         carteCourante = self.jeu.borne7.g1.carteCourante
         self.jeu.J1.placerIHM(self.carteEnCours,6)
         self.dictionnaire['J1B{0}{1}'.format(7,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
-        if self.jeu.borne1.g1.estComplet():
+        if self.jeu.borne7.g1.estComplet():
             self.bouton_borne7.setEnabled(False)
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][6] == 'J1':
+            self.bouton_borne7.move(540,290)
+        if self.jeu.plateau.tapis[3][6] == 'J2':
+            self.bouton_borne7.move(540,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
     def borne8(self):
         '''
@@ -799,12 +867,19 @@ class MyWindow(QtWidgets.QMainWindow):
         carteCourante = self.jeu.borne8.g1.carteCourante
         self.jeu.J1.placerIHM(self.carteEnCours,7)
         self.dictionnaire['J1B{0}{1}'.format(8,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
-        if self.jeu.borne1.g1.estComplet():
+        if self.jeu.borne8.g1.estComplet():
             self.bouton_borne8.setEnabled(False)
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][7] == 'J1':
+            self.bouton_borne8.move(610,290)
+        if self.jeu.plateau.tapis[3][7] == 'J2':
+            self.bouton_borne8.move(610,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
     
     def borne9(self):
         '''
@@ -819,12 +894,19 @@ class MyWindow(QtWidgets.QMainWindow):
         carteCourante = self.jeu.borne9.g1.carteCourante
         self.jeu.J1.placerIHM(self.carteEnCours,8)
         self.dictionnaire['J1B{0}{1}'.format(9,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
-        if self.jeu.bouton_borne1.g1.estComplet():
+        if self.jeu.bouton_borne9.g1.estComplet():
             self.bouton_borne9.setEnabled(False)
         self.jeu.J1.piocher()
         self.bouton_carte6.setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J1[5].couleur, self.jeu.J1[5].valeur))
         self.bouton_carte6.show()
-        self.tourAdversaire()
+        if self.jeu.plateau.tapis[3][8] == 'J1':
+            self.bouton_borne9.move(680,290)
+        if self.jeu.plateau.tapis[3][8] == 'J2':
+            self.bouton_borne9.move(680,250) 
+        if self.jeu.testVictoire()[0]:
+            self.showDialogue('{} a gagné !!'.format(self.jeu.testVictoire()[1]))
+        else:
+            self.tourAdversaire()
         
         
         
