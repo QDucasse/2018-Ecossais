@@ -15,8 +15,8 @@ class IA_3(Joueur):
     def __init__(self,taille,no,partie):
         super().__init__(taille,no,partie)
         self.niveau = 3
-        self.carteJouee = ''
-        self.emplacementVise = ''
+        self.carteJouee = Carte(0,'X')
+        self.emplacementVise = 0
     
     def jouer(self,no_IA=2):
         '''

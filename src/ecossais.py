@@ -327,7 +327,14 @@ class Jeu():
    
     
     def joueurCourant(self):
-        if joueurCourant == 1:
+        '''
+        Rend le joueur courant
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
+        if self.joueurCourant == 1:
             return self.J1
         else:
             return self.J2
@@ -468,6 +475,13 @@ class Jeu():
 ####### Sauvegarde et Chargement ########################
 
     def save(self):
+        '''
+        Sauvegarde du jeu en cours dans le fichier saves où le nom est formaté avec la date et heure courante
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
         now = datetime.datetime.now()
         fichier = open('saves/sauvegarde_{0}'.format(now),'wb')
         pickler = pickle.Pickler(fichier)
@@ -481,6 +495,13 @@ class Jeu():
         fichier.close()
     
     def saveIHM(self):
+        '''
+        Le chemin change pour l'IHM mais la fonction reste la même
+        
+        Paramètres
+        ----------
+        Aucun
+        '''
         now = datetime.datetime.now()
         fichier = open('../src/saves/sauvegarde_{0}'.format(now),'wb')
         pickler = pickle.Pickler(fichier)

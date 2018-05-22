@@ -315,11 +315,11 @@ class MyWindow(QtWidgets.QMainWindow):
         ----------
         Aucun
         '''
-        if self.jeu.J2 != []:    
+        if self.jeu.J2 != []:
             self.jeu.J2.placer()
-            carteCourante = self.jeu.ensembleBorne[self.jeu.J2.emplacementVise].g2.carteCourante
+            carteCourante = (self.jeu.ensembleBorne[self.jeu.J2.emplacementVise-1]).g2.carteCourante
             self.dictionnaire['J2B{0}{1}'.format(self.jeu.J2.emplacementVise+1,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({}{}.png)".format(self.jeu.J2[0].couleur, self.jeu.J2[0].valeur))
-            
+            self.jeu.J2.piocher() 
 
     def startJvIA0(self):
         '''
@@ -656,8 +656,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,0)
         carteCourante = self.jeu.borne1.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,0)
         self.dictionnaire['J1B{0}{1}'.format(1,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne1.g1.estComplet():
             self.bouton_borne1.setEnabled(False)
@@ -676,8 +676,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,1)
         carteCourante = self.jeu.borne2.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,1)
         self.dictionnaire['J1B{0}{1}'.format(2,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne2.g1.estComplet():
             self.bouton_borne2.setEnabled(False)
@@ -696,8 +696,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,2)
         carteCourante = self.jeu.borne3.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,2)
         self.dictionnaire['J1B{0}{1}'.format(3,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne3.g1.estComplet():
             self.bouton_borne3.setEnabled(False)
@@ -716,8 +716,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,3)
         carteCourante = self.jeu.borne4.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,3)
         self.dictionnaire['J1B{0}{1}'.format(4,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne4.g1.estComplet():
             self.bouton_borne4.setEnabled(False)
@@ -736,8 +736,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,4)
         carteCourante = self.jeu.borne5.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,4)
         self.dictionnaire['J1B{0}{1}'.format(5,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne1.g1.estComplet():
             self.bouton_borne5.setEnabled(False)
@@ -756,8 +756,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,5)
         carteCourante = self.jeu.borne6.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,5)
         self.dictionnaire['J1B{0}{1}'.format(6,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne6.g1.estComplet():
             self.bouton_borne6.setEnabled(False)
@@ -776,8 +776,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,6)
         carteCourante = self.jeu.borne7.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,6)
         self.dictionnaire['J1B{0}{1}'.format(7,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne1.g1.estComplet():
             self.bouton_borne7.setEnabled(False)
@@ -796,8 +796,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,7)
         carteCourante = self.jeu.borne8.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,7)
         self.dictionnaire['J1B{0}{1}'.format(8,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.borne1.g1.estComplet():
             self.bouton_borne8.setEnabled(False)
@@ -816,8 +816,8 @@ class MyWindow(QtWidgets.QMainWindow):
         Paramètres
         ----------
         '''
-        self.jeu.J1.placerIHM(self.carteEnCours,8)
         carteCourante = self.jeu.borne9.g1.carteCourante
+        self.jeu.J1.placerIHM(self.carteEnCours,8)
         self.dictionnaire['J1B{0}{1}'.format(9,self.dictionnaireCarteCourante[carteCourante])].setStyleSheet("background-image: url({0}{1}.png)".format(self.carteEnCours.couleur, self.carteEnCours.valeur))
         if self.jeu.bouton_borne1.g1.estComplet():
             self.bouton_borne9.setEnabled(False)
