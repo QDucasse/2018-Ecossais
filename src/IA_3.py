@@ -15,6 +15,8 @@ class IA_3(Joueur):
     def __init__(self,taille,no,partie):
         super().__init__(taille,no,partie)
         self.niveau = 3
+        self.carteJouee = ''
+        self.emplacementVise = ''
     
     def jouer(self,no_IA=2):
         '''
@@ -73,7 +75,7 @@ class IA_3(Joueur):
                 
             elif carte.couleur == carte_prev.couleur and carte.valeur-carte_prev.valeur == 1:             #on va chercher la première ou la dernière de la suite
                 probaTot = self.jeu.proba[dicoCouleur[carte.couleur]][carte.valeur] + self.jeu.proba[dicoCouleur[carte.couleur]][carte_prev.valeur -2]
-#Probabilité d'obtenir la première ou dernière de la suite
+                #Probabilité d'obtenir la première ou dernière de la suite
                 if probaTot > 0.3:
                     suitesACompleterMain.append = ([i-1, i])
 
@@ -117,6 +119,8 @@ class IA_3(Joueur):
         #Placement de la carte sur le tapis
         
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
+        self.carteJouee = self[no_carte]
+        self.emplacementVise = no_borne
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
         self.jeu.rafraichissementIntegral()

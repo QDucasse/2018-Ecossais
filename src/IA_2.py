@@ -16,6 +16,8 @@ class IA_2(Joueur):
     def __init__(self,taille,no,partie):
         super().__init__(taille,no,partie)
         self.niveau = 2
+        self.carteJouee = ''
+        self.emplacementVise = ''
     
     def jouer(self,no_IA=2):
         '''
@@ -67,6 +69,8 @@ class IA_2(Joueur):
         #Placement de la carte sur le tapis
         
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
+        self.carteJouee = self[no_carte]
+        self.emplacementVise = no_borne
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
         self.jeu.rafraichissementIntegral()

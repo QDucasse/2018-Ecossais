@@ -17,210 +17,211 @@
    <widget class="QWidget" name="J1B11" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>120</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B21" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>190</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B31" native="true">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>260</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B41" native="true">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>330</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B51" native="true">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>400</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B71" native="true">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>540</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B61" native="true">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>470</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B81" native="true">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>610</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B91" native="true">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>290</y>
-      <width>51</width>
-      <height>61</height>
+      <x>680</x>
+      <y>360</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B72" native="true">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>540</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B62" native="true">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>470</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B42" native="true">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>330</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B82" native="true">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>610</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B92" native="true">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>680</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B22" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>190</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B12" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>120</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
+    <zorder>J1B13</zorder>
    </widget>
    <widget class="QWidget" name="J1B32" native="true">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>260</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B52" native="true">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>360</y>
-      <width>51</width>
-      <height>61</height>
+      <x>400</x>
+      <y>400</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B73" native="true">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>540</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B63" native="true">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>470</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B43" native="true">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>330</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
@@ -230,376 +231,322 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>610</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B93" native="true">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>680</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B23" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>190</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B13" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>120</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B33" native="true">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>260</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J1B53" native="true">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>430</y>
-      <width>51</width>
-      <height>61</height>
+      <x>400</x>
+      <y>450</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B71" native="true">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>540</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B61" native="true">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>470</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B41" native="true">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>330</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B81" native="true">
     <property name="geometry">
      <rect>
-      <x>620</x>
+      <x>610</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B91" native="true">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>680</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B11" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>120</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B31" native="true">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>260</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B51" native="true">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>400</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B72" native="true">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>540</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B62" native="true">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>470</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B42" native="true">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>330</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B82" native="true">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>610</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B92" native="true">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>680</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B22" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>190</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B12" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>120</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B32" native="true">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>260</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B52" native="true">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>80</y>
-      <width>51</width>
-      <height>61</height>
+      <x>400</x>
+      <y>110</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B73" native="true">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>540</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B63" native="true">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>470</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B43" native="true">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>330</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B83" native="true">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>610</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B93" native="true">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>680</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B23" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>190</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B13" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>120</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B33" native="true">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>260</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="J2B53" native="true">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>10</y>
-      <width>51</width>
-      <height>61</height>
+      <x>400</x>
+      <y>60</y>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>530</y>
-      <width>491</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="bouton_carte1">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bouton_carte2">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bouton_carte3">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bouton_carte4">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bouton_carte5">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bouton_carte6">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -631,7 +578,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -657,7 +604,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -685,10 +632,10 @@
    <widget class="QWidget" name="J2B21" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>190</x>
       <y>150</y>
-      <width>51</width>
-      <height>61</height>
+      <width>70</width>
+      <height>95</height>
      </rect>
     </property>
    </widget>
@@ -696,7 +643,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -719,7 +666,7 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -742,7 +689,7 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -765,7 +712,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -788,7 +735,7 @@
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -811,7 +758,7 @@
     <property name="geometry">
      <rect>
       <x>680</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -834,7 +781,7 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>220</y>
+      <y>270</y>
       <width>71</width>
       <height>71</height>
      </rect>
@@ -1059,6 +1006,84 @@
     </property>
     <property name="text">
      <string>IA2 V IA2</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bouton_carte1">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>560</y>
+      <width>70</width>
+      <height>95</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bouton_carte2">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>560</y>
+      <width>70</width>
+      <height>95</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bouton_carte3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>560</y>
+      <width>70</width>
+      <height>95</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bouton_carte4">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>560</y>
+      <width>70</width>
+      <height>95</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bouton_carte5">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>560</y>
+      <width>70</width>
+      <height>95</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bouton_carte6">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>560</y>
+      <width>70</width>
+      <height>95</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

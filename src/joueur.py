@@ -143,7 +143,7 @@ class Joueur(list):
         ordonnee=self.jeu.ensembleBorne[no_borne].g1.carteCourante
         self.jeu.ensembleBorne[no_borne].g1.carteCourante-=1     
         #Placement de la carte sur le tapis
-        self.plateau.tapis[ordonnee][no_borne]=self[carte] 
+        self.plateau.tapis[ordonnee][no_borne]=carte 
         #Rafraîchissement des bornes pour y faire apparaître la carte
         self.jeu.rafraichissementIntegral()
         #On mémorise la borne sur laquelle la carte a été placée

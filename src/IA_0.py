@@ -16,6 +16,8 @@ class IA_0(Joueur):
     def __init__(self,taille,no,partie):
         super().__init__(taille,no,partie)
         self.niveau = 0
+        self.carteJouee = ''
+        self.emplacementVise = ''
     
     def jouer(self, no_IA=2):
         '''
@@ -26,14 +28,12 @@ class IA_0(Joueur):
         ----------
         Numéro de joueur de l'IA (1 ou 2, par défaut 2)
         '''
-        no_carte=rnd.randint(0,6)
-        while not self.jeu.bonNumeroCarte(no_carte):
-            no_carte=rnd.randint(0,6)
-        self.placer(no_carte, no_IA)
+        
+        self.placer(no_IA)
         self.piocher()
 
 
-    def placer(self,no_carte, no_IA=2):
+    def placer(self, no_IA=2):
         '''
         Place une carte au hasard sur la zone de jeu de l'IA
         
@@ -42,6 +42,10 @@ class IA_0(Joueur):
         Carte choisie
         Position visée sous la forme d'un tuple
         '''
+        
+        no_carte=rnd.randint(0,6)
+        while not self.jeu.bonNumeroCarte(no_carte):
+            no_carte=rnd.randint(0,6)
         
         no_borne=(rnd.randint(0,9))
         
@@ -59,6 +63,8 @@ class IA_0(Joueur):
         #Placement de la carte sur le tapis
         
         self.plateau.tapis[ordonnee][no_borne]=self[no_carte] 
+        self.carteJouee = self[no_carte]
+        self.emplacementVise = no_borne
         
         #Rafraîchissement des bornes pour y faire apparaître la carte
         self.jeu.rafraichissementIntegral()
