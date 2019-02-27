@@ -4,7 +4,7 @@ Created on Tue May  1 17:46:59 2018
 
 @author: Matthieu
 """
-
+#fuob;kjbgq;k;
 from carte import Carte
 from plateau import Plateau
 from joueur import Joueur

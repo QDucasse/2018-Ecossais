@@ -5,7 +5,7 @@ Created on Thu Mar 29 11:25:00 2018
 @author: Matthieu
 """
 
-
+#bkbvadjkbdk;
 from carte import Carte
 from plateau import Plateau
 from joueur import Joueur
